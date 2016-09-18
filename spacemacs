@@ -73,7 +73,7 @@ before layers configuration."
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 14
+                               :size 16
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -164,6 +164,9 @@ before layers configuration."
                     (get-char-property (point) 'face))))
       (if face (message "Face: %s" face) (message "No face at %d" pos))))
 
+  (setq org-startup-folded t)
+  (setq org-startup-truncated nil)
+
   (with-eval-after-load 'org
     (require 'org-crypt)
     ;; (org-crypt-use-before-save-magic)
@@ -198,7 +201,6 @@ before layers configuration."
     (setq org-icalendar-use-scheduled (quote (event-if-not-todo event-if-todo)))
     (setq org-modules (quote (org-crypt org-habit org-mouse)))
     (setq org-remember-clock-out-on-exit t)
-    (setq org-startup-folded t)
     (setq org-default-priority 90)
     (setq org-lowest-priority 90)
     (setq org-clock-clocked-in-display (quote both))
