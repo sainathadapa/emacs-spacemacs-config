@@ -1,1 +1,1 @@
-# emacs-spacemacs-config
+Config file for [spacemacs](https://github.com/syl20bnr/spacemacs) (which is an Emacs distribution). I mostly use spacemacs/emacs for Org-mode functionality. Hence this config file is mostly contained of org-mode settings.
