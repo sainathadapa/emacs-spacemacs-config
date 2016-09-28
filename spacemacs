@@ -209,6 +209,10 @@ before layers configuration."
     (set-default 'truncate-lines nil)
     (set-default 'word-wrap t)
     (setq helm-buffers-truncate-lines nil)
+    (setq org-log-into-drawer "LOGBOOK")
+    (setq org-refile-allow-creating-parent-nodes (quote confirm))
+    (setq org-refile-targets (quote ((org-agenda-files :level . 1))))
+    (setq org-refile-use-outline-path (quote file))
 
 
     (setq org-agenda-sorting-strategy
