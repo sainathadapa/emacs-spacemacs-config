@@ -213,6 +213,7 @@ before layers configuration."
     (setq org-refile-allow-creating-parent-nodes (quote confirm))
     (setq org-refile-targets (quote ((org-agenda-files :level . 1))))
     (setq org-refile-use-outline-path (quote file))
+    (setq org-image-actual-width 500)
 
 
     (setq org-agenda-sorting-strategy
