@@ -214,6 +214,7 @@ before layers configuration."
     (setq org-refile-targets (quote ((org-agenda-files :level . 1))))
     (setq org-refile-use-outline-path (quote file))
     (setq org-image-actual-width 500)
+    (setq org-checkbox-hierarchical-statistics nil)
 
 
     (setq org-agenda-sorting-strategy
@@ -232,14 +233,18 @@ before layers configuration."
             (search . " %i"))))
 
     (setq org-agenda-custom-commands
-          (quote
-           (("n" "Agenda and all TODOs"
-             ((agenda "" nil)
-              (alltodo "" nil))
-             nil)
-            ("x" "courses and books"
-             ((tags "+course|+book" nil))
-             nil nil))))
+      (quote
+       (("n" "Agenda and all TODOs"
+         ((agenda "" nil)
+          (alltodo "" nil))
+         nil)
+        ("z" "work separated"
+         ((tags-todo "-work" nil)
+          (tags-todo "+work" nil))
+         nil nil)
+        ("x" "courses and books"
+         ((tags "+course|+book" nil))
+         nil nil))))
 
     ;; Collapse everything except current tab.
     (defun org-show-current-heading-tidily ()
