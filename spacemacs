@@ -215,7 +215,19 @@ before layers configuration."
     (setq org-refile-use-outline-path (quote file))
     (setq org-image-actual-width 500)
     (setq org-checkbox-hierarchical-statistics nil)
+    (global-set-key (kbd "<f6>") 'org-capture)
 
+(setq org-capture-templates
+(quote (
+("t" "Task Diary" entry (file+datetree
+"~/Dropbox/org/tasks.org")
+ "* TODO %^{Description}  %^g
+ %?
+ Added: %U")
+("j" "Journal" entry (file+datetree
+"~/Dropbox/org/journal.org")
+ "** %U - %^{Activity}")
+)))
 
     (setq org-agenda-sorting-strategy
       (quote
