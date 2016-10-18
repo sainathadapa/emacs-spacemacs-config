@@ -23,6 +23,7 @@
      markdown
      deft
      syntax-checking
+     ess
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -180,6 +181,7 @@ before layers configuration."
     (setq helm-org-rifle-show-path t)
 
     (require 'org-download)
+    (require 'ess)
 
     (setq org-agenda-compact-blocks nil)
     (setq org-agenda-default-appointment-duration 60)
@@ -228,6 +230,11 @@ before layers configuration."
 "~/Dropbox/org/journal.org")
  "** %U - %^{Activity}")
 )))
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((R . t)
+   (python . t)))
 
     (setq org-agenda-sorting-strategy
       (quote
