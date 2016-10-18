@@ -217,6 +217,7 @@ before layers configuration."
     (setq org-refile-use-outline-path (quote file))
     (setq org-image-actual-width 500)
     (setq org-checkbox-hierarchical-statistics nil)
+    (setq-default org-download-image-dir "~/Dropbox/org/pics")
     (global-set-key (kbd "<f6>") 'org-capture)
 
 (setq org-capture-templates
