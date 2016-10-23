@@ -154,162 +154,183 @@ before layers configuration."
 
 (defun dotspacemacs/user-config ()
 
-  (load "~/emacs-request/request.el")
+ (load "~/emacs-request/request.el")
 
-  ;; (add-hook 'org-mode-hook (lambda () (variable-pitch-mode t)))
-  (setq line-spacing '0.25)
+ ;; (add-hook 'org-mode-hook (lambda () (variable-pitch-mode t)))
+ (setq line-spacing '0.25)
 
-  (defun what-face (pos)
-    (interactive "d")
-    (let ((face (or (get-char-property (point) 'read-face-name)
-                    (get-char-property (point) 'face))))
-      (if face (message "Face: %s" face) (message "No face at %d" pos))))
+ (defun what-face (pos)
+  (interactive "d")
+  (let ((face (or (get-char-property (point) 'read-face-name)
+               (get-char-property (point) 'face))))
+   (if face (message "Face: %s" face) (message "No face at %d" pos))))
 
-  (setq org-startup-folded t)
-  (setq org-startup-truncated nil)
+ (setq org-startup-folded t)
+ (setq org-startup-truncated nil)
 
-  (with-eval-after-load 'org
-    (require 'org-crypt)
-    ;; (org-crypt-use-before-save-magic)
-    (setq org-tags-exclude-from-inheritance (quote ("crypt")))
-    ;; GPG key to use for encryption
-    ;; Either the Key ID or set to nil to use symmetric encryption.
-    (setq org-crypt-key nil)
-    (setq org-crypt-disable-auto-save nil)
+ (with-eval-after-load 'org
 
-    (require 'helm-org-rifle)
-    (setq helm-org-rifle-show-path t)
+   ;; Encryption settings
+   (require 'org-crypt)
+   ;(org-crypt-use-before-save-magic)
+   (setq org-tags-exclude-from-inheritance (quote ("crypt")))
+   ;; GPG key to use for encryption
+   ;; Either the Key ID or set to nil to use symmetric encryption.
+   (setq org-crypt-key nil)
+   (setq org-crypt-disable-auto-save nil)
 
-    (require 'org-download)
-    (require 'ess)
+   (require 'helm-org-rifle)
+   (setq helm-org-rifle-show-path t)
 
-    (setq org-agenda-compact-blocks nil)
-    (setq org-agenda-default-appointment-duration 60)
-    (setq org-agenda-files '("~/Dropbox/org"))
-    (setq org-agenda-restore-windows-after-quit t)
-    (setq org-agenda-skip-deadline-if-done t)
-    (setq org-agenda-skip-scheduled-if-done t)
-    (setq org-agenda-span 7)
-    (setq org-agenda-start-on-weekday nil)
-    (setq org-auto-align-tags nil)
-    (setq org-bullets-bullet-list (quote ("◉" "◆" "✚" "☀" "○")))
-    (setq org-enforce-todo-checkbox-dependencies t)
-    (setq org-enforce-todo-dependencies t)
-    (setq org-export-babel-evaluate nil)
-    (setq org-export-backends (quote (html icalendar md)))
-    (setq org-icalendar-exclude-tags (quote ("noexport")))
-    (setq org-icalendar-include-todo t)
-    (setq org-icalendar-use-deadline (quote (event-if-not-todo event-if-todo)))
-    (setq org-icalendar-use-scheduled (quote (event-if-not-todo event-if-todo)))
-    (setq org-modules (quote (org-crypt org-habit org-mouse)))
-    (setq org-remember-clock-out-on-exit t)
-    (setq org-default-priority 90)
-    (setq org-lowest-priority 90)
-    (setq org-clock-clocked-in-display (quote both))
-    (setq org-columns-default-format "%80ITEM(Task) %10Effort(Effort){:} %10CLOCKSUM")
-    (setq org-cycle-include-plain-lists 'integrate)
-    (set-default 'truncate-lines nil)
-    (set-default 'word-wrap t)
-    (setq helm-buffers-truncate-lines nil)
-    (setq org-log-into-drawer "LOGBOOK")
-    (setq org-refile-allow-creating-parent-nodes (quote confirm))
-    (setq org-refile-targets (quote ((org-agenda-files :level . 1))))
-    (setq org-refile-use-outline-path (quote file))
-    (setq org-image-actual-width 500)
-    (setq org-checkbox-hierarchical-statistics nil)
-    (setq-default org-download-image-dir "~/Dropbox/org/pics")
-    (global-set-key (kbd "<f6>") 'org-capture)
+   (require 'org-download)
+   (setq-default org-download-image-dir "~/Dropbox/org/pics")
 
-(setq org-capture-templates
-(quote (
-("t" "Task Diary" entry (file+datetree
-"~/Dropbox/org/tasks.org")
- "* TODO %^{Description}  %^g
- %?
- Added: %U")
-("j" "Journal" entry (file+datetree
-"~/Dropbox/org/journal.org")
- "** %U - %^{Activity}")
-)))
+   ;; Do not truncate lines and enable Word wrap
+   (set-default 'truncate-lines nil)
+   (set-default 'word-wrap t)
 
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((R . t)
-   (python . t)))
+   (setq helm-buffers-truncate-lines nil)
+   ;; Do not enable the compact layout in agenda
+   (setq org-agenda-compact-blocks nil)
+   (setq org-agenda-default-appointment-duration 15)
+   (setq org-agenda-files '("~/Dropbox/org"))
+   (setq org-agenda-restore-windows-after-quit nil)
 
-    (setq org-agenda-sorting-strategy
-      (quote
-       ((agenda priority-down todo-state-down)
-        (todo priority-down todo-state-down)
-        (tags priority-down todo-state-down)
-        )))
+   ;; Don't show tasks in agenda if they are done
+   (setq org-agenda-skip-deadline-if-done t)
+   (setq org-agenda-skip-scheduled-if-done t)
 
-    (setq org-agenda-prefix-format
-          (quote
-           ((agenda . " %i %?-12t% s")
-            (timeline . "  % s")
-            (todo . " %i")
-            (tags . " %i")
-            (search . " %i"))))
+   ;; Max number of days to show in agenda
+   (setq org-agenda-span 7)
+   (setq org-agenda-start-on-weekday nil)
+   (setq org-auto-align-tags nil)
+   (setq org-bullets-bullet-list (quote ("◉" "◆" "✚" "☀" "○")))
+   (setq org-checkbox-hierarchical-statistics nil)
+   (setq org-clock-clocked-in-display (quote both))
+   (setq org-columns-default-format "%80ITEM(Task) %10Effort(Effort){:} %10CLOCKSUM")
+   (setq org-cycle-include-plain-lists 'integrate)
+   (setq org-default-priority 90)
+   (setq org-enforce-todo-checkbox-dependencies t)
+   (setq org-enforce-todo-dependencies t)
+   (setq org-export-babel-evaluate nil)
+   (setq org-export-backends (quote (html icalendar md)))
 
-(setq org-agenda-custom-commands
-  (quote
-   (("n" "Agenda and all TODOs"
-     ((agenda "" nil)
-      (alltodo "" nil))
-     nil)
-    ("z" "work separated"
-     ((agenda "" nil)
-      (tags-todo "-work"
-                 ((org-agenda-skip-function
-                   (quote
-                    (org-agenda-skip-entry-if
-                     (quote scheduled))))))
-      (tags-todo "+work"
-                 ((org-agenda-skip-function
-                   (quote
-                    (org-agenda-skip-entry-if
-                     (quote scheduled)))))))
-     nil nil)
-    ("x" "courses and books"
-     ((tags "+course|+book" nil))
-     nil nil))))
+   ;; calendar export settings
+   (setq org-icalendar-exclude-tags (quote ("noexport")))
+   (setq org-icalendar-include-todo t)
+   (setq org-icalendar-use-deadline (quote (event-if-not-todo event-if-todo)))
+   (setq org-icalendar-use-scheduled (quote (event-if-not-todo event-if-todo)))
 
-    ;; Collapse everything except current tab.
-    (defun org-show-current-heading-tidily ()
-      (interactive)  ;Inteactive
-      "Show next entry, keeping other entries closed."
-      (if (save-excursion (end-of-line) (outline-invisible-p))
-          (progn (org-show-entry) (show-children))
-        (outline-back-to-heading)
-        (unless (and (bolp) (org-on-heading-p))
-          (org-up-heading-safe)
-          (hide-subtree)
-          (error "Boundary reached"))
-        (org-overview)
-        (org-reveal t)
-        (org-show-entry)
-        (show-children)))
+   (setq org-image-actual-width 500)
+   (setq org-log-into-drawer "LOGBOOK")
+   (setq org-lowest-priority 90)
+   (setq org-modules (quote (org-crypt org-habit org-mouse)))
+   (setq org-refile-allow-creating-parent-nodes (quote confirm))
+   (setq org-refile-targets (quote ((org-agenda-files :level . 1))))
+   (setq org-refile-use-outline-path (quote file))
+   (setq org-remember-clock-out-on-exit t)
 
-    ;; Place tags close to the right-hand side of the window
-    (add-hook 'org-finalize-agenda-hook 'place-agenda-tags)
-    (defun place-agenda-tags ()
-      "Put the agenda tags by the right border of the agenda window."
-      (setq org-agenda-tags-column (- 4 (window-width)))
-      (org-agenda-align-tags))
+   ;; Org Capture settings
+   (global-set-key (kbd "<f6>") 'org-capture)
+   (setq org-capture-templates
+         (quote (
+                 ("w"         ; hotkey
+                  "Work Todo" ; name
+                  entry       ; type
+                  (file+headline "~/Dropbox/org/work.org" "General") ;heading type and title
+                  "* TODO %^{Description}\nAdded: %U" ; template
+                  )
+                 ("t"
+                  "Task Diary"
+                  entry
+                  (file+datetree "~/Dropbox/org/tasks.org")
+                  "* TODO %^{Description}\nAdded: %U")
+                 ("j"
+                  "Journal"
+                  entry
+                  (file+datetree "~/Dropbox/org/journal.org")
+                  "** %U - %^{Activity}")
+                 )))
 
-    ;; org config ends
-    )
+   (require 'ess)
+   (org-babel-do-load-languages
+    'org-babel-load-languages
+    '((R . t)
+      (python . t)))
 
-  ;; save whenever the you move out of focus
-  (defun save-all ()
-    (interactive)
-    (save-some-buffers t))
-  (add-hook 'focus-out-hook 'save-all)
+   (setq org-agenda-sorting-strategy
+         (quote
+          ((agenda time-up)
+           (todo priority-down todo-state-down)
+           (tags priority-down todo-state-down)
+           )))
 
-  (setq deft-directory "~/Dropbox/org")
-  (setq deft-extensions '("txt" "org"))
-  )
+   (setq org-agenda-prefix-format
+         (quote
+          ((agenda . " %i %?-12t% s")
+           (timeline . "  % s")
+           (todo . " %i")
+           (tags . " %i")
+           (search . " %i"))))
+
+   (setq org-agenda-custom-commands
+         (quote
+          (("n" "Agenda and all TODOs"
+            ((agenda "" nil)
+             (alltodo "" nil))
+            nil)
+           ("z" "work separated"
+            ((agenda "" nil)
+             (tags-todo "-work"
+                        ((org-agenda-skip-function
+                          (quote
+                           (org-agenda-skip-entry-if
+                            (quote scheduled))))))
+             (tags-todo "+work"
+                        ((org-agenda-skip-function
+                          (quote
+                           (org-agenda-skip-entry-if
+                            (quote scheduled)))))))
+            nil nil)
+           ("x" "courses and books"
+            ((tags "+course|+book" nil))
+            nil nil))))
+
+   ;; Collapse everything except current tab.
+   (defun org-show-current-heading-tidily ()
+     (interactive)  ;Inteactive
+     "Show next entry, keeping other entries closed."
+     (if (save-excursion (end-of-line) (outline-invisible-p))
+         (progn (org-show-entry) (show-children))
+       (outline-back-to-heading)
+       (unless (and (bolp) (org-on-heading-p))
+         (org-up-heading-safe)
+         (hide-subtree)
+         (error "Boundary reached"))
+       (org-overview)
+       (org-reveal t)
+       (org-show-entry)
+       (show-children)))
+
+   ;; Place tags close to the right-hand side of the window
+   (add-hook 'org-finalize-agenda-hook 'place-agenda-tags)
+   (defun place-agenda-tags ()
+     "Put the agenda tags by the right border of the agenda window."
+     (setq org-agenda-tags-column (- 4 (window-width)))
+     (org-agenda-align-tags))
+
+   ;; org config ends
+   )
+
+ ;; save whenever the you move out of focus
+ (defun save-all ()
+   (interactive)
+   (save-some-buffers t))
+ (add-hook 'focus-out-hook 'save-all)
+
+ (setq deft-directory "~/Dropbox/org")
+ (setq deft-extensions '("txt" "org"))
+ )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
