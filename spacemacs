@@ -252,19 +252,28 @@ before layers configuration."
             (tags . " %i")
             (search . " %i"))))
 
-    (setq org-agenda-custom-commands
-      (quote
-       (("n" "Agenda and all TODOs"
-         ((agenda "" nil)
-          (alltodo "" nil))
-         nil)
-        ("z" "work separated"
-         ((tags-todo "-work" nil)
-          (tags-todo "+work" nil))
-         nil nil)
-        ("x" "courses and books"
-         ((tags "+course|+book" nil))
-         nil nil))))
+(setq org-agenda-custom-commands
+  (quote
+   (("n" "Agenda and all TODOs"
+     ((agenda "" nil)
+      (alltodo "" nil))
+     nil)
+    ("z" "work separated"
+     ((agenda "" nil)
+      (tags-todo "-work"
+                 ((org-agenda-skip-function
+                   (quote
+                    (org-agenda-skip-entry-if
+                     (quote scheduled))))))
+      (tags-todo "+work"
+                 ((org-agenda-skip-function
+                   (quote
+                    (org-agenda-skip-entry-if
+                     (quote scheduled)))))))
+     nil nil)
+    ("x" "courses and books"
+     ((tags "+course|+book" nil))
+     nil nil))))
 
     ;; Collapse everything except current tab.
     (defun org-show-current-heading-tidily ()
