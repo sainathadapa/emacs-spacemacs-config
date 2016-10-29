@@ -154,6 +154,10 @@ before layers configuration."
 
 (defun dotspacemacs/user-config ()
 
+ (setq backup-directory-alist '(("." . "~/emacs_backups")))
+
+ (fset 'yes-or-no-p 'y-or-n-p)
+
  (load "~/emacs-request/request.el")
 
  ;; (add-hook 'org-mode-hook (lambda () (variable-pitch-mode t)))
@@ -190,8 +194,8 @@ before layers configuration."
    (set-default 'word-wrap t)
 
    (setq helm-buffers-truncate-lines nil)
-   ;; Do not enable the compact layout in agenda
-   (setq org-agenda-compact-blocks nil)
+   ;; Enable the compact layout in agenda
+   (setq org-agenda-compact-blocks t)
    (setq org-agenda-default-appointment-duration 15)
    (setq org-agenda-files '("~/Dropbox/org"))
    (setq org-agenda-restore-windows-after-quit nil)
