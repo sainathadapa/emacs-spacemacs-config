@@ -234,6 +234,16 @@ before layers configuration."
    (setq org-refile-use-outline-path (quote file))
    (setq org-remember-clock-out-on-exit t)
 
+   ;; org todo keywords
+   (setq org-todo-keywords
+     (quote
+      ((sequence "TODO" "PROGRESS" "PAUSED" "|" "DONE" "CANCELLED"))))
+
+   ;; org priority setting
+   (setq org-default-priority 55)
+   (setq org-highest-priority 48)
+   (setq org-lowest-priority 57)
+
    ;; Org Capture settings
    (global-set-key (kbd "<f6>") 'org-capture)
    (setq org-capture-templates
