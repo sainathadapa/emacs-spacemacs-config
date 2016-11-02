@@ -233,6 +233,8 @@ before layers configuration."
    (setq org-refile-targets (quote ((org-agenda-files :level . 1))))
    (setq org-refile-use-outline-path (quote file))
    (setq org-remember-clock-out-on-exit t)
+   (setq org-agenda-inhibit-startup t)
+
 
    ;; org todo keywords
    (setq org-todo-keywords
@@ -243,7 +245,6 @@ before layers configuration."
    (setq org-default-priority 55)
    (setq org-highest-priority 48)
    (setq org-lowest-priority 57)
-
    ;; Org Capture settings
    (global-set-key (kbd "<f6>") 'org-capture)
    (setq org-capture-templates
