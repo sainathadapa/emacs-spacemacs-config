@@ -274,11 +274,10 @@ before layers configuration."
       (python . t)))
 
    (setq org-agenda-sorting-strategy
-         (quote
-          ((agenda time-up)
-           (todo priority-down todo-state-down)
-           (tags priority-down todo-state-down)
-           )))
+     (quote
+      ((agenda time-up deadline-up)
+       (todo priority-down todo-state-down)
+       (tags priority-down todo-state-down))))
 
    (setq org-agenda-prefix-format
          (quote
