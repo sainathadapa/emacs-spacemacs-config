@@ -235,7 +235,6 @@ before layers configuration."
    (setq org-remember-clock-out-on-exit t)
    (setq org-agenda-inhibit-startup t)
 
-
    ;; org todo keywords
    (setq org-todo-keywords
      (quote
@@ -245,6 +244,7 @@ before layers configuration."
    (setq org-default-priority 55)
    (setq org-highest-priority 48)
    (setq org-lowest-priority 57)
+
    ;; Org Capture settings
    (global-set-key (kbd "<f6>") 'org-capture)
    (setq org-capture-templates
@@ -287,30 +287,57 @@ before layers configuration."
            (tags . " %i")
            (search . " %i"))))
 
-   (setq org-agenda-custom-commands
-     (quote
-      (("n" "Agenda and all TODOs"
-        ((agenda "" nil)
-         (alltodo "" nil))
-        nil)
-       ("z" "work separated"
-        ((agenda "" nil)
-         (tags-todo "-work"
-                    ((org-agenda-skip-function
-                      (quote
-                       (org-agenda-skip-entry-if
-                        (quote scheduled)
-                        (quote deadline))))))
-         (tags-todo "+work"
-                    ((org-agenda-skip-function
-                      (quote
-                       (org-agenda-skip-entry-if
-                        (quote deadline)
-                        (quote scheduled)))))))
-        nil nil)
-       ("x" "courses and books"
-        ((tags "+course|+book" nil))
-        nil nil))))
+   (setq org-columns-default-format
+         "%75ITEM %TODO %PRIORITY %SCHEDULED %DEADLINE %CLOSED %ALLTAGS")
+
+   ;; from http://emacs.stackexchange.com/questions/26351/custom-sorting-for-agenda
+   (defun cmp-date-property (prop)
+     "Compare two `org-mode' agenda entries, `A' and `B', by some date property. If a is before b, return -1. If a is after b, return 1. If they are equal return t."
+     (lexical-let ((prop prop))
+       #'(lambda (a b)
+
+           (let* ((a-pos (get-text-property 0 'org-marker a))
+                  (b-pos (get-text-property 0 'org-marker b))
+                  (a-date (or (org-entry-get a-pos prop)
+                              (format "<%s>" (org-read-date t nil "now"))))
+                  (b-date (or (org-entry-get b-pos prop)
+                              (format "<%s>" (org-read-date t nil "now"))))
+                  (cmp (compare-strings a-date nil nil b-date nil nil))
+                  )
+             (if (eq cmp t) nil (signum cmp))
+             ))))
+
+ (setq org-agenda-custom-commands
+   (quote
+    (("n" "Agenda and all TODOs"
+      ((agenda "" nil)
+       (alltodo "" nil))
+      nil)
+     ("x" "Tasks done in the last week"
+      ((tags "CLOSED>=\"<-1w>\"" nil))
+      ((org-agenda-view-columns-initially t)
+       (org-agenda-cmp-user-defined (cmp-date-property "CLOSED"))
+       (org-agenda-sorting-strategy '(user-defined-down))
+       (org-agenda-window-setup '(only-window))
+      ))
+     ("z" "work separated"
+      ((agenda "" nil)
+       (tags-todo "-work"
+                  ((org-agenda-skip-function
+                    (quote
+                     (org-agenda-skip-entry-if
+                      (quote scheduled)
+                      (quote deadline))))))
+       (tags-todo "+work"
+                  ((org-agenda-skip-function
+                    (quote
+                     (org-agenda-skip-entry-if
+                      (quote deadline)
+                      (quote scheduled)))))))
+      nil)
+     ("c" "courses and books"
+      ((tags "+course|+book" nil))
+      nil))))
 
    ;; Collapse everything except current tab.
    (defun org-show-current-heading-tidily ()
