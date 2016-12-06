@@ -320,10 +320,14 @@ before layers configuration."
      ("x" "Tasks done in the last week"
       ((tags "CLOSED>=\"<-1w>\"" nil))
       ((org-agenda-view-columns-initially t)
-       (org-agenda-cmp-user-defined (cmp-date-property "CLOSED"))
-       (org-agenda-sorting-strategy '(user-defined-down))
-       (org-agenda-window-setup '(only-window))
-      ))
+       (org-agenda-cmp-user-defined
+        (cmp-date-property "CLOSED"))
+       (org-agenda-sorting-strategy
+        (quote
+         (user-defined-down)))
+       (org-agenda-window-setup
+        (quote
+         (only-window)))))
      ("z" "work separated"
       ((agenda "" nil)
        (tags-todo "-work"
