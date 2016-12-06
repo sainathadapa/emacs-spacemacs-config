@@ -256,14 +256,14 @@ before layers configuration."
                  ("w"         ; hotkey
                   "Work Todo" ; name
                   entry       ; type
-                  (file+headline "~/Dropbox/org/work.org" "General") ;heading type and title
-                  "* TODO %^{Description}\nAdded: %U" ; template
+                  (file+headline "~/Dropbox/org/work.org" "General") ;target
+                  "* TODO %^{Description}\n:PROPERTIES:\n:Added: %U\n:END:" ; template
                   )
                  ("t"
                   "Task Diary"
                   entry
                   (file+datetree "~/Dropbox/org/tasks.org")
-                  "* TODO %^{Description}\nAdded: %U")
+                  "* TODO %^{Description}\n:PROPERTIES:\n:Added: %U\n:END:")
                  ("j"
                   "Journal"
                   entry
