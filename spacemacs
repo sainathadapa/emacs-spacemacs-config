@@ -341,7 +341,8 @@ before layers configuration."
                     (quote
                      (org-agenda-skip-entry-if
                       (quote deadline)
-                      (quote scheduled)))))))
+                      (quote scheduled))))))
+       (tags "GOAL" nil))
       nil)
      ("c" "courses and books"
       ((tags "+course|+book" nil))
