@@ -220,7 +220,6 @@ before layers configuration."
    (setq org-default-priority 90)
    (setq org-enforce-todo-checkbox-dependencies t)
    (setq org-enforce-todo-dependencies t)
-   (setq org-export-babel-evaluate nil)
    (setq org-export-backends (quote (html icalendar md)))
 
    ;; calendar export settings
@@ -271,11 +270,20 @@ before layers configuration."
                   "** %U - %^{Activity}")
                  )))
 
-   (require 'ess)
+   ;; org babel settings
+   (require 'ess-site)
+   (require 'ob-R)
    (org-babel-do-load-languages
     'org-babel-load-languages
     '((R . t)
+      (emacs-lisp . t)
       (python . t)))
+   (setq org-src-fontify-natively t)
+   (setq org-src-tab-acts-natively t)
+   (setq org-export-babel-evaluate nil)
+   (setq org-confirm-babel-evaluate nil)
+   (add-to-list 'org-babel-default-header-args:R
+                '(:session . "*org-R*"))
 
    (setq org-agenda-sorting-strategy
      (quote
