@@ -319,42 +319,41 @@ before layers configuration."
              (if (eq cmp t) nil (signum cmp))
              ))))
 
- (setq org-agenda-custom-commands
-   (quote
-    (("n" "Agenda and all TODOs"
-      ((agenda "" nil)
-       (alltodo "" nil))
-      nil)
-     ("x" "Tasks done in the last week"
-      ((tags "CLOSED>=\"<-1w>\"" nil))
-      ((org-agenda-view-columns-initially t)
-       (org-agenda-cmp-user-defined
-        (cmp-date-property "CLOSED"))
-       (org-agenda-sorting-strategy
-        (quote
-         (user-defined-down)))
-       (org-agenda-window-setup
-        (quote
-         (only-window)))))
-     ("z" "work separated"
-      ((agenda "" nil)
-       (tags-todo "-work"
-                  ((org-agenda-skip-function
-                    (quote
-                     (org-agenda-skip-entry-if
-                      (quote scheduled)
-                      (quote deadline))))))
-       (tags-todo "+work"
-                  ((org-agenda-skip-function
-                    (quote
-                     (org-agenda-skip-entry-if
-                      (quote deadline)
-                      (quote scheduled))))))
-       (tags "GOAL" nil))
-      nil)
-     ("c" "courses and books"
-      ((tags "+course|+book" nil))
-      nil))))
+   (setq org-agenda-custom-commands
+         (quote
+          (
+           ("x" "Tasks done in the last week"
+            ((tags "CLOSED>=\"<-1w>\"" nil))
+            ((org-agenda-view-columns-initially t)
+             (org-agenda-overriding-header "Tasks Done in the last week")
+             (org-agenda-cmp-user-defined
+              (cmp-date-property "CLOSED"))
+             (org-agenda-sorting-strategy (quote (user-defined-down)))
+             (org-agenda-window-setup
+              (quote
+               (only-window)))))
+           ("z" "work separated"
+            ((agenda "" nil)
+             (tags-todo "-work"
+                        ((org-agenda-skip-function (quote (org-agenda-skip-entry-if (quote scheduled) (quote deadline))))
+                         (org-agenda-overriding-header "Non-Work Tasks")
+                         ))
+             (tags-todo "+work"
+                        ((org-agenda-skip-function (quote (org-agenda-skip-entry-if (quote deadline) (quote scheduled))))
+                         (org-agenda-overriding-header "Work Tasks")
+                         ))
+             (tags "GOAL" (
+                           (org-agenda-overriding-header "Goals")
+                           ))
+             (tags "CLOSED>=\"<-1w>\"" (
+                                        (org-agenda-cmp-user-defined (cmp-date-property "CLOSED"))
+                                        (org-agenda-sorting-strategy '(user-defined-down))
+                                        (org-agenda-overriding-header "Tasks Done in the last week")
+                                        )))
+            nil)
+           ("c" "courses and books"
+            ((tags "+course|+book" nil))
+            nil))))
 
    ;; Collapse everything except current tab.
    (defun org-show-current-heading-tidily ()
