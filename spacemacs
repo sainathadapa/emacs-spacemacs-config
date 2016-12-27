@@ -240,8 +240,11 @@ before layers configuration."
 
    ;; org todo keywords
    (setq org-todo-keywords
-     (quote
-      ((sequence "TODO" "PROGRESS" "PAUSED" "|" "DONE" "CANCELLED"))))
+         (quote
+          ((sequence "TODO" "PROGRESS" "PAUSED" "|" "DONE" "CANCELLED"))))
+
+   (setq org-todo-keyword-faces
+         '(("PROGRESS" . "orange") ("PAUSED" . "magenta") ("CANCELLED" . "red") ("DONE" . "green")))
 
    ;; org priority setting
    (setq org-default-priority 55)
