@@ -321,10 +321,10 @@ before layers configuration."
              (if (eq cmp t) nil (signum cmp))
              ))))
 
+
    (setq org-agenda-custom-commands
          (quote
-          (
-           ("x" "Tasks done in the last week"
+          (("x" "Tasks done in the last week"
             ((tags "CLOSED>=\"<-1w>\"" nil))
             ((org-agenda-view-columns-initially t)
              (org-agenda-overriding-header "Tasks Done in the last week")
@@ -353,8 +353,30 @@ before layers configuration."
                                         (org-agenda-overriding-header "Tasks Done in the last week")
                                         )))
             nil)
-           ("c" "courses and books"
-            ((tags "+course|+book" nil))
+           ("Q" "closed tasks"
+            ((tags "CLOSED>=\"<-1w>\"" (
+                                        (org-agenda-cmp-user-defined (cmp-date-property "CLOSED"))
+                                        (org-agenda-sorting-strategy '(user-defined-down))
+                                        (org-agenda-overriding-header "Tasks Done in the last week")
+                                        )))
+            nil)
+           ("W" "work todos"
+            ((tags-todo "+work"
+                        ((org-agenda-skip-function (quote (org-agenda-skip-entry-if (quote deadline) (quote scheduled))))
+                         (org-agenda-overriding-header "Work Tasks")
+                         )))
+            nil)
+           ("E" "non-work todos"
+            ((tags-todo "-work"
+                        ((org-agenda-skip-function (quote (org-agenda-skip-entry-if (quote scheduled) (quote deadline))))
+                         (org-agenda-overriding-header "Non-Work Tasks")
+                         )))
+            nil)
+           ("G" "GOALS"
+            ((tags "GOAL" ((org-agenda-overriding-header "Goals"))))
+            nil)
+           ("P" "Projects"
+            ((tags "+PROJECT" nil))
             nil))))
 
    ;; Collapse everything except current tab.
@@ -384,6 +406,32 @@ before layers configuration."
    ;; org config ends
    )
 
+ (defun org-dashboard ()
+   "Run some commands in sequence."
+   (interactive)
+   (setq org-agenda-sticky t)
+   (setq org-agenda-window-setup 'current-window)
+   (split-window-right)
+   (org-agenda nil "a")
+   (other-window 1)
+   (org-agenda nil "Q")
+   (split-window-vertically)
+   (org-agenda nil "W")
+   (other-window 2)
+   (split-window-vertically)
+   (other-window 1)
+   (org-agenda nil "E")
+   (other-window 2)
+   (split-window-vertically)
+   (org-agenda nil "P")
+   (split-window-vertically)
+   (org-agenda nil "G")
+   (setq org-agenda-window-setup 'reorganize-frame)
+   (setq org-agenda-sticky nil)
+   )
+
+ (global-set-key (kbd "<f7>") 'org-dashboard)
+
  ;; save whenever the you move out of focus
  (defun save-all ()
    (interactive)
@@ -392,6 +440,7 @@ before layers configuration."
 
  (setq deft-directory "~/Dropbox/org")
  (setq deft-extensions '("txt" "org"))
+
  )
 
 ;; Do not write anything past this comment. This is where Emacs will
