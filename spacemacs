@@ -181,7 +181,6 @@ before layers configuration."
    ;; Encryption settings
    (require 'org-crypt)
    ;(org-crypt-use-before-save-magic)
-   (setq org-tags-exclude-from-inheritance (quote ("crypt")))
    ;; GPG key to use for encryption
    ;; Either the Key ID or set to nil to use symmetric encryption.
    (setq org-crypt-key nil)
@@ -381,6 +380,7 @@ before layers configuration."
      (setq org-agenda-tags-column (- 4 (window-width)))
      (org-agenda-align-tags))
 
+   (setq org-tags-exclude-from-inheritance (quote ("PROJECT" "crypt")))
    ;; org config ends
    )
 
