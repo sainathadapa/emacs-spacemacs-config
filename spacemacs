@@ -462,7 +462,7 @@ before layers configuration."
    (other-window 1)
    (shrink-window-if-larger-than-buffer)
    (other-window 3)
-   ;; (run-with-timer 0 (* 1 60) 'refresh-dashboard)
+   (run-with-timer 0 (* 5 60) 'refresh-dashboard)
    )
 
  (global-set-key (kbd "<f7>") 'org-dashboard)
