@@ -364,6 +364,7 @@ before layers configuration."
             ((tags-todo "+work"
                         ((org-agenda-skip-function (quote (org-agenda-skip-entry-if (quote deadline) (quote scheduled))))
                          (org-agenda-overriding-header "Work Tasks")
+                         (org-agenda-hide-tags-regexp "work")
                          )))
             nil)
            ("E" "non-work todos"
@@ -372,12 +373,19 @@ before layers configuration."
                          (org-agenda-overriding-header "Non-Work Tasks")
                          )))
             nil)
-           ("G" "GOALS"
-            ((tags "GOAL" ((org-agenda-overriding-header "Goals"))))
+           ("G" "Goals"
+            ((tags "GOAL" ((org-agenda-overriding-header "Goals")
+                           (org-agenda-hide-tags-regexp "GOAL"))))
             nil)
            ("P" "Projects"
-            ((tags "+PROJECT" nil))
-            nil))))
+            ((tags "+PROJECT&-DONE" ((org-agenda-overriding-header "Projects")
+                              (org-agenda-hide-tags-regexp "PROJECT"))))
+            nil)
+           ("K" "Wishlist"
+            ((tags "wishlist" ((org-agenda-overriding-header "Wishlist")
+                               (org-agenda-hide-tags-regexp "wishlist"))))
+            nil)
+           )))
 
    ;; Collapse everything except current tab.
    (defun org-show-current-heading-tidily ()
@@ -406,11 +414,26 @@ before layers configuration."
    ;; org config ends
    )
 
+ (defun refresh-dashboard ()
+   "Run some commands in sequence."
+   (interactive)
+   (message "%s" "i started")
+   (message nil)
+   (cl-loop repeat 6 do (execute-kbd-macro (kbd "r")) (other-window 1))
+   (message "%s" "i ran")
+   (message nil)
+   )
+
+ (setq global-auto-revert-mode t)
+ (setq org-agenda-window-setup 'reorganize-frame)
+ (setq org-agenda-sticky nil)
+
  (defun org-dashboard ()
    "Run some commands in sequence."
    (interactive)
    (setq org-agenda-sticky t)
    (setq org-agenda-window-setup 'current-window)
+   (setq-default mode-line-format nil)
    (split-window-right)
    (org-agenda nil "a")
    (other-window 1)
@@ -426,8 +449,20 @@ before layers configuration."
    (org-agenda nil "P")
    (split-window-vertically)
    (org-agenda nil "G")
-   (setq org-agenda-window-setup 'reorganize-frame)
-   (setq org-agenda-sticky nil)
+   (split-window-vertically)
+   (org-agenda nil "K")
+   (other-window 4)
+   (shrink-window-if-larger-than-buffer)
+   (other-window 2)
+   (shrink-window-if-larger-than-buffer)
+   (other-window 1)
+   (shrink-window-if-larger-than-buffer)
+   (other-window 1)
+   (shrink-window-if-larger-than-buffer)
+   (other-window 1)
+   (shrink-window-if-larger-than-buffer)
+   (other-window 3)
+   ;; (run-with-timer 0 (* 1 60) 'refresh-dashboard)
    )
 
  (global-set-key (kbd "<f7>") 'org-dashboard)
