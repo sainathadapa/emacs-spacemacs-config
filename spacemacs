@@ -154,329 +154,329 @@ before layers configuration."
 
 (defun dotspacemacs/user-config ()
 
- (setq backup-directory-alist '(("." . "~/emacs_backups")))
+  (setq backup-directory-alist '(("." . "~/emacs_backups")))
 
- (fset 'yes-or-no-p 'y-or-n-p)
+  (fset 'yes-or-no-p 'y-or-n-p)
 
- (load "~/emacs-request/request.el")
- ;; (load "~/org-protocol-capture-html/org-protocol-capture-html.el")
+  (load "~/emacs-request/request.el")
+  ;; (load "~/org-protocol-capture-html/org-protocol-capture-html.el")
 
- ;; (server-start)
- ;; (require 'org-protocol)
+  ;; (server-start)
+  ;; (require 'org-protocol)
 
- ;; (add-hook 'org-mode-hook (lambda () (variable-pitch-mode t)))
- (setq line-spacing '0.25)
+  ;; (add-hook 'org-mode-hook (lambda () (variable-pitch-mode t)))
+  (setq line-spacing '0.25)
 
- (defun what-face (pos)
-  (interactive "d")
-  (let ((face (or (get-char-property (point) 'read-face-name)
-               (get-char-property (point) 'face))))
-   (if face (message "Face: %s" face) (message "No face at %d" pos))))
+  (defun what-face (pos)
+    (interactive "d")
+    (let ((face (or (get-char-property (point) 'read-face-name)
+                    (get-char-property (point) 'face))))
+      (if face (message "Face: %s" face) (message "No face at %d" pos))))
 
- (setq org-startup-folded t)
- (setq org-startup-truncated nil)
+  (setq org-startup-folded t)
+  (setq org-startup-truncated nil)
 
- (with-eval-after-load 'org
+  (with-eval-after-load 'org
 
-   ;; Encryption settings
-   (require 'org-crypt)
-   ;(org-crypt-use-before-save-magic)
-   ;; GPG key to use for encryption
-   ;; Either the Key ID or set to nil to use symmetric encryption.
-   (setq org-crypt-key nil)
-   (setq org-crypt-disable-auto-save nil)
+    ;; Encryption settings
+    (require 'org-crypt)
+                                        ;(org-crypt-use-before-save-magic)
+    ;; GPG key to use for encryption
+    ;; Either the Key ID or set to nil to use symmetric encryption.
+    (setq org-crypt-key nil)
+    (setq org-crypt-disable-auto-save nil)
 
-   (require 'helm-org-rifle)
-   (setq helm-org-rifle-show-path t)
+    (require 'helm-org-rifle)
+    (setq helm-org-rifle-show-path t)
 
-   (require 'org-download)
-   (setq-default org-download-image-dir "~/Dropbox/org/pics")
+    (require 'org-download)
+    (setq-default org-download-image-dir "~/Dropbox/org/pics")
 
-   ;; Do not truncate lines and enable Word wrap
-   (set-default 'truncate-lines nil)
-   (set-default 'word-wrap t)
+    ;; Do not truncate lines and enable Word wrap
+    (set-default 'truncate-lines nil)
+    (set-default 'word-wrap t)
 
-   (setq helm-buffers-truncate-lines nil)
-   ;; Enable the compact layout in agenda
-   (setq org-agenda-compact-blocks t)
-   (setq org-agenda-default-appointment-duration 15)
-   (setq org-agenda-files '("~/Dropbox/org"))
-   (setq org-agenda-restore-windows-after-quit nil)
+    (setq helm-buffers-truncate-lines nil)
+    ;; Enable the compact layout in agenda
+    (setq org-agenda-compact-blocks t)
+    (setq org-agenda-default-appointment-duration 15)
+    (setq org-agenda-files '("~/Dropbox/org"))
+    (setq org-agenda-restore-windows-after-quit nil)
 
-   ;; Don't show tasks in agenda if they are done
-   (setq org-agenda-skip-deadline-if-done t)
-   (setq org-agenda-skip-scheduled-if-done t)
+    ;; Don't show tasks in agenda if they are done
+    (setq org-agenda-skip-deadline-if-done t)
+    (setq org-agenda-skip-scheduled-if-done t)
 
-   ;; Max number of days to show in agenda
-   (setq org-agenda-span 7)
-   (setq org-agenda-start-on-weekday nil)
-   (setq org-auto-align-tags nil)
-   (setq org-bullets-bullet-list (quote ("◉" "◆" "✚" "☀" "○")))
-   (setq org-checkbox-hierarchical-statistics nil)
-   (setq org-clock-clocked-in-display (quote both))
-   (setq org-columns-default-format "%80ITEM(Task) %10Effort(Effort){:} %10CLOCKSUM")
-   (setq org-cycle-include-plain-lists 'integrate)
-   (setq org-default-priority 90)
-   (setq org-enforce-todo-checkbox-dependencies t)
-   (setq org-enforce-todo-dependencies t)
-   (setq org-export-backends (quote (html icalendar md)))
+    ;; Max number of days to show in agenda
+    (setq org-agenda-span 7)
+    (setq org-agenda-start-on-weekday nil)
+    (setq org-auto-align-tags nil)
+    (setq org-bullets-bullet-list (quote ("◉" "◆" "✚" "☀" "○")))
+    (setq org-checkbox-hierarchical-statistics nil)
+    (setq org-clock-clocked-in-display (quote both))
+    (setq org-columns-default-format "%80ITEM(Task) %10Effort(Effort){:} %10CLOCKSUM")
+    (setq org-cycle-include-plain-lists 'integrate)
+    (setq org-default-priority 90)
+    (setq org-enforce-todo-checkbox-dependencies t)
+    (setq org-enforce-todo-dependencies t)
+    (setq org-export-backends (quote (html icalendar md)))
 
-   ;; calendar export settings
-   (setq org-icalendar-exclude-tags (quote ("noexport")))
-   (setq org-icalendar-include-todo t)
-   (setq org-icalendar-use-deadline (quote (event-if-not-todo event-if-todo)))
-   (setq org-icalendar-use-scheduled (quote (event-if-not-todo event-if-todo)))
+    ;; calendar export settings
+    (setq org-icalendar-exclude-tags (quote ("noexport")))
+    (setq org-icalendar-include-todo t)
+    (setq org-icalendar-use-deadline (quote (event-if-not-todo event-if-todo)))
+    (setq org-icalendar-use-scheduled (quote (event-if-not-todo event-if-todo)))
 
-   (setq org-image-actual-width 500)
-   (setq org-log-into-drawer "LOGBOOK")
-   (setq org-lowest-priority 90)
-   (setq org-modules (quote (org-crypt org-habit org-mouse)))
-   (setq org-refile-allow-creating-parent-nodes (quote confirm))
-   (setq org-refile-targets (quote ((org-agenda-files :level . 1))))
-   (setq org-refile-use-outline-path (quote file))
-   (setq org-remember-clock-out-on-exit t)
-   (setq org-agenda-inhibit-startup t)
+    (setq org-image-actual-width 500)
+    (setq org-log-into-drawer "LOGBOOK")
+    (setq org-lowest-priority 90)
+    (setq org-modules (quote (org-crypt org-habit org-mouse)))
+    (setq org-refile-allow-creating-parent-nodes (quote confirm))
+    (setq org-refile-targets (quote ((org-agenda-files :level . 1))))
+    (setq org-refile-use-outline-path (quote file))
+    (setq org-remember-clock-out-on-exit t)
+    (setq org-agenda-inhibit-startup t)
 
-   ;; org todo keywords
-   (setq org-todo-keywords
-         (quote
-          ((sequence "TODO" "PROGRESS" "PAUSED" "|" "DONE" "CANCELLED"))))
+    ;; org todo keywords
+    (setq org-todo-keywords
+          (quote
+           ((sequence "TODO" "PROGRESS" "PAUSED" "|" "DONE" "CANCELLED"))))
 
-   (setq org-todo-keyword-faces
-         '(("PROGRESS" . "orange") ("PAUSED" . "magenta") ("CANCELLED" . "red") ("DONE" . "green")))
+    (setq org-todo-keyword-faces
+          '(("PROGRESS" . "orange") ("PAUSED" . "magenta") ("CANCELLED" . "red") ("DONE" . "green")))
 
-   ;; org priority setting
-   (setq org-default-priority 55)
-   (setq org-highest-priority 48)
-   (setq org-lowest-priority 57)
+    ;; org priority setting
+    (setq org-default-priority 55)
+    (setq org-highest-priority 48)
+    (setq org-lowest-priority 57)
 
-   ;; Org Capture settings
-   (global-set-key (kbd "<f6>") 'org-capture)
-   (setq org-capture-templates
-         (quote (
-                 ("w"         ; hotkey
-                  "Work Todo" ; name
-                  entry       ; type
-                  (file+headline "~/Dropbox/org/work.org" "General") ;target
-                  "* TODO %^{Description}\n:PROPERTIES:\n:Added: %U\n:END:" ; template
-                  )
-                 ("t"
-                  "Task Diary"
-                  entry
-                  (file+datetree "~/Dropbox/org/tasks.org")
-                  "* TODO %^{Description}\n:PROPERTIES:\n:Added: %U\n:END:")
-                 ("j"
-                  "Journal"
-                  entry
-                  (file+datetree "~/Dropbox/org/journal.org")
-                  "** %U - %^{Activity}")
-                 )))
+    ;; Org Capture settings
+    (global-set-key (kbd "<f6>") 'org-capture)
+    (setq org-capture-templates
+          (quote (
+                  ("w"         ; hotkey
+                   "Work Todo" ; name
+                   entry       ; type
+                   (file+headline "~/Dropbox/org/work.org" "General") ;target
+                   "* TODO %^{Description}\n:PROPERTIES:\n:Added: %U\n:END:" ; template
+                   )
+                  ("t"
+                   "Task Diary"
+                   entry
+                   (file+datetree "~/Dropbox/org/tasks.org")
+                   "* TODO %^{Description}\n:PROPERTIES:\n:Added: %U\n:END:")
+                  ("j"
+                   "Journal"
+                   entry
+                   (file+datetree "~/Dropbox/org/journal.org")
+                   "** %U - %^{Activity}")
+                  )))
 
-   ;; org babel settings
-   (require 'ess-site)
-   (require 'ob-R)
-   (org-babel-do-load-languages
-    'org-babel-load-languages
-    '((R . t)
-      (emacs-lisp . t)
-      (python . t)))
-   (setq org-src-fontify-natively t)
-   (setq org-src-tab-acts-natively t)
-   (setq org-export-babel-evaluate nil)
-   (setq org-confirm-babel-evaluate nil)
-   (add-to-list 'org-babel-default-header-args:R
-                '(:session . "*org-R*"))
+    ;; org babel settings
+    (require 'ess-site)
+    (require 'ob-R)
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((R . t)
+       (emacs-lisp . t)
+       (python . t)))
+    (setq org-src-fontify-natively t)
+    (setq org-src-tab-acts-natively t)
+    (setq org-export-babel-evaluate nil)
+    (setq org-confirm-babel-evaluate nil)
+    (add-to-list 'org-babel-default-header-args:R
+                 '(:session . "*org-R*"))
 
-   (setq org-agenda-sorting-strategy
-     (quote
-      ((agenda time-up deadline-up)
-       (todo priority-down todo-state-down)
-       (tags priority-down todo-state-down))))
+    (setq org-agenda-sorting-strategy
+          (quote
+           ((agenda time-up deadline-up)
+            (todo priority-down todo-state-down)
+            (tags priority-down todo-state-down))))
 
-   (setq org-agenda-prefix-format
-         (quote
-          ((agenda . " %i %?-12t% s")
-           (timeline . "  % s")
-           (todo . " %i")
-           (tags . " %i")
-           (search . " %i"))))
+    (setq org-agenda-prefix-format
+          (quote
+           ((agenda . " %i %?-12t% s")
+            (timeline . "  % s")
+            (todo . " %i")
+            (tags . " %i")
+            (search . " %i"))))
 
-   (setq org-columns-default-format
-         "%75ITEM %TODO %PRIORITY %SCHEDULED %DEADLINE %CLOSED %ALLTAGS")
+    (setq org-columns-default-format
+          "%75ITEM %TODO %PRIORITY %SCHEDULED %DEADLINE %CLOSED %ALLTAGS")
 
-   ;; from http://emacs.stackexchange.com/questions/26351/custom-sorting-for-agenda
-   (defun cmp-date-property (prop)
-     "Compare two `org-mode' agenda entries, `A' and `B', by some date property. If a is before b, return -1. If a is after b, return 1. If they are equal return t."
-     (lexical-let ((prop prop))
-       #'(lambda (a b)
+    ;; from http://emacs.stackexchange.com/questions/26351/custom-sorting-for-agenda
+    (defun cmp-date-property (prop)
+      "Compare two `org-mode' agenda entries, `A' and `B', by some date property. If a is before b, return -1. If a is after b, return 1. If they are equal return t."
+      (lexical-let ((prop prop))
+        #'(lambda (a b)
 
-           (let* ((a-pos (get-text-property 0 'org-marker a))
-                  (b-pos (get-text-property 0 'org-marker b))
-                  (a-date (or (org-entry-get a-pos prop)
-                              (format "<%s>" (org-read-date t nil "now"))))
-                  (b-date (or (org-entry-get b-pos prop)
-                              (format "<%s>" (org-read-date t nil "now"))))
-                  (cmp (compare-strings a-date nil nil b-date nil nil))
-                  )
-             (if (eq cmp t) nil (signum cmp))
-             ))))
+            (let* ((a-pos (get-text-property 0 'org-marker a))
+                   (b-pos (get-text-property 0 'org-marker b))
+                   (a-date (or (org-entry-get a-pos prop)
+                               (format "<%s>" (org-read-date t nil "now"))))
+                   (b-date (or (org-entry-get b-pos prop)
+                               (format "<%s>" (org-read-date t nil "now"))))
+                   (cmp (compare-strings a-date nil nil b-date nil nil))
+                   )
+              (if (eq cmp t) nil (signum cmp))
+              ))))
 
 
-   (setq org-agenda-custom-commands
-         (quote
-          (("x" "Tasks done in the last week"
-            ((tags "CLOSED>=\"<-1w>\"" nil))
-            ((org-agenda-view-columns-initially t)
-             (org-agenda-overriding-header "Tasks Done in the last week")
-             (org-agenda-cmp-user-defined
-              (cmp-date-property "CLOSED"))
-             (org-agenda-sorting-strategy (quote (user-defined-down)))
-             (org-agenda-window-setup
-              (quote
-               (only-window)))))
-           ("z" "work separated"
-            ((agenda "" nil)
-             (tags-todo "-work"
-                        ((org-agenda-skip-function (quote (org-agenda-skip-entry-if (quote scheduled) (quote deadline))))
-                         (org-agenda-overriding-header "Non-Work Tasks")
-                         ))
-             (tags-todo "+work"
-                        ((org-agenda-skip-function (quote (org-agenda-skip-entry-if (quote deadline) (quote scheduled))))
-                         (org-agenda-overriding-header "Work Tasks")
-                         ))
-             (tags "GOAL" (
-                           (org-agenda-overriding-header "Goals")
-                           ))
-             (tags "CLOSED>=\"<-1w>\"" (
-                                        (org-agenda-cmp-user-defined (cmp-date-property "CLOSED"))
-                                        (org-agenda-sorting-strategy '(user-defined-down))
-                                        (org-agenda-overriding-header "Tasks Done in the last week")
-                                        )))
-            nil)
-           ("Q" "closed tasks"
-            ((tags "CLOSED>=\"<-1w>\"" (
-                                        (org-agenda-cmp-user-defined (cmp-date-property "CLOSED"))
-                                        (org-agenda-sorting-strategy '(user-defined-down))
-                                        (org-agenda-overriding-header "Tasks Done in the last week")
-                                        )))
-            nil)
-           ("W" "work todos"
-            ((tags-todo "+work"
-                        ((org-agenda-skip-function (quote (org-agenda-skip-entry-if (quote deadline) (quote scheduled))))
-                         (org-agenda-overriding-header "Work Tasks")
-                         (org-agenda-hide-tags-regexp "work")
-                         )))
-            nil)
-           ("E" "non-work todos"
-            ((tags-todo "-work"
-                        ((org-agenda-skip-function (quote (org-agenda-skip-entry-if (quote scheduled) (quote deadline))))
-                         (org-agenda-overriding-header "Non-Work Tasks")
-                         )))
-            nil)
-           ("G" "Goals"
-            ((tags "GOAL" ((org-agenda-overriding-header "Goals")
-                           (org-agenda-hide-tags-regexp "GOAL"))))
-            nil)
-           ("P" "Projects"
-            ((tags "+PROJECT&-DONE" ((org-agenda-overriding-header "Projects")
-                              (org-agenda-hide-tags-regexp "PROJECT"))))
-            nil)
-           ("K" "Wishlist"
-            ((tags "wishlist" ((org-agenda-overriding-header "Wishlist")
-                               (org-agenda-hide-tags-regexp "wishlist"))))
-            nil)
-           )))
+    (setq org-agenda-custom-commands
+          (quote
+           (("x" "Tasks done in the last week"
+             ((tags "CLOSED>=\"<-1w>\"" nil))
+             ((org-agenda-view-columns-initially t)
+              (org-agenda-overriding-header "Tasks Done in the last week")
+              (org-agenda-cmp-user-defined
+               (cmp-date-property "CLOSED"))
+              (org-agenda-sorting-strategy (quote (user-defined-down)))
+              (org-agenda-window-setup
+               (quote
+                (only-window)))))
+            ("z" "work separated"
+             ((agenda "" nil)
+              (tags-todo "-work"
+                         ((org-agenda-skip-function (quote (org-agenda-skip-entry-if (quote scheduled) (quote deadline))))
+                          (org-agenda-overriding-header "Non-Work Tasks")
+                          ))
+              (tags-todo "+work"
+                         ((org-agenda-skip-function (quote (org-agenda-skip-entry-if (quote deadline) (quote scheduled))))
+                          (org-agenda-overriding-header "Work Tasks")
+                          ))
+              (tags "GOAL" (
+                            (org-agenda-overriding-header "Goals")
+                            ))
+              (tags "CLOSED>=\"<-1w>\"" (
+                                         (org-agenda-cmp-user-defined (cmp-date-property "CLOSED"))
+                                         (org-agenda-sorting-strategy '(user-defined-down))
+                                         (org-agenda-overriding-header "Tasks Done in the last week")
+                                         )))
+             nil)
+            ("Q" "closed tasks"
+             ((tags "CLOSED>=\"<-1w>\"" (
+                                         (org-agenda-cmp-user-defined (cmp-date-property "CLOSED"))
+                                         (org-agenda-sorting-strategy '(user-defined-down))
+                                         (org-agenda-overriding-header "Tasks Done in the last week")
+                                         )))
+             nil)
+            ("W" "work todos"
+             ((tags-todo "+work"
+                         ((org-agenda-skip-function (quote (org-agenda-skip-entry-if (quote deadline) (quote scheduled))))
+                          (org-agenda-overriding-header "Work Tasks")
+                          (org-agenda-hide-tags-regexp "work")
+                          )))
+             nil)
+            ("E" "non-work todos"
+             ((tags-todo "-work"
+                         ((org-agenda-skip-function (quote (org-agenda-skip-entry-if (quote scheduled) (quote deadline))))
+                          (org-agenda-overriding-header "Non-Work Tasks")
+                          )))
+             nil)
+            ("G" "Goals"
+             ((tags "GOAL" ((org-agenda-overriding-header "Goals")
+                            (org-agenda-hide-tags-regexp "GOAL"))))
+             nil)
+            ("P" "Projects"
+             ((tags "+PROJECT&-DONE" ((org-agenda-overriding-header "Projects")
+                                      (org-agenda-hide-tags-regexp "PROJECT"))))
+             nil)
+            ("K" "Wishlist"
+             ((tags "wishlist" ((org-agenda-overriding-header "Wishlist")
+                                (org-agenda-hide-tags-regexp "wishlist"))))
+             nil)
+            )))
 
-   ;; Collapse everything except current tab.
-   (defun org-show-current-heading-tidily ()
-     (interactive)  ;Inteactive
-     "Show next entry, keeping other entries closed."
-     (if (save-excursion (end-of-line) (outline-invisible-p))
-         (progn (org-show-entry) (show-children))
-       (outline-back-to-heading)
-       (unless (and (bolp) (org-on-heading-p))
-         (org-up-heading-safe)
-         (hide-subtree)
-         (error "Boundary reached"))
-       (org-overview)
-       (org-reveal t)
-       (org-show-entry)
-       (show-children)))
+    ;; Collapse everything except current tab.
+    (defun org-show-current-heading-tidily ()
+      (interactive)  ;Inteactive
+      "Show next entry, keeping other entries closed."
+      (if (save-excursion (end-of-line) (outline-invisible-p))
+          (progn (org-show-entry) (show-children))
+        (outline-back-to-heading)
+        (unless (and (bolp) (org-on-heading-p))
+          (org-up-heading-safe)
+          (hide-subtree)
+          (error "Boundary reached"))
+        (org-overview)
+        (org-reveal t)
+        (org-show-entry)
+        (show-children)))
 
-   ;; Place tags close to the right-hand side of the window
-   (add-hook 'org-finalize-agenda-hook 'place-agenda-tags)
-   (defun place-agenda-tags ()
-     "Put the agenda tags by the right border of the agenda window."
-     (setq org-agenda-tags-column (- 4 (window-width)))
-     (org-agenda-align-tags))
+    ;; Place tags close to the right-hand side of the window
+    (add-hook 'org-finalize-agenda-hook 'place-agenda-tags)
+    (defun place-agenda-tags ()
+      "Put the agenda tags by the right border of the agenda window."
+      (setq org-agenda-tags-column (- 4 (window-width)))
+      (org-agenda-align-tags))
 
-   (setq org-tags-exclude-from-inheritance (quote ("PROJECT" "crypt")))
-   ;; org config ends
-   )
+    (setq org-tags-exclude-from-inheritance (quote ("PROJECT" "crypt")))
+    ;; org config ends
+    )
 
- (defun refresh-dashboard ()
-   "Run some commands in sequence."
-   (interactive)
-   (message "%s" "i started")
-   (message nil)
-   (cl-loop repeat 6 do (execute-kbd-macro (kbd "r")) (other-window 1))
-   (message "%s" "i ran")
-   (message nil)
-   )
+  (defun refresh-dashboard ()
+    "Run some commands in sequence."
+    (interactive)
+    (message "%s" "i started")
+    (message nil)
+    (cl-loop repeat 6 do (execute-kbd-macro (kbd "r")) (other-window 1))
+    (message "%s" "i ran")
+    (message nil)
+    )
 
- (setq global-auto-revert-mode t)
- (setq org-agenda-window-setup 'reorganize-frame)
- (setq org-agenda-sticky nil)
+  (setq global-auto-revert-mode t)
+  (setq org-agenda-window-setup 'reorganize-frame)
+  (setq org-agenda-sticky nil)
 
- (defun org-dashboard ()
-   "Run some commands in sequence."
-   (interactive)
-   (setq org-agenda-sticky t)
-   (setq org-agenda-window-setup 'current-window)
-   (setq-default mode-line-format nil)
-   (split-window-right)
-   (org-agenda nil "a")
-   (other-window 1)
-   (org-agenda nil "Q")
-   (split-window-vertically)
-   (org-agenda nil "W")
-   (other-window 2)
-   (split-window-vertically)
-   (other-window 1)
-   (org-agenda nil "E")
-   (other-window 2)
-   (split-window-vertically)
-   (org-agenda nil "P")
-   (split-window-vertically)
-   (org-agenda nil "G")
-   (split-window-vertically)
-   (org-agenda nil "K")
-   (other-window 4)
-   (shrink-window-if-larger-than-buffer)
-   (other-window 2)
-   (shrink-window-if-larger-than-buffer)
-   (other-window 1)
-   (shrink-window-if-larger-than-buffer)
-   (other-window 1)
-   (shrink-window-if-larger-than-buffer)
-   (other-window 1)
-   (shrink-window-if-larger-than-buffer)
-   (other-window 3)
-   (run-with-timer 0 (* 5 60) 'refresh-dashboard)
-   )
+  (defun org-dashboard ()
+    "Run some commands in sequence."
+    (interactive)
+    (setq org-agenda-sticky t)
+    (setq org-agenda-window-setup 'current-window)
+    (setq-default mode-line-format nil)
+    (split-window-right)
+    (org-agenda nil "a")
+    (other-window 1)
+    (org-agenda nil "Q")
+    (split-window-vertically)
+    (org-agenda nil "W")
+    (other-window 2)
+    (split-window-vertically)
+    (other-window 1)
+    (org-agenda nil "E")
+    (other-window 2)
+    (split-window-vertically)
+    (org-agenda nil "P")
+    (split-window-vertically)
+    (org-agenda nil "G")
+    (split-window-vertically)
+    (org-agenda nil "K")
+    (other-window 4)
+    (shrink-window-if-larger-than-buffer)
+    (other-window 2)
+    (shrink-window-if-larger-than-buffer)
+    (other-window 1)
+    (shrink-window-if-larger-than-buffer)
+    (other-window 1)
+    (shrink-window-if-larger-than-buffer)
+    (other-window 1)
+    (shrink-window-if-larger-than-buffer)
+    (other-window 3)
+    (run-with-timer 0 (* 5 60) 'refresh-dashboard)
+    )
 
- (global-set-key (kbd "<f7>") 'org-dashboard)
+  (global-set-key (kbd "<f7>") 'org-dashboard)
 
- ;; save whenever the you move out of focus
- (defun save-all ()
-   (interactive)
-   (save-some-buffers t))
- (add-hook 'focus-out-hook 'save-all)
+  ;; save whenever the you move out of focus
+  (defun save-all ()
+    (interactive)
+    (save-some-buffers t))
+  (add-hook 'focus-out-hook 'save-all)
 
- (setq deft-directory "~/Dropbox/org")
- (setq deft-extensions '("txt" "org"))
+  (setq deft-directory "~/Dropbox/org")
+  (setq deft-extensions '("txt" "org"))
 
- )
+  )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
