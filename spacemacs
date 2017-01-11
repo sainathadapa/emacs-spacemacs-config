@@ -165,22 +165,8 @@ before layers configuration."
   (fset 'yes-or-no-p 'y-or-n-p)
 
   (load "~/emacs-request/request.el")
-  ;; (load "~/org-protocol-capture-html/org-protocol-capture-html.el")
 
-  ;; (server-start)
-  ;; (require 'org-protocol)
-
-  ;; (add-hook 'org-mode-hook (lambda () (variable-pitch-mode t)))
-  (setq line-spacing '0.25)
-
-  (defun what-face (pos)
-    (interactive "d")
-    (let ((face (or (get-char-property (point) 'read-face-name)
-                    (get-char-property (point) 'face))))
-      (if face (message "Face: %s" face) (message "No face at %d" pos))))
-
-  (setq org-startup-folded t)
-  (setq org-startup-truncated nil)
+  ;; (setq line-spacing '0.25)
 
   (with-eval-after-load 'org
 
