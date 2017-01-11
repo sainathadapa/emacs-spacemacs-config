@@ -162,8 +162,10 @@ before layers configuration."
         kept-old-versions 2
         version-control t)
 
+  ;; kill-buffer with y-or-n-p instead of yes-or-no-p
   (fset 'yes-or-no-p 'y-or-n-p)
 
+  ;; for org-cliplink
   (load "~/emacs-request/request.el")
 
   ;; (setq line-spacing '0.25)
@@ -174,19 +176,26 @@ before layers configuration."
     (require 'helm-org-rifle)
     (setq helm-org-rifle-show-path t)
 
+    ;; org-download
     (require 'org-download)
     (setq-default org-download-image-dir "~/Dropbox/org/pics")
 
     ;; Do not truncate lines and enable Word wrap
     (set-default 'truncate-lines nil)
     (set-default 'word-wrap t)
-
     (setq helm-buffers-truncate-lines nil)
+
     ;; Enable the compact layout in agenda
     (setq org-agenda-compact-blocks t)
+
+    ;; default appointment duration
     (setq org-agenda-default-appointment-duration 15)
+
+    ;; org files directory
     (setq org-agenda-files '("~/Dropbox/org"))
-    (setq org-agenda-restore-windows-after-quit nil)
+
+    ;; dont know what this is for
+    ;; (setq org-agenda-restore-windows-after-quit nil)
 
     ;; Don't show tasks in agenda if they are done
     (setq org-agenda-skip-deadline-if-done t)
@@ -194,16 +203,30 @@ before layers configuration."
 
     ;; Max number of days to show in agenda
     (setq org-agenda-span 7)
+
+    ;; org agenda starts on the current day
     (setq org-agenda-start-on-weekday nil)
+
+    ;; dont do auto align tags
     (setq org-auto-align-tags nil)
+
+    ;; org bullets config
     (setq org-bullets-bullet-list (quote ("◉" "◆" "✚" "☀" "○")))
+
+    ;; count all checkboxes, not just the ones directly below
     (setq org-checkbox-hierarchical-statistics nil)
     (setq org-clock-clocked-in-display (quote both))
-    (setq org-columns-default-format "%80ITEM(Task) %10Effort(Effort){:} %10CLOCKSUM")
+
+    ;; lists are also collapsed by default, not just headings
     (setq org-cycle-include-plain-lists 'integrate)
-    (setq org-default-priority 90)
+
+    ;; checkbox cant be checked unless all the children are not done
     (setq org-enforce-todo-checkbox-dependencies t)
+
+    ;; todo cant be done unless all the children tasks are done
     (setq org-enforce-todo-dependencies t)
+
+    ;; export formats
     (setq org-export-backends (quote (html icalendar md)))
 
     ;; calendar export settings
@@ -212,25 +235,42 @@ before layers configuration."
     (setq org-icalendar-use-deadline (quote (event-if-not-todo event-if-todo)))
     (setq org-icalendar-use-scheduled (quote (event-if-not-todo event-if-todo)))
 
+    ;; show all images with fixed with
     (setq org-image-actual-width 500)
+
+    ;; log the clocks into this drawer
     (setq org-log-into-drawer "LOGBOOK")
-    (setq org-lowest-priority 90)
+
+    ;; org modules to load
     (setq org-modules (quote (org-crypt org-habit org-mouse)))
+
+    ;; org refile settings
     (setq org-refile-allow-creating-parent-nodes (quote confirm))
     (setq org-refile-targets (quote ((org-agenda-files :level . 1))))
     (setq org-refile-use-outline-path (quote file))
+
+    ;; remember to clock out the clock on exit
     (setq org-remember-clock-out-on-exit t)
+
+    ;; When you run an agenda command, Org visits agenda files that are not yet visited. When finding a file for the first time, Org checks the startup options and apply them to the buffer: those options are either globally set through the org-startup-* variables or on a per-file basis through the #+STARTUP keyword. Especially, Org will honor the startup visibility status, as set by org-startup-folded or #+STARTUP: folded. This may slow down the operation of visiting a file very much, and the process of selecting agenda entries consequently. To prevent agenda commands to honor startup options when visiting an agenda file for the first time, do this
     (setq org-agenda-inhibit-startup t)
+
+    ;; on startup, the headings should be folded
+    (setq org-startup-folded t)
+
+    ;; Non-nil means entering Org-mode will set ‘truncate-lines’. This is useful since some lines containing links can be very long and uninteresting. Also tables look terrible when wrapped.
+    (setq org-startup-truncated nil)
 
     ;; org todo keywords
     (setq org-todo-keywords
           (quote
            ((sequence "TODO" "PROGRESS" "PAUSED" "|" "DONE" "CANCELLED"))))
 
+    ;; colors for todo states
     (setq org-todo-keyword-faces
           '(("PROGRESS" . "orange") ("PAUSED" . "magenta") ("CANCELLED" . "red") ("DONE" . "green")))
 
-    ;; org priority setting
+    ;; org priority settings 7, 0, 9
     (setq org-default-priority 55)
     (setq org-highest-priority 48)
     (setq org-lowest-priority 57)
@@ -286,10 +326,12 @@ before layers configuration."
             (tags . " %i")
             (search . " %i"))))
 
+    ;; default format for columns view
     (setq org-columns-default-format
           "%75ITEM %TODO %PRIORITY %SCHEDULED %DEADLINE %CLOSED %ALLTAGS")
 
     ;; from http://emacs.stackexchange.com/questions/26351/custom-sorting-for-agenda
+    ;; being used in a org agenda custom command below
     (defun cmp-date-property (prop)
       "Compare two `org-mode' agenda entries, `A' and `B', by some date property. If a is before b, return -1. If a is after b, return 1. If they are equal return t."
       (lexical-let ((prop prop))
@@ -374,7 +416,7 @@ before layers configuration."
 
     ;; Collapse everything except current tab.
     (defun org-show-current-heading-tidily ()
-      (interactive)  ;Inteactive
+      (interactive)
       "Show next entry, keeping other entries closed."
       (if (save-excursion (end-of-line) (outline-invisible-p))
           (progn (org-show-entry) (show-children))
@@ -395,10 +437,22 @@ before layers configuration."
       (setq org-agenda-tags-column (- 4 (window-width)))
       (org-agenda-align-tags))
 
+    ;; any items below the headings with these tags dont inherit that tag
     (setq org-tags-exclude-from-inheritance (quote ("PROJECT" "crypt")))
+
+    ;; by default, agenda will reorganize buffers
+    (setq org-agenda-window-setup 'reorganize-frame)
+
+    ;; By default, Org maintains only a single agenda buffer and rebuilds it each time you change the view, to make sure everything is always up to date. If you often switch between agenda views and the build time bothers you, you can turn on sticky agenda buffers or make this the default by customizing the variable org-agenda-sticky. With sticky agendas, the agenda dispatcher will not recreate agenda views from scratch, it will only switch to the selected one, and you need to update the agenda by hand with r or g when needed. You can toggle sticky agenda view any time with org-toggle-sticky-agenda.
+    (setq org-agenda-sticky nil)
+
     ;; org config ends
     )
 
+  ;; load any changes from disk
+  (setq global-auto-revert-mode t)
+
+  ;; commands and settings for dashboard
   (defun refresh-dashboard ()
     "Run some commands in sequence."
     (interactive)
@@ -408,13 +462,8 @@ before layers configuration."
     (message "%s" "i ran")
     (message nil)
     )
-
-  (setq global-auto-revert-mode t)
-  (setq org-agenda-window-setup 'reorganize-frame)
-  (setq org-agenda-sticky nil)
-
   (defun org-dashboard ()
-    "Run some commands in sequence."
+    "Dashboard-like setting in org"
     (interactive)
     (setq org-agenda-sticky t)
     (setq org-agenda-window-setup 'current-window)
@@ -449,15 +498,15 @@ before layers configuration."
     (other-window 3)
     (run-with-timer 0 (* 5 60) 'refresh-dashboard)
     )
-
   (global-set-key (kbd "<f7>") 'org-dashboard)
 
-  ;; save whenever the you move out of focus
+  ;; save whenever emacs is out of focus
   (defun save-all ()
     (interactive)
     (save-some-buffers t))
   (add-hook 'focus-out-hook 'save-all)
 
+  ;; deft settings
   (setq deft-directory "~/Dropbox/org")
   (setq deft-extensions '("txt" "org"))
 
@@ -475,8 +524,6 @@ before layers configuration."
  '(ahs-idle-interval 0.25)
  '(ahs-idle-timer 0 t)
  '(ahs-inhibit-face-list nil)
- '(browse-url-browser-function (quote browse-url-generic))
- '(browse-url-generic-program "google-chrome")
  '(line-spacing 0.25)
  '(ring-bell-function (quote ignore) t))
 (custom-set-faces
