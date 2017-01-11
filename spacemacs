@@ -170,14 +170,7 @@ before layers configuration."
 
   (with-eval-after-load 'org
 
-    ;; Encryption settings
-    (require 'org-crypt)
-                                        ;(org-crypt-use-before-save-magic)
-    ;; GPG key to use for encryption
-    ;; Either the Key ID or set to nil to use symmetric encryption.
-    (setq org-crypt-key nil)
-    (setq org-crypt-disable-auto-save nil)
-
+    ;; helm-org-rifle
     (require 'helm-org-rifle)
     (setq helm-org-rifle-show-path t)
 
