@@ -510,6 +510,7 @@ before layers configuration."
   (setq deft-directory "~/Dropbox/org")
   (setq deft-extensions '("txt" "org"))
 
+  (find-file "~/Dropbox/org/main.org")
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
