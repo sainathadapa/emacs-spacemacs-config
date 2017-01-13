@@ -348,6 +348,8 @@ before layers configuration."
               (if (eq cmp t) nil (signum cmp))
               ))))
 
+    ;; from http://emacs.stackexchange.com/questions/18710/display-count-of-tasks-in-agenda-instead-of-tasks-based-on-tag
+    (load "~/org-agenda-count.el")
 
     (setq org-agenda-custom-commands
           (quote
@@ -384,32 +386,32 @@ before layers configuration."
              ((tags "CLOSED>=\"<-1w>\"" (
                                          (org-agenda-cmp-user-defined (cmp-date-property "CLOSED"))
                                          (org-agenda-sorting-strategy '(user-defined-down))
-                                         (org-agenda-overriding-header "Tasks Done in the last week")
+                                         (org-agenda-overriding-header (format "Tasks done in the last week (%s)" (org-agenda-count "CLOSED")))
                                          )))
              nil)
             ("W" "work todos"
              ((tags-todo "+work"
                          ((org-agenda-skip-function (quote (org-agenda-skip-entry-if (quote deadline) (quote scheduled))))
-                          (org-agenda-overriding-header "Work Tasks")
+                          (org-agenda-overriding-header (format "Work Tasks (%s)" (org-agenda-count "work")))
                           (org-agenda-hide-tags-regexp "work")
                           )))
              nil)
             ("E" "non-work todos"
              ((tags-todo "-work"
                          ((org-agenda-skip-function (quote (org-agenda-skip-entry-if (quote scheduled) (quote deadline))))
-                          (org-agenda-overriding-header "Non-Work Tasks")
+                          (org-agenda-overriding-header (format "Non-Work Tasks (%s)" (org-agenda-count "-work")))
                           )))
              nil)
             ("G" "Goals"
-             ((tags "GOAL" ((org-agenda-overriding-header "Goals")
+             ((tags "GOAL" ((org-agenda-overriding-header (format "Goals (%s)" (org-agenda-count "GOAL")))
                             (org-agenda-hide-tags-regexp "GOAL"))))
              nil)
             ("P" "Projects"
-             ((tags "+PROJECT&-DONE" ((org-agenda-overriding-header "Projects")
+             ((tags "+PROJECT&-DONE" ((org-agenda-overriding-header (format "Projects (%s)" (org-agenda-count "+PROJECT&-DONE")))
                                       (org-agenda-hide-tags-regexp "PROJECT"))))
              nil)
             ("K" "Wishlist"
-             ((tags "wishlist" ((org-agenda-overriding-header "Wishlist")
+             ((tags "wishlist" ((org-agenda-overriding-header (format "Wishlist (%s)" (org-agenda-count "wishlist")))
                                 (org-agenda-hide-tags-regexp "wishlist"))))
              nil)
             )))
