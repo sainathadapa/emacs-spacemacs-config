@@ -166,6 +166,8 @@ before layers configuration."
         kept-old-versions 2
         version-control t)
 
+  (add-to-list 'auto-mode-alist '("\\.org.txt\\'" . org-mode))
+
   ;; kill-buffer with y-or-n-p instead of yes-or-no-p
   (fset 'yes-or-no-p 'y-or-n-p)
 
@@ -196,7 +198,7 @@ before layers configuration."
     (setq org-agenda-default-appointment-duration 15)
 
     ;; org files directory
-    (setq org-agenda-files '("~/Dropbox/org"))
+    (setq org-agenda-files '("~/Dropbox/org" "~/Dropbox/org/pocket-to-org.org.txt"))
 
     ;; dont know what this is for
     ;; (setq org-agenda-restore-windows-after-quit nil)
@@ -369,6 +371,8 @@ before layers configuration."
                 (only-window)))))
             ("z" "work separated"
              ((agenda "" nil)
+              (tags "+PROJECT&-DONE" ((org-agenda-overriding-header "Projects")
+                                      (org-agenda-hide-tags-regexp "PROJECT")))
               (tags-todo "-work"
                          ((org-agenda-skip-function (quote (org-agenda-skip-entry-if (quote scheduled) (quote deadline))))
                           (org-agenda-overriding-header "Non-Work Tasks")
@@ -491,17 +495,9 @@ before layers configuration."
     (org-agenda nil "G")
     (split-window-vertically)
     (org-agenda nil "K")
-    (other-window 4)
-    (shrink-window-if-larger-than-buffer)
-    (other-window 2)
+    (other-window 5)
     (shrink-window-if-larger-than-buffer)
     (other-window 1)
-    (shrink-window-if-larger-than-buffer)
-    (other-window 1)
-    (shrink-window-if-larger-than-buffer)
-    (other-window 1)
-    (shrink-window-if-larger-than-buffer)
-    (other-window 3)
     (run-with-timer 0 (* 5 60) 'refresh-dashboard)
     )
   (global-set-key (kbd "<f7>") 'org-dashboard)
