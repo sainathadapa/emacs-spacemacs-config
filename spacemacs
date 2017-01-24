@@ -74,7 +74,7 @@ before layers configuration."
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 16
+                               :size 15
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -174,8 +174,6 @@ before layers configuration."
   ;; for org-cliplink
   (load "~/emacs-request/request.el")
 
-  ;; (setq line-spacing '0.25)
-
   (with-eval-after-load 'org
 
     ;; helm-org-rifle
@@ -208,7 +206,7 @@ before layers configuration."
     (setq org-agenda-skip-scheduled-if-done t)
 
     ;; Max number of days to show in agenda
-    (setq org-agenda-span 7)
+    (setq org-agenda-span 14)
 
     ;; org agenda starts on the current day
     (setq org-agenda-start-on-weekday nil)
@@ -370,7 +368,7 @@ before layers configuration."
                (quote
                 (only-window)))))
             ("z" "work separated"
-             ((agenda "" nil)
+             ((agenda "" ((org-agenda-span 5)))
               (tags "+PROJECT&-DONE" ((org-agenda-overriding-header "Projects")
                                       (org-agenda-hide-tags-regexp "PROJECT")))
               (tags-todo "-work"
@@ -496,8 +494,7 @@ before layers configuration."
     (split-window-vertically)
     (org-agenda nil "K")
     (other-window 5)
-    (shrink-window-if-larger-than-buffer)
-    (other-window 1)
+    (balance-windows)
     (run-with-timer 0 (* 5 60) 'refresh-dashboard)
     )
   (global-set-key (kbd "<f7>") 'org-dashboard)
@@ -511,6 +508,10 @@ before layers configuration."
   ;; deft settings
   (setq deft-directory "~/Dropbox/org")
   (setq deft-extensions '("txt" "org"))
+
+  ;; default browser
+  (setq browse-url-browser-function 'browse-url-generic
+        browse-url-generic-program "google-chrome")
 
   (find-file "~/Dropbox/org/main.org")
   )
@@ -535,4 +536,5 @@ before layers configuration."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
- '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
+ '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil))))
+ '(org-link ((t (:foreground "#b58900" :underline nil)))))
