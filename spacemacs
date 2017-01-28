@@ -74,7 +74,7 @@ before layers configuration."
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 15
+                               :size 16
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -196,7 +196,7 @@ before layers configuration."
     (setq org-agenda-default-appointment-duration 15)
 
     ;; org files directory
-    (setq org-agenda-files '("~/Dropbox/org" "~/Dropbox/org/pocket-to-org.org.txt"))
+    (setq org-agenda-files '("~/Dropbox/org" "~/Dropbox/org/pocket-to-org.org.txt" "~/Dropbox/org/zapier-to-org.org.txt"))
 
     ;; dont know what this is for
     ;; (setq org-agenda-restore-windows-after-quit nil)
@@ -206,7 +206,7 @@ before layers configuration."
     (setq org-agenda-skip-scheduled-if-done t)
 
     ;; Max number of days to show in agenda
-    (setq org-agenda-span 14)
+    (setq org-agenda-span 21)
 
     ;; org agenda starts on the current day
     (setq org-agenda-start-on-weekday nil)
@@ -324,7 +324,7 @@ before layers configuration."
 
     (setq org-agenda-prefix-format
           (quote
-           ((agenda . " %i %?-12t% s")
+           ((agenda . "%?-12t")
             (timeline . "  % s")
             (todo . " %i")
             (tags . " %i")
@@ -477,27 +477,71 @@ before layers configuration."
     (setq org-agenda-window-setup 'current-window)
     (setq-default mode-line-format nil)
     (split-window-right)
+    (split-window-below)
+    (split-window-below)
+    (org-agenda nil "P")
+    (other-window 1)
+    (org-agenda nil "W")
+    (other-window 1)
+    (org-agenda nil "E")
+    (other-window 1)
+    (split-window-below)
+    (split-window-right)
     (org-agenda nil "a")
     (other-window 1)
     (org-agenda nil "Q")
-    (split-window-vertically)
-    (org-agenda nil "W")
-    (other-window 2)
-    (split-window-vertically)
     (other-window 1)
-    (org-agenda nil "E")
-    (other-window 2)
-    (split-window-vertically)
-    (org-agenda nil "P")
-    (split-window-vertically)
+    (split-window-below)
     (org-agenda nil "G")
-    (split-window-vertically)
+    (other-window 1)
     (org-agenda nil "K")
-    (other-window 5)
-    (balance-windows)
+    (shrink-window-if-larger-than-buffer)
+    (other-window 1)
+    (shrink-window-if-larger-than-buffer)
+    (other-window 1)
+    (shrink-window-if-larger-than-buffer)
+    (other-window 1)
+    (shrink-window-if-larger-than-buffer)
+    (other-window 1)
+    (shrink-window-if-larger-than-buffer)
+    (other-window 1)
+    (shrink-window-if-larger-than-buffer)
+    (other-window 1)
+    (shrink-window-if-larger-than-buffer)
+    (other-window 1)
+    (shrink-window-if-larger-than-buffer)
+    (other-window 1)
+    (shrink-window-if-larger-than-buffer)
+    (other-window 1)
+    (shrink-window-if-larger-than-buffer)
+    (other-window 1)
+    (shrink-window-if-larger-than-buffer)
+    (other-window 1)
+    (shrink-window-if-larger-than-buffer)
+    (other-window 1)
+    (shrink-window-if-larger-than-buffer)
+    (other-window 1)
+    (shrink-window-if-larger-than-buffer)
+    (other-window 1)
+    (shrink-window-if-larger-than-buffer)
+    (other-window 1)
     (run-with-timer 0 (* 5 60) 'refresh-dashboard)
     )
   (global-set-key (kbd "<f7>") 'org-dashboard)
+
+  ;; close dashboard
+  (require 'cl)
+  (defun bk-kill-buffers (regexp)
+    "Kill buffers matching REGEXP without asking for confirmation."
+    (interactive "sKill buffers matching this regular expression: ")
+    (flet ((kill-buffer-ask (buffer) (kill-buffer buffer)))
+      (kill-matching-buffers regexp)))
+  (defun close-dashboard ()
+    "Dashboard-like setting in org"
+    (interactive)
+    (bk-kill-buffers ".*Org.*Agenda.*")
+    (delete-other-windows)
+    )
 
   ;; save whenever emacs is out of focus
   (defun save-all ()
