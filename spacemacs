@@ -454,6 +454,8 @@ before layers configuration."
     ;; By default, Org maintains only a single agenda buffer and rebuilds it each time you change the view, to make sure everything is always up to date. If you often switch between agenda views and the build time bothers you, you can turn on sticky agenda buffers or make this the default by customizing the variable org-agenda-sticky. With sticky agendas, the agenda dispatcher will not recreate agenda views from scratch, it will only switch to the selected one, and you need to update the agenda by hand with r or g when needed. You can toggle sticky agenda view any time with org-toggle-sticky-agenda.
     (setq org-agenda-sticky nil)
 
+    (setq org-time-stamp-custom-formats (quote ("<%m/%d/%y %a>" . "<%Y-%m-%dT%H:%M:%S%z>")))
+
     ;; org config ends
     )
 
