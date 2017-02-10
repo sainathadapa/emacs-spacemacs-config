@@ -165,29 +165,44 @@ before layers configuration."
         kept-new-versions 6
         kept-old-versions 2
         version-control t)
+  ;;; disable creation of lock files
+  (setq create-lockfiles nil)
 
+  ;; consider *.org.txt files as org files
   (add-to-list 'auto-mode-alist '("\\.org.txt\\'" . org-mode))
 
   ;; kill-buffer with y-or-n-p instead of yes-or-no-p
   (fset 'yes-or-no-p 'y-or-n-p)
 
-  ;; for org-cliplink
+  ;; requirement for org-cliplink
   (load "~/emacs-request/request.el")
 
+  ;; save whenever emacs is out of focus
+  (defun save-all ()
+    (interactive)
+    (save-some-buffers t))
+  (add-hook 'focus-out-hook 'save-all)
+
+  ;; deft settings
+  (setq deft-directory "~/Dropbox/org")
+  (setq deft-extensions '("txt" "org"))
+
+  ;; spacemacs requires the org settings to defined this way
   (with-eval-after-load 'org
 
-    ;; helm-org-rifle
+    ;; helm-org-rifle settings
     (require 'helm-org-rifle)
     (setq helm-org-rifle-show-path t)
 
-    ;; org-download
+    ;; org-download settings
     (require 'org-download)
     (setq-default org-download-image-dir "~/Dropbox/org/pics")
 
-    ;; Do not truncate lines and enable Word wrap
+    ;; Do not truncate lines and enable word wrap
     (set-default 'truncate-lines nil)
     (set-default 'word-wrap t)
     (setq helm-buffers-truncate-lines nil)
+    (setq org-startup-truncated nil)
 
     ;; Enable the compact layout in agenda
     (setq org-agenda-compact-blocks t)
@@ -198,8 +213,8 @@ before layers configuration."
     ;; org files directory
     (setq org-agenda-files '("~/Dropbox/org" "~/Dropbox/org/pocket-to-org.org.txt" "~/Dropbox/org/zapier-to-org.org.txt"))
 
-    ;; dont know what this is for
-    ;; (setq org-agenda-restore-windows-after-quit nil)
+    ;; restore layout after exit from agenda view
+    (setq org-agenda-restore-windows-after-quit t)
 
     ;; Don't show tasks in agenda if they are done
     (setq org-agenda-skip-deadline-if-done t)
@@ -219,6 +234,14 @@ before layers configuration."
 
     ;; count all checkboxes, not just the ones directly below
     (setq org-checkbox-hierarchical-statistics nil)
+
+    ;; log the clocks into this drawer
+    (setq org-log-into-drawer "LOGBOOK")
+
+    ;; remember to clock out the clock on exit
+    (setq org-remember-clock-out-on-exit t)
+
+    ;; display clock time both in mode line and frame title
     (setq org-clock-clocked-in-display (quote both))
 
     ;; lists are also collapsed by default, not just headings
@@ -239,31 +262,24 @@ before layers configuration."
     (setq org-icalendar-use-deadline (quote (event-if-not-todo event-if-todo)))
     (setq org-icalendar-use-scheduled (quote (event-if-not-todo event-if-todo)))
 
-    ;; show all images with fixed with
+    ;; show all images with fixed width
     (setq org-image-actual-width 500)
-
-    ;; log the clocks into this drawer
-    (setq org-log-into-drawer "LOGBOOK")
 
     ;; org modules to load
     (setq org-modules (quote (org-crypt org-habit org-mouse)))
 
     ;; org refile settings
     (setq org-refile-allow-creating-parent-nodes (quote confirm))
-    (setq org-refile-targets (quote ((org-agenda-files :level . 1))))
-    (setq org-refile-use-outline-path (quote file))
-
-    ;; remember to clock out the clock on exit
-    (setq org-remember-clock-out-on-exit t)
+    (setq org-refile-targets '((nil :maxlevel . 9)
+                               (org-agenda-files :maxlevel . 9)))
+    (setq org-outline-path-complete-in-steps nil)         ; Refile in a single go
+    (setq org-refile-use-outline-path t)                  ; Show full paths for refiling
 
     ;; When you run an agenda command, Org visits agenda files that are not yet visited. When finding a file for the first time, Org checks the startup options and apply them to the buffer: those options are either globally set through the org-startup-* variables or on a per-file basis through the #+STARTUP keyword. Especially, Org will honor the startup visibility status, as set by org-startup-folded or #+STARTUP: folded. This may slow down the operation of visiting a file very much, and the process of selecting agenda entries consequently. To prevent agenda commands to honor startup options when visiting an agenda file for the first time, do this
     (setq org-agenda-inhibit-startup t)
 
     ;; on startup, the headings should be folded
     (setq org-startup-folded t)
-
-    ;; Non-nil means entering Org-mode will set ‘truncate-lines’. This is useful since some lines containing links can be very long and uninteresting. Also tables look terrible when wrapped.
-    (setq org-startup-truncated nil)
 
     ;; org todo keywords
     (setq org-todo-keywords
@@ -286,7 +302,7 @@ before layers configuration."
                   ("w"         ; hotkey
                    "Work Todo" ; name
                    entry       ; type
-                   (file+headline "~/Dropbox/org/work.org" "General") ;target
+                   (file+headline "~/Dropbox/org/work.org" "Tasks") ;target
                    "* TODO %^{Description}\n:PROPERTIES:\n:Added: %U\n:END:" ; template
                    )
                   ("t"
@@ -316,12 +332,14 @@ before layers configuration."
     (add-to-list 'org-babel-default-header-args:R
                  '(:session . "*org-R*"))
 
+    ;; sorting strategy for org agenda
     (setq org-agenda-sorting-strategy
           (quote
            ((agenda time-up deadline-up)
             (todo priority-down todo-state-down)
             (tags priority-down todo-state-down))))
 
+    ;; text format for org agenda
     (setq org-agenda-prefix-format
           (quote
            ((agenda . "%?-12t")
@@ -454,6 +472,7 @@ before layers configuration."
     ;; By default, Org maintains only a single agenda buffer and rebuilds it each time you change the view, to make sure everything is always up to date. If you often switch between agenda views and the build time bothers you, you can turn on sticky agenda buffers or make this the default by customizing the variable org-agenda-sticky. With sticky agendas, the agenda dispatcher will not recreate agenda views from scratch, it will only switch to the selected one, and you need to update the agenda by hand with r or g when needed. You can toggle sticky agenda view any time with org-toggle-sticky-agenda.
     (setq org-agenda-sticky nil)
 
+    ;; custom format for timestamp
     (setq org-time-stamp-custom-formats (quote ("<%m/%d/%y %a>" . "<%Y-%m-%dT%H:%M:%S%z>")))
 
     ;; org config ends
@@ -545,20 +564,7 @@ before layers configuration."
     (delete-other-windows)
     )
 
-  ;; save whenever emacs is out of focus
-  (defun save-all ()
-    (interactive)
-    (save-some-buffers t))
-  (add-hook 'focus-out-hook 'save-all)
-
-  ;; deft settings
-  (setq deft-directory "~/Dropbox/org")
-  (setq deft-extensions '("txt" "org"))
-
-  ;; default browser
-  (setq browse-url-browser-function 'browse-url-generic
-        browse-url-generic-program "google-chrome")
-
+  ;; default file to open
   (find-file "~/Dropbox/org/main.org")
   )
 
