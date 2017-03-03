@@ -187,6 +187,10 @@ before layers configuration."
   (setq deft-directory "~/Dropbox/org")
   (setq deft-extensions '("txt" "org"))
 
+  ;; browser settings
+  (setq browse-url-browser-function 'browse-url-generic
+        browse-url-generic-program "google-chrome")
+
   ;; spacemacs requires the org settings to defined this way
   (with-eval-after-load 'org
 
@@ -209,6 +213,10 @@ before layers configuration."
 
     ;; default appointment duration
     (setq org-agenda-default-appointment-duration 15)
+
+    ;; redefining tab in org-agenda
+    (add-hook 'org-agenda-mode-hook
+              (lambda () (local-set-key [tab] 'org-agenda-tree-to-indirect-buffer)))
 
     ;; org files directory
     (setq org-agenda-files '("~/Dropbox/org" "~/Dropbox/org/pocket-to-org.org.txt" "~/Dropbox/org/zapier-to-org.org.txt"))
