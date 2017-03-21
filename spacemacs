@@ -328,8 +328,16 @@ before layers configuration."
                    "** %U - %^{Activity}")
                   )))
 
-    ;; org babel settings
+    ;; ess settings
+    (setq ess-ask-for-ess-directory nil)
+    (setq ansi-color-for-comint-mode 'filter)
+    (setq comint-scroll-to-bottom-on-input t)
+    (setq comint-scroll-to-bottom-on-output t)
+    (setq comint-move-point-for-output t)
+    (setq ess-eval-visibly-p nil)
     (require 'ess-site)
+
+    ;; org babel settings
     (require 'ob-R)
     (org-babel-do-load-languages
      'org-babel-load-languages
