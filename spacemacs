@@ -361,11 +361,11 @@ before layers configuration."
     ;; text format for org agenda
     (setq org-agenda-prefix-format
           (quote
-           ((agenda . "%?-12t")
-            (timeline . "  % s")
-            (todo . " %i")
-            (tags . " %i")
-            (search . " %i"))))
+           ((agenda . "%s %?-12t %e")
+            (timeline . "  %s")
+            (todo . " %i %e")
+            (tags . " %i %e")
+            (search . " %i %e"))))
 
     ;; default format for columns view
     (setq org-columns-default-format
@@ -394,8 +394,8 @@ before layers configuration."
 
     (setq org-agenda-custom-commands
           (quote
-           (("x" "Tasks done in the last week"
-             ((tags "CLOSED>=\"<-1w>\"" nil))
+           (("x" "Tasks done"
+             ((tags "CLOSED>=\"<-4w>\"" nil))
              ((org-agenda-view-columns-initially t)
               (org-agenda-overriding-header "Tasks Done in the last week")
               (org-agenda-cmp-user-defined
@@ -419,14 +419,14 @@ before layers configuration."
               (tags "GOAL" (
                             (org-agenda-overriding-header "Goals")
                             ))
-              (tags "CLOSED>=\"<-1w>\"" (
+              (tags "CLOSED>=\"<-4w>\"" (
                                          (org-agenda-cmp-user-defined (cmp-date-property "CLOSED"))
                                          (org-agenda-sorting-strategy '(user-defined-down))
                                          (org-agenda-overriding-header "Tasks Done in the last week")
                                          )))
              nil)
             ("Q" "closed tasks"
-             ((tags "CLOSED>=\"<-1w>\"" (
+             ((tags "CLOSED>=\"<-4w>\"" (
                                          (org-agenda-cmp-user-defined (cmp-date-property "CLOSED"))
                                          (org-agenda-sorting-strategy '(user-defined-down))
                                          (org-agenda-overriding-header (format "Tasks done in the last week (%s)" (org-agenda-count "CLOSED")))
