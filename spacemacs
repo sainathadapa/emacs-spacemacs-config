@@ -231,6 +231,9 @@ before layers configuration."
     ;; Max number of days to show in agenda
     (setq org-agenda-span 21)
 
+    ;; Warn about a deadline
+    (setq org-deadline-warning-days 60)
+
     ;; org agenda starts on the current day
     (setq org-agenda-start-on-weekday nil)
 
