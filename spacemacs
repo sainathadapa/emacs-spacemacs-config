@@ -579,6 +579,7 @@ before layers configuration."
   (defun close-dashboard ()
     "Dashboard-like setting in org"
     (interactive)
+    (cancel-function-timers 'refresh-dashboard)
     (bk-kill-buffers ".*Org.*Agenda.*")
     (delete-other-windows)
     )
