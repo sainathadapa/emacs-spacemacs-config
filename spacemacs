@@ -301,10 +301,10 @@ before layers configuration."
     (setq org-todo-keyword-faces
           '(("PROG" . "orange") ("PAUS" . "magenta") ("CANC" . "red") ("DONE" . "green")))
 
-    ;; org priority settings 7, 0, 9
-    (setq org-default-priority 55)
-    (setq org-highest-priority 48)
-    (setq org-lowest-priority 57)
+    ;; org priority settings H, A, Z
+    (setq org-default-priority 72)
+    (setq org-highest-priority 65)
+    (setq org-lowest-priority 90)
 
     ;; Org Capture settings
     (global-set-key (kbd "<f6>") 'org-capture)
