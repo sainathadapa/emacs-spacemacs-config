@@ -525,11 +525,11 @@ before packages are loaded. If you are unsure, you should try in setting them in
     ;; text format for org agenda
     (setq org-agenda-prefix-format
           (quote
-           ((agenda . "%s %?-12t %e")
+           ((agenda . "%s %?-12t %e ")
             (timeline . "  %s")
-            (todo . " %i %e")
-            (tags . " %i %e")
-            (search . " %i %e"))))
+            (todo . " %i %e ")
+            (tags . " %i %e ")
+            (search . " %i %e "))))
 
     ;; default format for columns view
     (setq org-columns-default-format
@@ -570,9 +570,9 @@ before packages are loaded. If you are unsure, you should try in setting them in
                 (only-window)))))
             ("z" "work separated"
              ((agenda "" ((org-agenda-span 5)))
-              (tags "+PROJECT&-DONE" ((org-agenda-overriding-header "Projects")
+              (tags "+PROJECT/-DONE" ((org-agenda-overriding-header "Projects")
                                       (org-agenda-hide-tags-regexp "PROJECT")))
-              (tags-todo "-work"
+              (tags-todo "-work&-PROJECT"
                          ((org-agenda-skip-function (quote (org-agenda-skip-entry-if (quote scheduled) (quote deadline))))
                           (org-agenda-overriding-header "Non-Work Tasks")
                           ))
@@ -580,7 +580,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
                          ((org-agenda-skip-function (quote (org-agenda-skip-entry-if (quote deadline) (quote scheduled))))
                           (org-agenda-overriding-header "Work Tasks")
                           ))
-              (tags "GOAL" (
+              (tags "GOAL/-DONE" (
                             (org-agenda-overriding-header "Goals")
                             ))
               (tags "CLOSED>=\"<-4w>\"" (
@@ -604,17 +604,17 @@ before packages are loaded. If you are unsure, you should try in setting them in
                           )))
              nil)
             ("E" "non-work todos"
-             ((tags-todo "-work"
+             ((tags-todo "-work&-PROJECT"
                          ((org-agenda-skip-function (quote (org-agenda-skip-entry-if (quote scheduled) (quote deadline))))
                           (org-agenda-overriding-header (format "Non-Work Tasks (%s)" (org-agenda-count "-work")))
                           )))
              nil)
             ("G" "Goals"
-             ((tags "GOAL" ((org-agenda-overriding-header (format "Goals (%s)" (org-agenda-count "GOAL")))
+             ((tags "GOAL/-DONE" ((org-agenda-overriding-header (format "Goals (%s)" (org-agenda-count "GOAL")))
                             (org-agenda-hide-tags-regexp "GOAL"))))
              nil)
             ("P" "Projects"
-             ((tags "+PROJECT&-DONE" ((org-agenda-overriding-header (format "Projects (%s)" (org-agenda-count "+PROJECT&-DONE")))
+             ((tags "+PROJECT/-DONE-CANC" ((org-agenda-overriding-header (format "Projects (%s)" (org-agenda-count "+PROJECT&-DONE")))
                                       (org-agenda-hide-tags-regexp "PROJECT"))))
              nil)
             ("K" "Wishlist"
