@@ -69,7 +69,7 @@
 
 ;;; Code:
 
-(load "~/alist.el")
+(load "~/emacs-spacemacs-config/alist.el")
 ;; (require 'alist)
 
 
