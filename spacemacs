@@ -335,7 +335,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (fset 'yes-or-no-p 'y-or-n-p)
 
   ;; requirement for org-cliplink
-  (load "~/emacs-request/request.el")
+  (load "~/emacs-spacemacs-config/emacs-request/request.el")
 
   ;; save whenever emacs is out of focus
   (defun save-all ()
@@ -554,7 +554,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
               ))))
 
     ;; from http://emacs.stackexchange.com/questions/18710/display-count-of-tasks-in-agenda-instead-of-tasks-based-on-tag
-    (load "~/org-agenda-count.el")
+    (load "~/emacs-spacemacs-config/org-agenda-count.el")
 
     (setq org-agenda-custom-commands
           (quote
