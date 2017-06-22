@@ -570,9 +570,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
                 (only-window)))))
             ("z" "work separated"
              ((agenda "" ((org-agenda-span 5)))
-              (tags "+PROJECT/-DONE" ((org-agenda-overriding-header "Projects")
-                                      (org-agenda-hide-tags-regexp "PROJECT")))
-              (tags-todo "-work&-PROJECT"
+              (tags-todo "-work"
                          ((org-agenda-skip-function (quote (org-agenda-skip-entry-if (quote scheduled) (quote deadline))))
                           (org-agenda-overriding-header "Non-Work Tasks")
                           ))
@@ -604,7 +602,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
                           )))
              nil)
             ("E" "non-work todos"
-             ((tags-todo "-work&-PROJECT"
+             ((tags-todo "-work"
                          ((org-agenda-skip-function (quote (org-agenda-skip-entry-if (quote scheduled) (quote deadline))))
                           (org-agenda-overriding-header (format "Non-Work Tasks (%s)" (org-agenda-count "-work")))
                           )))
@@ -612,10 +610,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
             ("G" "Goals"
              ((tags "GOAL/-DONE" ((org-agenda-overriding-header (format "Goals (%s)" (org-agenda-count "GOAL")))
                             (org-agenda-hide-tags-regexp "GOAL"))))
-             nil)
-            ("P" "Projects"
-             ((tags "+PROJECT/-DONE-CANC" ((org-agenda-overriding-header (format "Projects (%s)" (org-agenda-count "+PROJECT&-DONE")))
-                                      (org-agenda-hide-tags-regexp "PROJECT"))))
              nil)
             ("K" "Wishlist"
              ((tags "wishlist" ((org-agenda-overriding-header (format "Wishlist (%s)" (org-agenda-count "wishlist")))
@@ -670,7 +664,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
     (interactive)
     (message "%s" "i started")
     (message nil)
-    (cl-loop repeat 6 do (execute-kbd-macro (kbd "r")) (other-window 1))
+    (cl-loop repeat 5 do (execute-kbd-macro (kbd "r")) (other-window 1))
     (message "%s" "i ran")
     (message nil)
     )
@@ -682,12 +676,9 @@ before packages are loaded. If you are unsure, you should try in setting them in
     (setq-default mode-line-format nil)
     (split-window-right)
     (split-window-below)
-    (split-window-below)
-    (org-agenda nil "P")
+    (org-agenda nil "E")
     (other-window 1)
     (org-agenda nil "W")
-    (other-window 1)
-    (org-agenda nil "E")
     (other-window 1)
     (split-window-below)
     (split-window-right)
@@ -699,16 +690,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
     (org-agenda nil "G")
     (other-window 1)
     (org-agenda nil "K")
-    (shrink-window-if-larger-than-buffer)
-    (other-window 1)
-    (shrink-window-if-larger-than-buffer)
-    (other-window 1)
-    (shrink-window-if-larger-than-buffer)
-    (other-window 1)
-    (shrink-window-if-larger-than-buffer)
-    (other-window 1)
-    (shrink-window-if-larger-than-buffer)
-    (other-window 1)
     (shrink-window-if-larger-than-buffer)
     (other-window 1)
     (shrink-window-if-larger-than-buffer)
