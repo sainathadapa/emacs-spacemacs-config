@@ -590,8 +590,8 @@ before packages are loaded. If you are unsure, you should try in setting them in
                           (org-agenda-overriding-header "Work Tasks")
                           ))
               (tags "GOAL/-DONE" (
-                            (org-agenda-overriding-header "Goals")
-                            ))
+                                  (org-agenda-overriding-header "Goals")
+                                  ))
               (tags "CLOSED>=\"<-4w>\"" (
                                          (org-agenda-cmp-user-defined (cmp-date-property "CLOSED"))
                                          (org-agenda-sorting-strategy '(user-defined-down))
@@ -620,7 +620,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
              nil)
             ("G" "Goals"
              ((tags "GOAL/-DONE" ((org-agenda-overriding-header (format "Goals (%s)" (org-agenda-count "GOAL")))
-                            (org-agenda-hide-tags-regexp "GOAL"))))
+                                  (org-agenda-hide-tags-regexp "GOAL"))))
              nil)
             ("K" "Wishlist"
              ((tags "wishlist" ((org-agenda-overriding-header (format "Wishlist (%s)" (org-agenda-count "wishlist")))
@@ -673,11 +673,11 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (defun refresh-dashboard ()
     "Run some commands in sequence."
     (interactive)
-    (message "%s" "i started")
-    (message nil)
-    (cl-loop repeat 5 do (execute-kbd-macro (kbd "r")) (other-window 1))
-    (message "%s" "i ran")
-    (message nil)
+    ;; (message "%s" "i started")
+    ;; (message nil)
+    (cl-loop repeat 6 do (execute-kbd-macro (kbd "r")) (other-window 1))
+    ;; (message "%s" "i ran")
+    ;; (message nil)
     )
   (defun org-dashboard ()
     "Dashboard-like setting in org"
