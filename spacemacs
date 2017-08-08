@@ -613,7 +613,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
                           )))
              nil)
             ("E" "non-work todos"
-             ((tags-todo "-work"
+             ((tags-todo "-work-PRIORITY=\"Z\""
                          ((org-agenda-skip-function (quote (org-agenda-skip-entry-if (quote scheduled) (quote deadline))))
                           (org-agenda-overriding-header (format "Non-Work Tasks (%s)" (org-agenda-count "-work")))
                           )))
