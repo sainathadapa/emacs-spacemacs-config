@@ -298,7 +298,7 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
-  (setenv "WORKON_HOME" "/home/sainath/anaconda3")
+  (setenv "WORKON_HOME" "~/anaconda3") ;; for python
   )
 
 (defun dotspacemacs/user-config ()
@@ -358,7 +358,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (setq deft-directory "~/Dropbox/org")
   (setq deft-extensions '("txt" "org"))
 
-  ;; browser settings
+  ;; default browser settings
   (setq browse-url-browser-function 'browse-url-generic
         browse-url-generic-program "google-chrome")
 
@@ -393,7 +393,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
     (add-hook 'org-agenda-mode-hook
               (lambda () (local-set-key [tab] 'org-agenda-tree-to-indirect-buffer)))
 
-    ;; org files directory
+    ;; org files and directories
     (setq org-agenda-files '("~/Dropbox/org" "~/Dropbox/org/pocket-to-org.org.txt" "~/Dropbox/org/zapier-to-org.org.txt"))
 
     ;; restore layout after exit from agenda view
@@ -476,7 +476,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
     (setq org-todo-keyword-faces
           '(("PROG" . "orange") ("PAUS" . "magenta") ("CANC" . "red") ("DONE" . "green")))
 
-    ;; org priority settings H, A, Z
+    ;; org priority settings : default-H, highest-A, lowest-Z
     (setq org-default-priority 72)
     (setq org-highest-priority 65)
     (setq org-lowest-priority 90)
@@ -503,7 +503,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
                    "** %U - %^{Activity}")
                   )))
 
-    ;; ess settings
+    ;; Emacs-Speaks-Statistics ESS settings
     (setq ess-ask-for-ess-directory nil)
     (setq ansi-color-for-comint-mode 'filter)
     (setq comint-scroll-to-bottom-on-input t)
@@ -659,9 +659,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
     ;; By default, Org maintains only a single agenda buffer and rebuilds it each time you change the view, to make sure everything is always up to date. If you often switch between agenda views and the build time bothers you, you can turn on sticky agenda buffers or make this the default by customizing the variable org-agenda-sticky. With sticky agendas, the agenda dispatcher will not recreate agenda views from scratch, it will only switch to the selected one, and you need to update the agenda by hand with r or g when needed. You can toggle sticky agenda view any time with org-toggle-sticky-agenda.
     (setq org-agenda-sticky nil)
-
-    ;; custom format for timestamp
-    (setq org-time-stamp-custom-formats (quote ("<%m/%d/%y %a>" . "<%Y-%m-%dT%H:%M:%S%z>")))
 
     ;; org config ends
     )
