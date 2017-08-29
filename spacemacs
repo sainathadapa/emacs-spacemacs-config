@@ -387,7 +387,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
     (setq org-agenda-compact-blocks t)
 
     ;; default appointment duration
-    (setq org-agenda-default-appointment-duration 15)
+    (setq org-agenda-default-appointment-duration 0)
 
     ;; redefining tab in org-agenda
     (add-hook 'org-agenda-mode-hook
@@ -569,62 +569,32 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
     (setq org-agenda-custom-commands
           (quote
-           (("x" "Tasks done"
-             ((tags "CLOSED>=\"<-4w>\"" nil))
-             ((org-agenda-view-columns-initially t)
-              (org-agenda-overriding-header "Tasks Done in the last week")
-              (org-agenda-cmp-user-defined
-               (cmp-date-property "CLOSED"))
-              (org-agenda-sorting-strategy (quote (user-defined-down)))
-              (org-agenda-window-setup
-               (quote
-                (only-window)))))
-            ("z" "work separated"
-             ((agenda "" ((org-agenda-span 5)))
-              (tags-todo "-work"
-                         ((org-agenda-skip-function (quote (org-agenda-skip-entry-if (quote scheduled) (quote deadline))))
-                          (org-agenda-overriding-header "Non-Work Tasks")
-                          ))
-              (tags-todo "+work"
-                         ((org-agenda-skip-function (quote (org-agenda-skip-entry-if (quote deadline) (quote scheduled))))
-                          (org-agenda-overriding-header "Work Tasks")
-                          ))
-              (tags "GOAL/-DONE" (
-                                  (org-agenda-overriding-header "Goals")
-                                  ))
-              (tags "CLOSED>=\"<-4w>\"" (
-                                         (org-agenda-cmp-user-defined (cmp-date-property "CLOSED"))
-                                         (org-agenda-sorting-strategy '(user-defined-down))
-                                         (org-agenda-overriding-header "Tasks Done in the last week")
-                                         )))
-             nil)
-            ("Q" "closed tasks"
+           (
+            ("Q" "Closed Tasks"
              ((tags "CLOSED>=\"<-4w>\"" (
                                          (org-agenda-cmp-user-defined (cmp-date-property "CLOSED"))
                                          (org-agenda-sorting-strategy '(user-defined-down))
                                          (org-agenda-overriding-header (format "Tasks done in the last week (%s)" (org-agenda-count "CLOSED")))
                                          )))
              nil)
-            ("W" "work todos"
+            ("H" "Z Tasks"
+             ((tags-todo "+PRIORITY=\"Z\""
+                         ((org-agenda-skip-function (quote (org-agenda-skip-entry-if (quote deadline) (quote scheduled))))
+                          (org-agenda-overriding-header (format "Z Tasks (%s)" (org-agenda-count "")))
+                          )))
+             nil)
+            ("W" "Work ToDos"
              ((tags-todo "+work"
                          ((org-agenda-skip-function (quote (org-agenda-skip-entry-if (quote deadline) (quote scheduled))))
-                          (org-agenda-overriding-header (format "Work Tasks (%s)" (org-agenda-count "work")))
+                          (org-agenda-overriding-header (format "Work Tasks (%s)" (org-agenda-count "")))
                           (org-agenda-hide-tags-regexp "work")
                           )))
              nil)
-            ("E" "non-work todos"
+            ("E" "Non-Work ToDos"
              ((tags-todo "-work-PRIORITY=\"Z\""
                          ((org-agenda-skip-function (quote (org-agenda-skip-entry-if (quote scheduled) (quote deadline))))
-                          (org-agenda-overriding-header (format "Non-Work Tasks (%s)" (org-agenda-count "-work")))
+                          (org-agenda-overriding-header (format "Non-Work Tasks (%s)" (org-agenda-count "")))
                           )))
-             nil)
-            ("G" "Goals"
-             ((tags "GOAL/-DONE" ((org-agenda-overriding-header (format "Goals (%s)" (org-agenda-count "GOAL")))
-                                  (org-agenda-hide-tags-regexp "GOAL"))))
-             nil)
-            ("K" "Wishlist"
-             ((tags "wishlist" ((org-agenda-overriding-header (format "Wishlist (%s)" (org-agenda-count "wishlist")))
-                                (org-agenda-hide-tags-regexp "wishlist"))))
              nil)
             )))
 
@@ -672,7 +642,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
     (interactive)
     ;; (message "%s" "i started")
     ;; (message nil)
-    (cl-loop repeat 6 do (execute-kbd-macro (kbd "r")) (other-window 1))
+    (cl-loop repeat 5 do (execute-kbd-macro (kbd "r")) (other-window 1))
     ;; (message "%s" "i ran")
     ;; (message nil)
     )
@@ -689,35 +659,21 @@ before packages are loaded. If you are unsure, you should try in setting them in
     (org-agenda nil "W")
     (other-window 1)
     (split-window-below)
-    (split-window-right)
     (org-agenda nil "a")
+    (other-window 1)
+    (org-agenda nil "H")
+    (split-window-below)
     (other-window 1)
     (org-agenda nil "Q")
     (other-window 1)
-    (split-window-below)
-    (org-agenda nil "G")
-    (other-window 1)
-    (org-agenda nil "K")
     (shrink-window-if-larger-than-buffer)
     (other-window 1)
     (shrink-window-if-larger-than-buffer)
-    (other-window 1)
-    (shrink-window-if-larger-than-buffer)
-    (other-window 1)
-    (shrink-window-if-larger-than-buffer)
-    (other-window 1)
-    (shrink-window-if-larger-than-buffer)
-    (other-window 1)
-    (shrink-window-if-larger-than-buffer)
-    (other-window 1)
-    (shrink-window-if-larger-than-buffer)
-    (other-window 1)
-    (shrink-window-if-larger-than-buffer)
-    (other-window 1)
-    (shrink-window-if-larger-than-buffer)
-    (other-window 1)
-    (shrink-window-if-larger-than-buffer)
-    (other-window 1)
+    (other-window 3)
+    (shrink-window 10)
+    (other-window -1)
+    (shrink-window 10)
+    (other-window 2)
     (run-with-timer 0 (* 5 60) 'refresh-dashboard)
     )
   (global-set-key (kbd "<f7>") 'org-dashboard)
