@@ -365,6 +365,9 @@ before packages are loaded. If you are unsure, you should try in setting them in
   ;; spacemacs requires the org settings to defined this way
   (with-eval-after-load 'org
 
+    ;; stylize exported html according to specified css
+    (setq org-html-htmlize-output-type 'css)
+
     ;; org-indent
     (require 'org-indent)
     (setq org-startup-indented t)
