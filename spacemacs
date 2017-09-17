@@ -436,12 +436,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
     ;; lists are also collapsed by default, not just headings
     (setq org-cycle-include-plain-lists 'integrate)
 
-    ;; checkbox cant be checked unless all the children are not done
-    (setq org-enforce-todo-checkbox-dependencies t)
-
-    ;; todo cant be done unless all the children tasks are done
-    (setq org-enforce-todo-dependencies t)
-
     ;; export formats
     (setq org-export-backends (quote (html icalendar md)))
 
