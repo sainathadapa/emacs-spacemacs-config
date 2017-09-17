@@ -404,7 +404,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
     (setq org-agenda-skip-scheduled-if-done t)
 
     ;; Max number of days to show in agenda
-    (setq org-agenda-span 21)
+    (setq org-agenda-span 31)
 
     ;; Warn about a deadline
     (setq org-deadline-warning-days 60)
