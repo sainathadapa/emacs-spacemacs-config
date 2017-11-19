@@ -42,7 +42,6 @@ values."
      org
      markdown
      deft
-     ess
      html
      python
      spell-checking
@@ -303,13 +302,12 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
 (defun dotspacemacs/user-config ()
 
-  (setq org-agenda-day-face-function 'my-org-agenda-get-day-face-fn)
 
-  (require 'python) ; if not done elsewhere
-  (require 'eval-in-repl-python)
-  (add-hook 'python-mode-hook
-            '(lambda ()
-               (local-set-key (kbd "<C-return>") 'eir-eval-in-python)))
+  ;; (require 'python) ; if not done elsewhere
+  ;; (require 'eval-in-repl-python)
+  ;; (add-hook 'python-mode-hook
+  ;;           '(lambda ()
+  ;;              (local-set-key (kbd "<C-return>") 'eir-eval-in-python)))
 
   ;; disabling arrows when word wrap is enabled
   (setq-default visual-line-fringe-indicators nil)
