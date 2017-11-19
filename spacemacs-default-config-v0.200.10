@@ -37,18 +37,24 @@ values."
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      helm
-     auto-completion
+     ;; auto-completion
+     ;; better-defaults
      emacs-lisp
-     org
-     markdown
-     html
-     spell-checking
+     ;; git
+     ;; markdown
+     ;; org
+     ;; (shell :variables
+     ;;        shell-default-height 30
+     ;;        shell-default-position 'bottom)
+     ;; spell-checking
+     ;; syntax-checking
+     ;; version-control
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(org-cliplink transpose-frame rainbow-mode helm-org-rifle org-download eval-in-repl)
+   dotspacemacs-additional-packages '()
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -97,7 +103,7 @@ values."
    ;; (default 'vim)
    dotspacemacs-editing-style 'vim
    ;; If non nil output loading progress in `*Messages*' buffer. (default nil)
-   dotspacemacs-verbose-loading t
+   dotspacemacs-verbose-loading nil
    ;; Specify the startup banner. Default value is `official', it displays
    ;; the official spacemacs logo. An integer value is the index of text
    ;; banner, `random' chooses a random text banner in `core/banners'
@@ -121,14 +127,13 @@ values."
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(spacemacs-dark
-                         solarized-dark
                          spacemacs-light)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 16
+                               :size 13
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -138,7 +143,7 @@ values."
    ;; (default "SPC")
    dotspacemacs-emacs-command-key "SPC"
    ;; The key used for Vim Ex commands (default ":")
-   dotspacemacs-ex-command-key ";"
+   dotspacemacs-ex-command-key ":"
    ;; The leader key accessible in `emacs state' and `insert state'
    ;; (default "M-m")
    dotspacemacs-emacs-leader-key "M-m"
@@ -222,7 +227,7 @@ values."
    ;; If non nil the frame is maximized when Emacs starts up.
    ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
    ;; (default nil) (Emacs 24.4+ only)
-   dotspacemacs-maximized-at-startup t
+   dotspacemacs-maximized-at-startup nil
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's active or selected.
    ;; Transparency can be toggled through `toggle-transparency'. (default 90)
@@ -295,391 +300,15 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
-  (setenv "WORKON_HOME" "~/anaconda3") ;; for python
   )
 
 (defun dotspacemacs/user-config ()
-
-
-  ;; (require 'python) ; if not done elsewhere
-  ;; (require 'eval-in-repl-python)
-  ;; (add-hook 'python-mode-hook
-  ;;           '(lambda ()
-  ;;              (local-set-key (kbd "<C-return>") 'eir-eval-in-python)))
-
-  ;; disabling arrows when word wrap is enabled
-  (setq-default visual-line-fringe-indicators nil)
-  (setq-default fringe-indicator-alist '(
-                                         (truncation left-arrow right-arrow)
-                                         (continuation nil nil) ;; left-curly-arrow
-                                         (overlay-arrow . right-triangle)
-                                         (up . up-arrow)
-                                         (down . down-arrow)
-                                         (top top-left-angle top-right-angle)
-                                         (bottom bottom-left-angle bottom-right-angle top-right-angle top-left-angle)
-                                         (top-bottom left-bracket right-bracket top-right-angle top-left-angle)
-                                         (empty-line . empty-line)
-                                         (unknown . question-mark)))
-
-  ;; backup settings
-  ;;; store all backup and autosave files in the tmp dir
-  (setq backup-directory-alist
-        `((".*" . ,temporary-file-directory)))
-  (setq auto-save-file-name-transforms
-        `((".*" ,temporary-file-directory t)))
-  (setq backup-by-copying t)
-  (setq delete-old-versions t
-        kept-new-versions 6
-        kept-old-versions 2
-        version-control t)
-  ;;; disable creation of lock files
-  (setq create-lockfiles nil)
-
-  ;; consider *.org.txt files as org files
-  (add-to-list 'auto-mode-alist '("\\.org.txt\\'" . org-mode))
-
-  ;; kill-buffer with y-or-n-p instead of yes-or-no-p
-  (fset 'yes-or-no-p 'y-or-n-p)
-
-  ;; requirement for org-cliplink
-  (load "~/emacs-spacemacs-config/emacs-request/request.el")
-
-  ;; save whenever emacs is out of focus
-  (defun save-all ()
-    (interactive)
-    (save-some-buffers t))
-  (add-hook 'focus-out-hook 'save-all)
-
-  ;; default browser settings
-  (setq browse-url-browser-function 'browse-url-generic
-        browse-url-generic-program "google-chrome")
-
-  (require 'helm-bookmark)
-
-  ;; spacemacs requires the org settings to defined this way
-  (with-eval-after-load 'org
-
-    ;; stylize exported html according to specified css
-    (setq org-html-htmlize-output-type 'css)
-    (setq org-html-html5-fancy t
-          org-html-doctype "html5")
-
-    ;; org-publish
-    (require 'ox-publish)
-    (setq org-publish-project-alist
-          '(
-            ("org"
-             :base-directory "~/Dropbox/org/"
-             :publishing-directory "~/Dropbox/org/"
-             :base-extension "---"
-             :recursive nil
-             :publishing-function org-html-publish-to-html
-             :include ("bayesian.org" "classification.org" "clustering.org" "data_science_misc.org" "data_structs_algos.org" "deep_learning.org" "ds_tools.org" "machine_learning_misc.org" "nlp.org" "recommendations.org" "regression.org" "reinforcement-learning.org" "statistics.org" "supervised_learning.org" "time_series.org")
-             )
-
-            ))
-
-    ;; org-indent
-    (require 'org-indent)
-    (setq org-startup-indented t)
-
-    ;; helm-org-rifle settings
-    (require 'helm-org-rifle)
-    (setq helm-org-rifle-show-path t)
-
-    ;; org-download settings
-    (require 'org-download)
-    (setq-default org-download-image-dir "~/Dropbox/org/pics")
-
-    ;; Do not truncate lines and enable word wrap
-    (set-default 'truncate-lines nil)
-    (set-default 'word-wrap t)
-    (setq helm-buffers-truncate-lines nil)
-    (setq org-startup-truncated nil)
-
-    ;; Enable the compact layout in agenda
-    (setq org-agenda-compact-blocks t)
-
-    ;; default appointment duration
-    (setq org-agenda-default-appointment-duration 30)
-
-    ;; redefining tab in org-agenda
-    (add-hook 'org-agenda-mode-hook
-              (lambda () (local-set-key [tab] 'org-agenda-tree-to-indirect-buffer)))
-
-    ;; org files and directories
-    (setq org-agenda-files '("~/Dropbox/org" "~/Dropbox/org/pocket-to-org.org.txt" "~/Dropbox/org/zapier-to-org.org.txt"))
-
-    ;; restore layout after exit from agenda view
-    (setq org-agenda-restore-windows-after-quit t)
-
-    ;; Don't show tasks in agenda if they are done
-    (setq org-agenda-skip-deadline-if-done t)
-    (setq org-agenda-skip-scheduled-if-done t)
-
-    ;; Max number of days to show in agenda
-    (setq org-agenda-span 31)
-
-    ;; Warn about a deadline
-    (setq org-deadline-warning-days 60)
-
-    ;; org agenda starts on the current day
-    (setq org-agenda-start-on-weekday nil)
-
-    ;; dont do auto align tags
-    (setq org-auto-align-tags nil)
-
-    ;; org bullets config
-    (setq org-bullets-bullet-list (quote ("◉" "◆" "✚" "☀" "○")))
-
-    ;; count all checkboxes, not just the ones directly below
-    (setq org-checkbox-hierarchical-statistics nil)
-
-    ;; log the clocks into this drawer
-    (setq org-log-into-drawer "LOGBOOK")
-
-    ;; remember to clock out the clock on exit
-    (setq org-remember-clock-out-on-exit t)
-
-    ;; display clock time both in mode line and frame title
-    (setq org-clock-clocked-in-display (quote both))
-
-    ;; lists are also collapsed by default, not just headings
-    (setq org-cycle-include-plain-lists 'integrate)
-
-    ;; export formats
-    (setq org-export-backends (quote (html icalendar md)))
-
-    ;; calendar export settings
-    (setq org-icalendar-exclude-tags (quote ("noexport")))
-    (setq org-icalendar-include-todo t)
-    (setq org-icalendar-use-deadline (quote (event-if-not-todo event-if-todo)))
-    (setq org-icalendar-use-scheduled (quote (event-if-not-todo event-if-todo)))
-
-    ;; show all images with fixed width
-    (setq org-image-actual-width 750)
-
-    ;; org modules to load
-    (setq org-modules (quote (org-crypt org-habit org-mouse)))
-
-    ;; org refile settings
-    (setq org-refile-allow-creating-parent-nodes (quote confirm))
-    (setq org-refile-targets '((nil :maxlevel . 9)
-                               (org-agenda-files :maxlevel . 9)))
-    (setq org-outline-path-complete-in-steps nil)         ; Refile in a single go
-    (setq org-refile-use-outline-path (quote file))       ; Show full paths for refiling
-
-    ;; When you run an agenda command, Org visits agenda files that are not yet visited. When finding a file for the first time, Org checks the startup options and apply them to the buffer: those options are either globally set through the org-startup-* variables or on a per-file basis through the #+STARTUP keyword. Especially, Org will honor the startup visibility status, as set by org-startup-folded or #+STARTUP: folded. This may slow down the operation of visiting a file very much, and the process of selecting agenda entries consequently. To prevent agenda commands to honor startup options when visiting an agenda file for the first time, do this
-    (setq org-agenda-inhibit-startup t)
-
-    ;; on startup, the headings should be folded
-    (setq org-startup-folded t)
-
-    ;; org todo keywords
-    (setq org-todo-keywords
-          (quote
-           ((sequence "TODO" "PROG" "PAUS" "|" "DONE" "CANC"))))
-
-    ;; colors for todo states
-    (setq org-todo-keyword-faces
-          '(("PROG" . "orange") ("PAUS" . "magenta") ("CANC" . "red") ("DONE" . "green")))
-
-    ;; org priority settings : default-H, highest-A, lowest-Z
-    (setq org-default-priority 72)
-    (setq org-highest-priority 65)
-    (setq org-lowest-priority 90)
-
-    ;; Org Capture settings
-    (global-set-key (kbd "<f6>") 'org-capture)
-    (setq org-capture-templates
-          (quote (
-                  ("w"         ; hotkey
-                   "Work Todo" ; name
-                   entry       ; type
-                   (file+headline "~/Dropbox/org/work.org" "Tasks") ;target
-                   "* TODO %^{Description}\n:PROPERTIES:\n:Added: %U\n:END:" ; template
-                   )
-                  ("t"
-                   "Task Diary"
-                   entry
-                   (file+datetree "~/Dropbox/org/tasks.org")
-                   "* TODO %^{Description}\n:PROPERTIES:\n:Added: %U\n:END:")
-                  ("j"
-                   "Journal"
-                   item
-                   (file+datetree "~/Dropbox/org/journal.org")
-                   "- %U - %^{Activity}")
-                  )))
-
-    ;; sorting strategy for org agenda
-    (setq org-agenda-sorting-strategy
-          (quote
-           ((agenda time-up deadline-up)
-            (todo priority-down todo-state-down)
-            (tags priority-down todo-state-down))))
-
-    ;; text format for org agenda
-    (setq org-agenda-prefix-format
-          (quote
-           ((agenda . "%s %?-12t %e ")
-            (timeline . "  %s")
-            (todo . " %i %e ")
-            (tags . " %i %e ")
-            (search . " %i %e "))))
-
-    ;; default format for columns view
-    (setq org-columns-default-format
-          "%75ITEM %TODO %PRIORITY %SCHEDULED %DEADLINE %CLOSED %ALLTAGS")
-
-    ;; from http://emacs.stackexchange.com/questions/26351/custom-sorting-for-agenda
-    ;; being used in a org agenda custom command below
-    (defun cmp-date-property (prop)
-      "Compare two `org-mode' agenda entries, `A' and `B', by some date property. If a is before b, return -1. If a is after b, return 1. If they are equal return t."
-      (lexical-let ((prop prop))
-        #'(lambda (a b)
-
-            (let* ((a-pos (get-text-property 0 'org-marker a))
-                   (b-pos (get-text-property 0 'org-marker b))
-                   (a-date (or (org-entry-get a-pos prop)
-                               (format "<%s>" (org-read-date t nil "now"))))
-                   (b-date (or (org-entry-get b-pos prop)
-                               (format "<%s>" (org-read-date t nil "now"))))
-                   (cmp (compare-strings a-date nil nil b-date nil nil))
-                   )
-              (if (eq cmp t) nil (signum cmp))
-              ))))
-
-    ;; from http://emacs.stackexchange.com/questions/18710/display-count-of-tasks-in-agenda-instead-of-tasks-based-on-tag
-    (load "~/emacs-spacemacs-config/org-agenda-count.el")
-
-    (setq org-agenda-custom-commands
-          (quote
-           (
-            ("Q" "Closed Tasks"
-             ((tags "CLOSED>=\"<-4w>\"" (
-                                         (org-agenda-cmp-user-defined (cmp-date-property "CLOSED"))
-                                         (org-agenda-sorting-strategy '(user-defined-down))
-                                         (org-agenda-overriding-header (format "Tasks done in the last week (%s)" (org-agenda-count "CLOSED")))
-                                         )))
-             nil)
-            ("H" "Z Tasks"
-             ((tags-todo "+PRIORITY=\"Z\""
-                         ((org-agenda-skip-function (quote (org-agenda-skip-entry-if (quote deadline) (quote scheduled))))
-                          (org-agenda-overriding-header (format "Z Tasks (%s)" (org-agenda-count "")))
-                          )))
-             nil)
-            ("W" "Work ToDos"
-             ((tags-todo "+work"
-                         ((org-agenda-skip-function (quote (org-agenda-skip-entry-if (quote deadline) (quote scheduled))))
-                          (org-agenda-overriding-header (format "Work Tasks (%s)" (org-agenda-count "")))
-                          (org-agenda-hide-tags-regexp "work")
-                          )))
-             nil)
-            ("E" "Non-Work ToDos"
-             ((tags-todo "-work-PRIORITY=\"Z\""
-                         ((org-agenda-skip-function (quote (org-agenda-skip-entry-if (quote scheduled) (quote deadline))))
-                          (org-agenda-overriding-header (format "Non-Work Tasks (%s)" (org-agenda-count "")))
-                          )))
-             nil)
-            )))
-
-    ;; Collapse everything except current tab.
-    (defun org-show-current-heading-tidily ()
-      (interactive)
-      "Show next entry, keeping other entries closed."
-      (if (save-excursion (end-of-line) (outline-invisible-p))
-          (progn (org-show-entry) (show-children))
-        (outline-back-to-heading)
-        (unless (and (bolp) (org-on-heading-p))
-          (org-up-heading-safe)
-          (hide-subtree)
-          (error "Boundary reached"))
-        (org-overview)
-        (org-reveal t)
-        (org-show-entry)
-        (show-children)))
-
-    ;; Place tags close to the right-hand side of the window
-    (add-hook 'org-finalize-agenda-hook 'place-agenda-tags)
-    (defun place-agenda-tags ()
-      "Put the agenda tags by the right border of the agenda window."
-      (setq org-agenda-tags-column (- 4 (window-width)))
-      (org-agenda-align-tags))
-
-    ;; any items below the headings with these tags dont inherit that tag
-    (setq org-tags-exclude-from-inheritance (quote ("PROJECT" "crypt")))
-
-    ;; by default, agenda will reorganize buffers
-    (setq org-agenda-window-setup 'reorganize-frame)
-
-    ;; By default, Org maintains only a single agenda buffer and rebuilds it each time you change the view, to make sure everything is always up to date. If you often switch between agenda views and the build time bothers you, you can turn on sticky agenda buffers or make this the default by customizing the variable org-agenda-sticky. With sticky agendas, the agenda dispatcher will not recreate agenda views from scratch, it will only switch to the selected one, and you need to update the agenda by hand with r or g when needed. You can toggle sticky agenda view any time with org-toggle-sticky-agenda.
-    (setq org-agenda-sticky nil)
-
-    ;; org config ends
-    )
-
-  ;; load any changes from disk
-  (setq global-auto-revert-mode t)
-
-  ;; commands and settings for dashboard
-  (defun refresh-dashboard ()
-    "Run some commands in sequence."
-    (interactive)
-    ;; (message "%s" "i started")
-    ;; (message nil)
-    (cl-loop repeat 5 do (execute-kbd-macro (kbd "r")) (other-window 1))
-    ;; (message "%s" "i ran")
-    ;; (message nil)
-    )
-  (defun org-dashboard ()
-    "Dashboard-like setting in org"
-    (interactive)
-    (setq org-agenda-sticky t)
-    (setq org-agenda-window-setup 'current-window)
-    (setq-default mode-line-format nil)
-    (split-window-right)
-    (split-window-below)
-    (org-agenda nil "E")
-    (other-window 1)
-    (org-agenda nil "W")
-    (other-window 1)
-    (split-window-below)
-    (org-agenda nil "a")
-    (other-window 1)
-    (org-agenda nil "H")
-    (split-window-below)
-    (other-window 1)
-    (org-agenda nil "Q")
-    (other-window 1)
-    (shrink-window-if-larger-than-buffer)
-    (other-window 1)
-    (shrink-window-if-larger-than-buffer)
-    (other-window 3)
-    (shrink-window 10)
-    (other-window -1)
-    (shrink-window 10)
-    (other-window 2)
-    (run-with-timer 0 (* 5 60) 'refresh-dashboard)
-    )
-  (global-set-key (kbd "<f7>") 'org-dashboard)
-
-  ;; close dashboard
-  (require 'cl)
-  (defun bk-kill-buffers (regexp)
-    "Kill buffers matching REGEXP without asking for confirmation."
-    (interactive "sKill buffers matching this regular expression: ")
-    (flet ((kill-buffer-ask (buffer) (kill-buffer buffer)))
-      (kill-matching-buffers regexp)))
-  (defun close-dashboard ()
-    "Dashboard-like setting in org"
-    (interactive)
-    (cancel-function-timers 'refresh-dashboard)
-    (bk-kill-buffers ".*Org.*Agenda.*")
-    (delete-other-windows)
-    )
-
-  ;; default file to open
-  (find-file "~/Dropbox/org/main.org")
+  "Configuration function for user code.
+This function is called at the very end of Spacemacs initialization after
+layers configuration.
+This is the place where most of your configurations should be done. Unless it is
+explicitly specified that a variable should be set before a package is loaded,
+you should place your code here."
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -689,7 +318,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(line-spacing 5)
  '(package-selected-packages
    (quote
     (ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))))
@@ -698,4 +326,4 @@ before packages are loaded. If you are unsure, you should try in setting them in
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(org-link ((t (:foreground "#b58900" :underline nil)))))
+ )
