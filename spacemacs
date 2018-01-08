@@ -52,7 +52,7 @@ values."
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '()
+   dotspacemacs-excluded-packages '(org-projectile)
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
    ;; `used-only' installs only explicitly used packages and uninstall any
@@ -421,7 +421,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
     (setq org-agenda-span 31)
 
     ;; Warn about a deadline
-    (setq org-deadline-warning-days 60)
+    (setq org-deadline-warning-days 90)
 
     ;; org agenda starts on the current day
     (setq org-agenda-start-on-weekday nil)
@@ -564,21 +564,17 @@ before packages are loaded. If you are unsure, you should try in setting them in
              nil)
             ("H" "Z Tasks"
              ((tags-todo "+PRIORITY=\"Z\""
-                         ((org-agenda-skip-function (quote (org-agenda-skip-entry-if (quote deadline) (quote scheduled))))
-                          (org-agenda-overriding-header (format "Z Tasks (%s)" (org-agenda-count "")))
-                          )))
+                         ((org-agenda-overriding-header (format "Z Tasks (%s)" (org-agenda-count ""))))))
              nil)
             ("W" "Work ToDos"
              ((tags-todo "+work"
-                         ((org-agenda-skip-function (quote (org-agenda-skip-entry-if (quote deadline) (quote scheduled))))
-                          (org-agenda-overriding-header (format "Work Tasks (%s)" (org-agenda-count "")))
+                         ((org-agenda-overriding-header (format "Work Tasks (%s)" (org-agenda-count "")))
                           (org-agenda-hide-tags-regexp "work")
                           )))
              nil)
             ("E" "Non-Work ToDos"
              ((tags-todo "-work-PRIORITY=\"Z\""
-                         ((org-agenda-skip-function (quote (org-agenda-skip-entry-if (quote scheduled) (quote deadline))))
-                          (org-agenda-overriding-header (format "Non-Work Tasks (%s)" (org-agenda-count "")))
+                         ((org-agenda-overriding-header (format "Non-Work Tasks (%s)" (org-agenda-count "")))
                           )))
              nil)
             )))
