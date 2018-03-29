@@ -511,6 +511,12 @@ before packages are loaded. If you are unsure, you should try in setting them in
                    item
                    (file+datetree "~/Dropbox/org/journal.org")
                    "- %U - %^{Activity}")
+                  ("b"
+                   "Add a book to read"
+                   entry
+                   (file+headline "~/Dropbox/org/notes.org" "Books to read")
+                   "* TODO %^{Book name}\n%^{Why to read this book?}"
+                   )
                   )))
 
     ;; sorting strategy for org agenda
