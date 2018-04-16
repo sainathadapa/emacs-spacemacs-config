@@ -459,7 +459,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
     (setq org-icalendar-use-scheduled (quote (event-if-not-todo event-if-todo)))
 
     ;; show all images with fixed width
-    (setq org-image-actual-width 750)
+    (setq org-image-actual-width 250)
 
     ;; org modules to load
     (setq org-modules (quote (org-crypt org-habit org-mouse)))
