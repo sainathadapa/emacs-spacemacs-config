@@ -535,8 +535,8 @@ before packages are loaded. If you are unsure, you should try in setting them in
     (setq org-agenda-sorting-strategy
           (quote
            ((agenda time-up deadline-up)
-            (todo priority-down todo-state-down)
-            (tags priority-down todo-state-down))))
+            (todo priority-down todo-state-down tag-up)
+            (tags priority-down todo-state-down tag-up))))
 
     ;; text format for org agenda
     (setq org-agenda-prefix-format
@@ -667,7 +667,9 @@ before packages are loaded. If you are unsure, you should try in setting them in
     (shrink-window-if-larger-than-buffer)
     (other-window 2)
     (shrink-window-horizontally 10)
-    (other-window 3)
+    (other-window 1)
+    (shrink-window 15)
+    (other-window 1)
     (run-with-timer 0 (* 5 60) 'refresh-dashboard)
     )
   (global-set-key (kbd "<f7>") 'org-dashboard)
