@@ -303,6 +303,10 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (with-eval-after-load 'helm
     (setq helm-display-function 'helm-default-display-buffer)) ;; temp work around
 
+  (require 'epa-file)
+  (epa-file-enable)
+  (setq epa-file-cache-passphrase-for-symmetric-encryption t)
+
   ;; (require 'python) ; if not done elsewhere
   ;; (require 'eval-in-repl-python)
   ;; (add-hook 'python-mode-hook
@@ -360,6 +364,14 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
   ;; spacemacs requires the org settings to defined this way
   (with-eval-after-load 'org
+
+    ;; crypt
+    (require 'org-crypt)
+    (org-crypt-use-before-save-magic)
+    (setq org-tags-exclude-from-inheritance (quote ("crypt")))
+    ;; GPG key to use for encryption
+    ;; Either the Key ID or set to nil to use symmetric encryption.
+    (setq org-crypt-key nil)
 
     ;; stylize exported html according to specified css
     (setq org-html-htmlize-output-type 'css)
@@ -686,7 +698,9 @@ before packages are loaded. If you are unsure, you should try in setting them in
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(epg-gpg-program "/usr/bin/gpg1")
  '(line-spacing 5)
+ '(org-modules (quote (org-crypt org-habit org-mouse)))
  '(package-selected-packages
    (quote
     (transpose-frame tagedit slim-mode sass-mode rainbow-mode pug-mode org-present org-pomodoro log4e gntp org-download org-cliplink mmm-mode markdown-toc less-css-mode htmlize helm-css-scss helm-c-yasnippet haml-mode gnuplot gh-md fuzzy flyspell-correct-helm flyspell-correct eval-in-repl paredit emmet-mode company-web web-completion-data company-statistics auto-yasnippet auto-dictionary ac-ispell auto-complete web-mode scss-mode helm-org-rifle helm-company company yasnippet markdown-mode alert org-mime ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))))
