@@ -511,13 +511,13 @@ before packages are loaded. If you are unsure, you should try in setting them in
                    "Work Todo" ; name
                    entry       ; type
                    (file+headline "~/Dropbox/org/work.org" "Tasks") ;target
-                   "* TODO [#A] %^{Task}\n:PROPERTIES:\n:Added: %U\n:END:" ; template
+                   "* TODO [#A] %^{Task}" ; template
                    )
                   ("t"
                    "Task Diary"
                    entry
                    (file+datetree "~/Dropbox/org/tasks.org")
-                   "* TODO [#A] %^{Task}\n:PROPERTIES:\n:Added: %U\n:END:")
+                   "* TODO [#A] %^{Task}")
                   ("j"
                    "Journal"
                    item
@@ -528,6 +528,12 @@ before packages are loaded. If you are unsure, you should try in setting them in
                    entry
                    (file+headline "~/Dropbox/org/notes.org" "Books to read")
                    "* TODO %^{Book name}\n%^{Why to read this book?}"
+                   )
+                  ("s"
+                   "Schedule an event or a task"
+                   entry
+                   (file+datetree "~/Dropbox/org/tasks.org")
+                   "* %^{Event or Task}\nSCHEDULED: %^t"
                    )
                   )))
 
@@ -593,7 +599,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
                           )))
              nil)
             ("E" "Non-Work ToDos"
-             ((tags-todo "-work"
+             ((tags-todo "-work+PRIORITY<=\"H\""
                          ((org-agenda-overriding-header (format "Non-Work Tasks (%s)" (org-agenda-count "")))
                           )))
              nil)
