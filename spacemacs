@@ -358,7 +358,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
   ;; default browser settings
   (setq browse-url-browser-function 'browse-url-generic
-        browse-url-generic-program "google-chrome")
+        browse-url-generic-program "google-chrome-stable")
 
   (require 'helm-bookmark)
 
@@ -470,8 +470,19 @@ before packages are loaded. If you are unsure, you should try in setting them in
     (setq org-icalendar-use-deadline (quote (event-if-not-todo event-if-todo)))
     (setq org-icalendar-use-scheduled (quote (event-if-not-todo event-if-todo)))
 
-    ;; show all images with fixed width
-    (setq org-image-actual-width 250)
+    ;; set custom org-display-inline-images function
+    (setq org-image-actual-width 1800)
+    (load "~/emacs-spacemacs-config/org-display-inline-images-custom.el")
+
+    ;; Don't show tasks with "home" tag during day time
+    (defun my/org-agenda-skip-home ()
+      (let ((current-hour (string-to-number (format-time-string "%H"))))
+        (when (and (< 10 current-hour 18)
+                   (member "home" (org-get-tags-at)))
+          (or (outline-next-heading)
+              (goto-char (point-max))))))
+    (setq org-agenda-skip-function #'my/org-agenda-skip-home)
+
 
     ;; org modules to load
     (setq org-modules (quote (org-crypt org-habit org-mouse)))
