@@ -295,7 +295,6 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
-  (setenv "WORKON_HOME" "~/anaconda3") ;; for python
   )
 
 (defun dotspacemacs/user-config ()
@@ -610,7 +609,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
                           )))
              nil)
             ("E" "Non-Work ToDos"
-             ((tags-todo "-work+PRIORITY<=\"H\""
+             ((tags-todo "-work"
                          ((org-agenda-overriding-header (format "Non-Work Tasks (%s)" (org-agenda-count "")))
                           )))
              nil)
