@@ -473,6 +473,9 @@ before packages are loaded. If you are unsure, you should try in setting them in
     (setq org-image-actual-width 1800)
     (load "~/emacs-spacemacs-config/org-display-inline-images-custom.el")
 
+    ;; load org-pretty-tags
+    (load "~/emacs-spacemacs-config/org-pretty-tags/org-pretty-tags.el")
+
     ;; Don't show tasks with "home" tag during day time
     (defun my/org-agenda-skip-home ()
       (let ((current-hour (string-to-number (format-time-string "%H"))))
