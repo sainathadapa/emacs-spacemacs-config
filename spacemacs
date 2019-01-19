@@ -431,7 +431,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
     (setq org-agenda-skip-scheduled-if-done t)
 
     ;; Max number of days to show in agenda
-    (setq org-agenda-span 31)
+    (setq org-agenda-span 45)
 
     ;; Warn about a deadline
     (setq org-deadline-warning-days 90)
@@ -463,6 +463,9 @@ before packages are loaded. If you are unsure, you should try in setting them in
     ;; export formats
     (setq org-export-backends (quote (html icalendar md)))
 
+    ;; change ... to
+    ;; (setq org-ellipsis "⤵")
+
     ;; calendar export settings
     (setq org-icalendar-exclude-tags (quote ("noexport")))
     (setq org-icalendar-include-todo t)
@@ -483,7 +486,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
                    (member "home" (org-get-tags-at)))
           (or (outline-next-heading)
               (goto-char (point-max))))))
-    (setq org-agenda-skip-function #'my/org-agenda-skip-home)
+    ;; (setq org-agenda-skip-function #'my/org-agenda-skip-home)
 
 
     ;; org modules to load
@@ -720,6 +723,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(epg-gpg-program "/usr/bin/gpg1")
+ '(ispell-personal-dictionary "~/Dropbox/org/.aspell.en.pws")
  '(line-spacing 5)
  '(org-modules (quote (org-crypt org-habit org-mouse)))
  '(package-selected-packages
