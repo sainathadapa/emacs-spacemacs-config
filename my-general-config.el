@@ -258,9 +258,9 @@
   ;; sorting strategy for org agenda
   (setq org-agenda-sorting-strategy
         (quote
-         ((agenda time-up deadline-up)
-          (todo priority-down todo-state-down tag-up)
-          (tags priority-down todo-state-down tag-up))))
+         ((agenda priority-down alpha-up)
+          (todo priority-down alpha-up)
+          (tags priority-down alpha-up))))
 
   ;; text format for org agenda
   (setq org-agenda-prefix-format
