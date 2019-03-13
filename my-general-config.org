@@ -1,4 +1,4 @@
-#+TITLE: General configuration
+#+TITLE: Configuration
 #+PROPERTY: header-args+ :comments both
 #+PROPERTY: header-args+ :mkdirp yes
 #+PROPERTY: header-args+ :tangle "my-general-config.el"
@@ -67,7 +67,10 @@
 
 (require 'helm-bookmark)
 
-;; spacemacs requires the org settings to defined this way
+#+END_SRC
+* Org config
+~spacemacs~ requires the org settings to defined this way
+#+BEGIN_SRC emacs-lisp
 (with-eval-after-load 'org
 
   ;; crypt
@@ -361,7 +364,10 @@
 
   ;; org config ends
   )
+#+END_SRC
 
+* Remaining
+#+BEGIN_SRC emacs-lisp
 ;; load any changes from disk
 (setq global-auto-revert-mode t)
 
