@@ -62,8 +62,12 @@
       browse-url-generic-program "google-chrome-stable")
 
 (require 'helm-bookmark)
+;; Config:1 ends here
 
-;; spacemacs requires the org settings to defined this way
+;; Org config
+;; ~spacemacs~ requires the org settings to defined this way
+
+;; [[file:~/emacs-spacemacs-config/my-general-config.org::*Org%20config][Org config:1]]
 (with-eval-after-load 'org
 
   ;; crypt
@@ -296,6 +300,37 @@
   ;; from http://emacs.stackexchange.com/questions/18710/display-count-of-tasks-in-agenda-instead-of-tasks-based-on-tag
   (load "~/emacs-spacemacs-config/org-agenda-count.el")
 
+(defun remove-priority (str)
+  (replace-regexp-in-string "\\[#[^\\[]*\\] " "" str))
+
+(defun extract-link-text (str)
+  (replace-regexp-in-string "\\[\\[\\([^][]+\\)\\]\\(\\[\\([^][]+\\)\\]\\)?\\]" "\\3" str))
+
+(defun org-cmp-alpha-2 (a b)
+  "Compare the headlines, alphabetically. (after extract link texts if any links present)"
+  (let* ((pla (text-property-any 0 (length a) 'org-heading t a))
+   (plb (text-property-any 0 (length b) 'org-heading t b))
+   (ta (and pla (substring a pla)))
+   (tb (and plb (substring b plb)))
+   (case-fold-search nil))
+    (when pla
+      (when (string-match (concat "\\`[ \t]*" (or (get-text-property 0 'org-todo-regexp a) "")
+          "\\([ \t]*\\[[a-zA-Z0-9]\\]\\)? *") ta)
+  (setq ta (substring ta (match-end 0))))
+      (setq ta (downcase ta)))
+    (when plb
+      (when (string-match (concat "\\`[ \t]*" (or (get-text-property 0 'org-todo-regexp b) "")
+          "\\([ \t]*\\[[a-zA-Z0-9]\\]\\)? *") tb)
+  (setq tb (substring tb (match-end 0))))
+      (setq tb (downcase tb)))
+    (setq ta (extract-link-text ta))
+    (setq tb (extract-link-text tb))
+    (cond ((not (or ta tb)) nil)
+    ((not ta) +1)
+    ((not tb) -1)
+    ((string-lessp ta tb) -1)
+    ((string-lessp tb ta) +1))))
+
   (setq org-agenda-custom-commands
         (quote
          (
@@ -317,8 +352,10 @@
                         )))
            nil)
           ("E" "Non-Work ToDos"
-           ((tags-todo "-work"
-                       ((org-agenda-overriding-header (format "Non-Work Tasks (%s)" (org-agenda-count "")))
+           ((tags-todo "-work" (
+                               (org-agenda-overriding-header (format "Non-Work Tasks (%s)" (org-agenda-count "")))
+                                       (org-agenda-cmp-user-defined 'org-cmp-alpha-2)
+                                       (org-agenda-sorting-strategy '(user-defined-up))
                         )))
            nil)
           )))
@@ -357,7 +394,11 @@
 
   ;; org config ends
   )
+;; Org config:1 ends here
 
+;; Remaining
+
+;; [[file:~/emacs-spacemacs-config/my-general-config.org::*Remaining][Remaining:1]]
 ;; load any changes from disk
 (setq global-auto-revert-mode t)
 
@@ -415,7 +456,7 @@
 
 ;; default file to open
 (find-file "~/Dropbox/org/main.org")
-;; Config:1 ends here
+;; Remaining:1 ends here
 
 ;; Finalization
 ;; In the end, satisfy the Spacemacs loading mechanism.
