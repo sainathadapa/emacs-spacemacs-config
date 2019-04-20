@@ -1,0 +1,6 @@
+#+TITLE: Literate Emacs (Spacemacs) configuration
+#+SETUPFILE: ~/emacs-spacemacs-config/org-html-themes/setup/theme-readtheorg.setup
+#+HTML_HEAD: <style> #content{max-width:1800px;}</style>
+#+OPTIONS: \n:t
+* [[/general-config][General settings]]
+* [[/org-config][Org-mode settings]]
