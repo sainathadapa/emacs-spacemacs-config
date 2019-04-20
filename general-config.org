@@ -1,4 +1,4 @@
-#+TITLE: Spacemacs configuration - Sainath Adapa
+#+TITLE: General settings
 #+PROPERTY: header-args+ :comments both
 #+PROPERTY: header-args+ :mkdirp yes
 #+PROPERTY: header-args+ :tangle "general-config.el"
