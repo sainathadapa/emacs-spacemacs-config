@@ -1,0 +1,115 @@
+#+TITLE: Spacemacs configuration - Sainath Adapa
+#+PROPERTY: header-args+ :comments both
+#+PROPERTY: header-args+ :mkdirp yes
+#+PROPERTY: header-args+ :tangle "general-config.el"
+#+SETUPFILE: ~/emacs-spacemacs-config/org-html-themes/setup/theme-readtheorg.setup
+#+HTML_HEAD: <style> #content{max-width:1800px;}</style>
+#+OPTIONS: \n:t
+* Appearance
+Disabling bent arrows (↩)
+#+BEGIN_SRC emacs-lisp
+(setq-default visual-line-fringe-indicators nil)
+(setq-default fringe-indicator-alist '(
+                                       (truncation left-arrow right-arrow)
+                                       (continuation nil nil) ;; left-curly-arrow
+                                       (overlay-arrow . right-triangle)
+                                       (up . up-arrow)
+                                       (down . down-arrow)
+                                       (top top-left-angle top-right-angle)
+                                       (bottom bottom-left-angle bottom-right-angle top-right-angle top-left-angle)
+                                       (top-bottom left-bracket right-bracket top-right-angle top-left-angle)
+                                       (empty-line . empty-line)
+                                       (unknown . question-mark)))
+#+END_SRC
+* Backup and other file settings
+Store all backup and autosave files in the ~/tmp~ directory
+#+BEGIN_SRC emacs-lisp
+(setq backup-directory-alist
+      `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms
+      `((".*" ,temporary-file-directory t)))
+#+END_SRC
+
+Backup by copying instead of renaming. See https://www.gnu.org/software/emacs/manual/html_node/emacs/Backup-Copying.html
+#+BEGIN_SRC emacs-lisp
+(setq backup-by-copying t)
+#+END_SRC
+
+Automatic deletion of backups. See https://www.gnu.org/software/emacs/manual/html_node/emacs/Backup-Deletion.html
+#+BEGIN_SRC emacs-lisp
+(setq delete-old-versions t
+      kept-new-versions 6
+      kept-old-versions 2
+      version-control t)
+#+END_SRC
+
+Do not create "lock" files.
+#+BEGIN_SRC emacs-lisp
+(setq create-lockfiles nil)
+#+END_SRC
+
+Save files when emacs goes out of focus
+#+BEGIN_SRC emacs-lisp
+(defun save-all ()
+  (interactive)
+  (save-some-buffers t))
+(add-hook 'focus-out-hook 'save-all)
+#+END_SRC
+
+Load any changes from disk automatically
+#+BEGIN_SRC emacs-lisp
+(setq global-auto-revert-mode t)
+#+END_SRC
+* Miscellaneous
+Answer with y/n instead of having to write the full words
+#+BEGIN_SRC emacs-lisp
+(fset 'yes-or-no-p 'y-or-n-p)
+#+END_SRC
+
+Default browser to use
+#+BEGIN_SRC emacs-lisp
+(setq browse-url-browser-function 'browse-url-generic
+      browse-url-generic-program "google-chrome-stable")
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(with-eval-after-load 'helm
+  (setq helm-display-function 'helm-default-display-buffer)) ;; temp work around
+#+END_SRC
+
+* Org config
+Spacemacs requires the org-mode settings to be defined after the org-mode is activated.
+#+BEGIN_SRC emacs-lisp
+(with-eval-after-load 'org
+  (require 'org-config)
+)
+#+END_SRC
+
+Default file to open
+#+BEGIN_SRC emacs-lisp
+(find-file "~/Dropbox/org/main.org")
+#+END_SRC
+* Disabled
+#+BEGIN_SRC emacs-lisp
+;; (require 'epa-file)
+;; (epa-file-enable)
+;; (setq epa-file-cache-passphrase-for-symmetric-encryption t)
+
+;; (require 'python) ; if not done elsewhere
+;; (require 'eval-in-repl-python)
+;; (add-hook 'python-mode-hook
+;;           '(lambda ()
+;;              (local-set-key (kbd "<C-return>") 'eir-eval-in-python)))
+
+;; consider *.org.txt files as org files
+;; (add-to-list 'auto-mode-alist '("\\.org.txt\\'" . org-mode))
+
+;; (require 'helm-bookmark)
+#+END_SRC
+* Final
+Let the Spacemacs use this configuration.
+#+BEGIN_SRC emacs-lisp
+(provide 'general-config)
+#+END_SRC
+
+
