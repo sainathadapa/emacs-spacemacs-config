@@ -299,7 +299,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
 (defun dotspacemacs/user-config ()
   (add-to-list 'load-path "~/emacs-spacemacs-config")
-  (require 'my-general-config)
+  (require 'general-config)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
