@@ -71,6 +71,19 @@
 (load "~/emacs-spacemacs-config/org-display-inline-images-custom.el")
 ;; Appearance:8 ends here
 
+
+
+;; Smooth scrolling with mouse:
+;; from https://emacs.stackexchange.com/questions/10354/smooth-mouse-scroll-for-inline-images
+
+;; [[file:~/emacs-spacemacs-config/org-config.org::*Appearance][Appearance:9]]
+(pixel-scroll-mode)
+(setq pixel-dead-time 0) ; Never go back to the old scrolling behaviour.
+(setq pixel-resolution-fine-flag t) ; Scroll by number of pixels instead of lines (t = frame-char-height pixels).
+(setq mouse-wheel-scroll-amount '(1)) ; Distance in pixel-resolution to scroll each mouse wheel event.
+(setq mouse-wheel-progressive-speed nil) ; Progressive speed is too fast
+;; Appearance:9 ends here
+
 ;; To-Do states and related
 ;; Keywords
 

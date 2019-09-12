@@ -55,6 +55,17 @@ Custom ~org-display-inline-images~ function that displays the images according t
 (setq org-image-actual-width 1800)
 (load "~/emacs-spacemacs-config/org-display-inline-images-custom.el")
 #+END_SRC
+
+Smooth scrolling with mouse:
+from https://emacs.stackexchange.com/questions/10354/smooth-mouse-scroll-for-inline-images
+#+BEGIN_SRC emacs-lisp
+(pixel-scroll-mode)
+(setq pixel-dead-time 0) ; Never go back to the old scrolling behaviour.
+(setq pixel-resolution-fine-flag t) ; Scroll by number of pixels instead of lines (t = frame-char-height pixels).
+(setq mouse-wheel-scroll-amount '(1)) ; Distance in pixel-resolution to scroll each mouse wheel event.
+(setq mouse-wheel-progressive-speed nil) ; Progressive speed is too fast
+#+END_SRC
+
 * To-Do states and related
 Keywords
 #+BEGIN_SRC emacs-lisp
