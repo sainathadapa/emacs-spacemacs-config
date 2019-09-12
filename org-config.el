@@ -485,11 +485,19 @@
 
 
 
-;; Load a requirement for `org-cliplink~
+;; Load a requirement for ~org-cliplink~
 
 ;; [[file:~/emacs-spacemacs-config/org-config.org::*Miscellaneous][Miscellaneous:5]]
 (load "~/emacs-spacemacs-config/emacs-request/request.el")
 ;; Miscellaneous:5 ends here
+
+
+
+;; Load ~org-notify~
+
+;; [[file:~/emacs-spacemacs-config/org-config.org::*Miscellaneous][Miscellaneous:6]]
+(require 'org-notify)
+;; Miscellaneous:6 ends here
 
 ;; Dashboard
 ;; Create a dashboard with multiple Agenda views

@@ -376,9 +376,14 @@ Collapse everything except current tab. From https://stackoverflow.com/questions
 (setq-default org-download-image-dir "~/Dropbox/org/pics")
 #+END_SRC
 
-Load a requirement for `org-cliplink~
+Load a requirement for ~org-cliplink~
 #+BEGIN_SRC emacs-lisp
 (load "~/emacs-spacemacs-config/emacs-request/request.el")
+#+END_SRC
+
+Load ~org-notify~
+#+BEGIN_SRC emacs-lisp
+(require 'org-notify)
 #+END_SRC
 
 * Dashboard
