@@ -392,9 +392,12 @@ Load a requirement for ~org-cliplink~
 (load "~/emacs-spacemacs-config/emacs-request/request.el")
 #+END_SRC
 
-Load ~org-notify~
+Alerts:
+- https://github.com/akhramov/org-wild-notifier.el
+- https://github.com/spegoraro/org-alert
 #+BEGIN_SRC emacs-lisp
-(require 'org-notify)
+(require 'org-alert)
+(setq alert-default-style 'libnotify)
 #+END_SRC
 
 * Dashboard
