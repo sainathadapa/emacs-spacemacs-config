@@ -506,10 +506,13 @@
 
 
 
-;; Load ~org-notify~
+;; Alerts:
+;; - https://github.com/akhramov/org-wild-notifier.el
+;; - https://github.com/spegoraro/org-alert
 
 ;; [[file:~/emacs-spacemacs-config/org-config.org::*Miscellaneous][Miscellaneous:6]]
-(require 'org-notify)
+(require 'org-alert)
+(setq alert-default-style 'libnotify)
 ;; Miscellaneous:6 ends here
 
 ;; Dashboard
