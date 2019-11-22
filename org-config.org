@@ -357,6 +357,16 @@ Modules to load
 (setq org-modules (quote (org-crypt org-habit org-mouse)))
 #+END_SRC
 
+Prevent editing in the invisible area
+#+BEGIN_SRC emacs-lisp
+(setq org-catch-invisible-edits (quote show-and-error))
+#+END_SRC
+
+Do not show empty lines between subtrees, when collapsed
+#+BEGIN_SRC emacs-lisp
+(setq org-cycle-separator-lines 0)
+#+END_SRC
+
 Collapse everything except current tab. From https://stackoverflow.com/questions/25161792/emacs-org-mode-how-can-i-fold-everything-but-the-current-headline
 #+BEGIN_SRC emacs-lisp
 (defun org-show-current-heading-tidily ()

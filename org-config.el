@@ -459,9 +459,25 @@
 
 
 
-;; Collapse everything except current tab. From https://stackoverflow.com/questions/25161792/emacs-org-mode-how-can-i-fold-everything-but-the-current-headline
+;; Prevent editing in the invisible area
 
 ;; [[file:~/emacs-spacemacs-config/org-config.org::*Miscellaneous][Miscellaneous:2]]
+(setq org-catch-invisible-edits (quote show-and-error))
+;; Miscellaneous:2 ends here
+
+
+
+;; Do not show empty lines between subtrees, when collapsed
+
+;; [[file:~/emacs-spacemacs-config/org-config.org::*Miscellaneous][Miscellaneous:3]]
+(setq org-cycle-separator-lines 0)
+;; Miscellaneous:3 ends here
+
+
+
+;; Collapse everything except current tab. From https://stackoverflow.com/questions/25161792/emacs-org-mode-how-can-i-fold-everything-but-the-current-headline
+
+;; [[file:~/emacs-spacemacs-config/org-config.org::*Miscellaneous][Miscellaneous:4]]
 (defun org-show-current-heading-tidily ()
   (interactive)
   "Show next entry, keeping other entries closed."
@@ -476,33 +492,33 @@
     (org-reveal t)
     (org-show-entry)
     (show-children)))
-;; Miscellaneous:2 ends here
+;; Miscellaneous:4 ends here
 
 
 
 ;; ~helm-org-rifle~ settings
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Miscellaneous][Miscellaneous:3]]
+;; [[file:~/emacs-spacemacs-config/org-config.org::*Miscellaneous][Miscellaneous:5]]
 (require 'helm-org-rifle)
 (setq helm-org-rifle-show-path t)
-;; Miscellaneous:3 ends here
+;; Miscellaneous:5 ends here
 
 
 
 ;; ~org-download~ settings
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Miscellaneous][Miscellaneous:4]]
+;; [[file:~/emacs-spacemacs-config/org-config.org::*Miscellaneous][Miscellaneous:6]]
 (require 'org-download)
 (setq-default org-download-image-dir "~/Dropbox/org/pics")
-;; Miscellaneous:4 ends here
+;; Miscellaneous:6 ends here
 
 
 
 ;; Load a requirement for ~org-cliplink~
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Miscellaneous][Miscellaneous:5]]
+;; [[file:~/emacs-spacemacs-config/org-config.org::*Miscellaneous][Miscellaneous:7]]
 (load "~/emacs-spacemacs-config/emacs-request/request.el")
-;; Miscellaneous:5 ends here
+;; Miscellaneous:7 ends here
 
 
 
@@ -510,10 +526,10 @@
 ;; - https://github.com/akhramov/org-wild-notifier.el
 ;; - https://github.com/spegoraro/org-alert
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Miscellaneous][Miscellaneous:6]]
+;; [[file:~/emacs-spacemacs-config/org-config.org::*Miscellaneous][Miscellaneous:8]]
 (require 'org-alert)
 (setq alert-default-style 'libnotify)
-;; Miscellaneous:6 ends here
+;; Miscellaneous:8 ends here
 
 ;; Dashboard
 ;; Create a dashboard with multiple Agenda views
