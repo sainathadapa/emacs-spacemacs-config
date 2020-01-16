@@ -69,7 +69,7 @@ Answer with y/n instead of having to write the full words
 Default browser to use
 #+BEGIN_SRC emacs-lisp
 (setq browse-url-browser-function 'browse-url-generic
-      browse-url-generic-program "google-chrome-stable")
+      browse-url-generic-program "open")
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp

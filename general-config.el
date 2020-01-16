@@ -85,7 +85,7 @@
 
 ;; [[file:~/emacs-spacemacs-config/general-config.org::*Miscellaneous][Miscellaneous:2]]
 (setq browse-url-browser-function 'browse-url-generic
-      browse-url-generic-program "google-chrome-stable")
+      browse-url-generic-program "open")
 ;; Miscellaneous:2 ends here
 
 ;; [[file:~/emacs-spacemacs-config/general-config.org::*Miscellaneous][Miscellaneous:3]]
