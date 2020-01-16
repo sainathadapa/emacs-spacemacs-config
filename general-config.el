@@ -19,7 +19,7 @@
 ;; Backup and other file settings
 ;; Store all backup and autosave files in the ~/tmp~ directory
 
-;; [[file:~/emacs-spacemacs-config/general-config.org::*Backup%20and%20other%20file%20settings][Backup and other file settings:1]]
+;; [[file:~/emacs-spacemacs-config/general-config.org::*Backup and other file settings][Backup and other file settings:1]]
 (setq backup-directory-alist
       `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms
@@ -30,7 +30,7 @@
 
 ;; Backup by copying instead of renaming. See https://www.gnu.org/software/emacs/manual/html_node/emacs/Backup-Copying.html
 
-;; [[file:~/emacs-spacemacs-config/general-config.org::*Backup%20and%20other%20file%20settings][Backup and other file settings:2]]
+;; [[file:~/emacs-spacemacs-config/general-config.org::*Backup and other file settings][Backup and other file settings:2]]
 (setq backup-by-copying t)
 ;; Backup and other file settings:2 ends here
 
@@ -38,7 +38,7 @@
 
 ;; Automatic deletion of backups. See https://www.gnu.org/software/emacs/manual/html_node/emacs/Backup-Deletion.html
 
-;; [[file:~/emacs-spacemacs-config/general-config.org::*Backup%20and%20other%20file%20settings][Backup and other file settings:3]]
+;; [[file:~/emacs-spacemacs-config/general-config.org::*Backup and other file settings][Backup and other file settings:3]]
 (setq delete-old-versions t
       kept-new-versions 6
       kept-old-versions 2
@@ -49,7 +49,7 @@
 
 ;; Do not create "lock" files.
 
-;; [[file:~/emacs-spacemacs-config/general-config.org::*Backup%20and%20other%20file%20settings][Backup and other file settings:4]]
+;; [[file:~/emacs-spacemacs-config/general-config.org::*Backup and other file settings][Backup and other file settings:4]]
 (setq create-lockfiles nil)
 ;; Backup and other file settings:4 ends here
 
@@ -57,7 +57,7 @@
 
 ;; Save files when emacs goes out of focus
 
-;; [[file:~/emacs-spacemacs-config/general-config.org::*Backup%20and%20other%20file%20settings][Backup and other file settings:5]]
+;; [[file:~/emacs-spacemacs-config/general-config.org::*Backup and other file settings][Backup and other file settings:5]]
 (defun save-all ()
   (interactive)
   (save-some-buffers t))
@@ -68,7 +68,7 @@
 
 ;; Load any changes from disk automatically
 
-;; [[file:~/emacs-spacemacs-config/general-config.org::*Backup%20and%20other%20file%20settings][Backup and other file settings:6]]
+;; [[file:~/emacs-spacemacs-config/general-config.org::*Backup and other file settings][Backup and other file settings:6]]
 (setq global-auto-revert-mode t)
 ;; Backup and other file settings:6 ends here
 
@@ -96,7 +96,7 @@
 ;; Org config
 ;; Spacemacs requires the org-mode settings to be defined after the org-mode is activated.
 
-;; [[file:~/emacs-spacemacs-config/general-config.org::*Org%20config][Org config:1]]
+;; [[file:~/emacs-spacemacs-config/general-config.org::*Org config][Org config:1]]
 (with-eval-after-load 'org
   (require 'org-config)
 )
@@ -106,7 +106,7 @@
 
 ;; Default file to open
 
-;; [[file:~/emacs-spacemacs-config/general-config.org::*Org%20config][Org config:2]]
+;; [[file:~/emacs-spacemacs-config/general-config.org::*Org config][Org config:2]]
 (find-file "~/Dropbox/org/main.org")
 ;; Org config:2 ends here
 

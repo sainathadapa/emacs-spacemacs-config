@@ -87,7 +87,7 @@
 ;; To-Do states and related
 ;; Keywords
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*To-Do%20states%20and%20related][To-Do states and related:1]]
+;; [[file:~/emacs-spacemacs-config/org-config.org::*To-Do states and related][To-Do states and related:1]]
 (setq org-todo-keywords
       (quote
        ((sequence "TODO" "PROG" "PAUS" "|" "DONE" "CANC"))))
@@ -97,7 +97,7 @@
 
 ;; Colors for todo states
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*To-Do%20states%20and%20related][To-Do states and related:2]]
+;; [[file:~/emacs-spacemacs-config/org-config.org::*To-Do states and related][To-Do states and related:2]]
 (setq org-todo-keyword-faces
       '(("PROG" . "orange") ("PAUS" . "magenta") ("CANC" . "red") ("DONE" . "green")))
 ;; To-Do states and related:2 ends here
@@ -106,7 +106,7 @@
 
 ;; Priority settings : default is H, highest is A, and lowest is Z
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*To-Do%20states%20and%20related][To-Do states and related:3]]
+;; [[file:~/emacs-spacemacs-config/org-config.org::*To-Do states and related][To-Do states and related:3]]
 (setq org-default-priority 72)
 (setq org-highest-priority 65)
 (setq org-lowest-priority 90)
@@ -304,7 +304,7 @@
 ;; Helper functions
 ;; Extract the date of completion, and use it for comparison. From http://emacs.stackexchange.com/questions/26351/custom-sorting-for-agenda
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Helper%20functions][Helper functions:1]]
+;; [[file:~/emacs-spacemacs-config/org-config.org::*Helper functions][Helper functions:1]]
 (defun cmp-date-property (prop)
   "Compare two `org-mode' agenda entries, `A' and `B', by some date property. If a is before b, return -1. If a is after b, return 1. If they are equal return t."
   (lexical-let ((prop prop))
@@ -326,7 +326,7 @@
 
 ;; Display the total number of tasks in Agenda. From http://emacs.stackexchange.com/questions/18710/display-count-of-tasks-in-agenda-instead-of-tasks-based-on-tag
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Helper%20functions][Helper functions:2]]
+;; [[file:~/emacs-spacemacs-config/org-config.org::*Helper functions][Helper functions:2]]
 (load "~/emacs-spacemacs-config/org-agenda-count.el")
 ;; Helper functions:2 ends here
 
@@ -334,7 +334,7 @@
 
 ;; Sort agenda items by link's text and not link's URL
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Helper%20functions][Helper functions:3]]
+;; [[file:~/emacs-spacemacs-config/org-config.org::*Helper functions][Helper functions:3]]
 (defun remove-priority (str)
   (replace-regexp-in-string "\\[#[^\\[]*\\] " "" str))
 
