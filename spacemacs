@@ -123,8 +123,7 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(spacemacs-dark
-                         spacemacs-light)
+   dotspacemacs-themes '(spacemacs-dark)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
@@ -302,11 +301,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
 (defun dotspacemacs/user-config ()
   (add-to-list 'load-path "~/emacs-spacemacs-config")
   (require 'general-config)
-  ;; from https://two-wrongs.com/centered-cursor-mode-in-vanilla-emacs.html
-  (setq scroll-preserve-screen-position t
-        scroll-conservatively 0
-        maximum-scroll-margin 0.5
-        scroll-margin 99999)
   (server-start)
   )
 
@@ -343,6 +337,7 @@ This function is called at the very end of Spacemacs initialization."
  '(evil-want-Y-yank-to-eol nil)
  '(ispell-personal-dictionary "~/Dropbox/org/.aspell.en.pws")
  '(line-spacing 5)
+ '(org-download-screenshot-method "~/emacs-spacemacs-config/grim_screenshot_region.sh %s")
  '(org-modules (quote (org-crypt org-habit org-mouse)))
  '(org-pretty-tags-surrogate-strings (quote (("imp" . "☆") ("music" . "♩"))))
  '(package-selected-packages
