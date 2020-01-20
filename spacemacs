@@ -126,7 +126,7 @@ values."
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 14
+                               :size 15
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -337,7 +337,7 @@ This function is called at the very end of Spacemacs initialization."
  '(evil-want-Y-yank-to-eol nil)
  '(ispell-personal-dictionary "~/Dropbox/org/.aspell.en.pws")
  '(line-spacing 5)
- '(org-download-screenshot-method "~/emacs-spacemacs-config/grim_screenshot_region.sh %s")
+ '(org-download-screenshot-method "screencapture -i %s")
  '(org-modules (quote (org-crypt org-habit org-mouse)))
  '(org-pretty-tags-surrogate-strings (quote (("imp" . "☆") ("music" . "♩"))))
  '(package-selected-packages
