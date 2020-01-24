@@ -558,9 +558,7 @@
   ;; (other-window 1)
   ;; (shrink-window 15)
   ;; (other-window 1)
-  (run-with-timer 0 (* 5 60) 'refresh-dashboard)
   )
-(global-set-key (kbd "<f7>") 'org-dashboard)
 
 (defun refresh-dashboard ()
   "Run some commands in sequence."
