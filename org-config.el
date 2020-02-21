@@ -417,6 +417,14 @@
 (setq org-export-backends (quote (html icalendar md)))
 ;; Export:2 ends here
 
+
+
+;; Do not use babel on export
+
+;; [[file:~/emacs-spacemacs-config/org-config.org::*Export][Export:3]]
+(setq org-export-use-babel nil)
+;; Export:3 ends here
+
 ;; Refile
 
 ;; [[file:~/emacs-spacemacs-config/org-config.org::*Refile][Refile:1]]
@@ -558,6 +566,7 @@
   ;; (other-window 1)
   ;; (shrink-window 15)
   ;; (other-window 1)
+  (run-with-timer 0 (* 5 60) 'refresh-dashboard)
   )
 
 (defun refresh-dashboard ()
