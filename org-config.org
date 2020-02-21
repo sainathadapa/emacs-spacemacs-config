@@ -328,6 +328,11 @@ Backends to enable
 (setq org-export-backends (quote (html icalendar md)))
 #+END_SRC
 
+Do not use babel on export
+#+BEGIN_SRC emacs-lisp
+(setq org-export-use-babel nil)
+#+END_SRC
+
 * Refile
 #+BEGIN_SRC emacs-lisp
 (setq org-refile-allow-creating-parent-nodes (quote confirm))
@@ -413,54 +418,55 @@ Alerts:
 * Dashboard
 Create a dashboard with multiple Agenda views
 #+BEGIN_SRC emacs-lisp
-(defun org-dashboard ()
-  "Dashboard-like setting in org"
-  (interactive)
-  (setq org-agenda-sticky t)
-  (setq org-agenda-window-setup 'current-window)
-  (setq-default mode-line-format nil)
-  (split-window-right)
-  (split-window-below)
-  (org-agenda nil "W")
-  (other-window 1)
-  (org-agenda nil "E")
-  (other-window 1)
-  ;; (split-window-below)
-  (org-agenda nil "a")
-  ;; (other-window 1)
-  ;; (org-agenda nil "Q")
-  ;; (other-window 1)
-  ;; (shrink-window-if-larger-than-buffer)
-  ;; (other-window 2)
-  ;; (shrink-window-horizontally 10)
-  ;; (other-window 1)
-  ;; (shrink-window 15)
-  ;; (other-window 1)
-  )
+  (defun org-dashboard ()
+    "Dashboard-like setting in org"
+    (interactive)
+    (setq org-agenda-sticky t)
+    (setq org-agenda-window-setup 'current-window)
+    (setq-default mode-line-format nil)
+    (split-window-right)
+    (split-window-below)
+    (org-agenda nil "W")
+    (other-window 1)
+    (org-agenda nil "E")
+    (other-window 1)
+    ;; (split-window-below)
+    (org-agenda nil "a")
+    ;; (other-window 1)
+    ;; (org-agenda nil "Q")
+    ;; (other-window 1)
+    ;; (shrink-window-if-larger-than-buffer)
+    ;; (other-window 2)
+    ;; (shrink-window-horizontally 10)
+    ;; (other-window 1)
+    ;; (shrink-window 15)
+    ;; (other-window 1)
+    (run-with-timer 0 (* 5 60) 'refresh-dashboard)
+    )
 
-(defun refresh-dashboard ()
-  "Run some commands in sequence."
-  (interactive)
-  ;; (message "%s" "i started")
-  ;; (message nil)
-  (cl-loop repeat 3 do (execute-kbd-macro (kbd "r")) (other-window 1))
-  ;; (message "%s" "i ran")
-  ;; (message nil)
-  )
+  (defun refresh-dashboard ()
+    "Run some commands in sequence."
+    (interactive)
+    ;; (message "%s" "i started")
+    ;; (message nil)
+    (cl-loop repeat 3 do (execute-kbd-macro (kbd "r")) (other-window 1))
+    ;; (message "%s" "i ran")
+    ;; (message nil)
+    )
 
-(require 'cl)
-(defun bk-kill-buffers (regexp)
-  "Kill buffers matching REGEXP without asking for confirmation."
-  (interactive "sKill buffers matching this regular expression: ")
-  (flet ((kill-buffer-ask (buffer) (kill-buffer buffer)))
-    (kill-matching-buffers regexp)))
-(defun close-dashboard ()
-  "Dashboard-like setting in org"
-  (interactive)
-  (cancel-function-timers 'refresh-dashboard)
-  (bk-kill-buffers ".*Org.*Agenda.*")
-  (delete-other-windows)
-  )
+  (require 'cl)
+  (defun bk-kill-buffers (regexp)
+    "Kill buffers matching REGEXP without asking for confirmation."
+    (interactive "sKill buffers matching this regular expression: ")
+    (flet ((kill-buffer-ask (buffer) (kill-buffer buffer)))
+      (kill-matching-buffers regexp)))
+  (defun close-dashboard ()
+    "Dashboard-like setting in org"
+    (interactive)
+    (cancel-function-timers 'refresh-dashboard)
+    (bk-kill-buffers ".*Org.*Agenda.*")
+    (delete-other-windows)
+    )
 #+END_SRC
 * Disabled
 #+BEGIN_SRC emacs-lisp
