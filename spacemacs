@@ -30,18 +30,31 @@ values."
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(javascript
-     auto-completion
-     emacs-lisp
-     helm
-     html
-     markdown
+   '(;; org-mode
      org
+     ;; Typing-related
+     auto-completion
+     (spell-checking :variables spell-checking-enable-by-default nil)
+     syntax-checking
+     ;; Search-related
+     deft
+     ;; Language support
+     emacs-lisp
+     html
+     javascript
+     lsp
+     markdown
+     markdown
      python
      sql
-     lsp
+     yaml
      ;; (scala :variables scala-backend 'scala-metals)
-     (spell-checking :variables spell-checking-enable-by-default nil)
+     ;; For papers and PDFs
+     bibtex
+     pdf-tools
+     ;; Other
+     git
+     helm
      (osx :variables osx-control-as 'hyper
                      osx-command-as 'control)
      )
