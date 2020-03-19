@@ -211,7 +211,7 @@
 ;; Max number of days to show in agenda
 
 ;; [[file:~/emacs-spacemacs-config/org-config.org::*Agenda][Agenda:7]]
-(setq org-agenda-span 45)
+(setq org-agenda-span 90)
 ;; Agenda:7 ends here
 
 
@@ -557,14 +557,14 @@
   (other-window 1)
   ;; (split-window-below)
   (org-agenda nil "a")
-  ;; (other-window 1)
+  (other-window 1)
+  (shrink-window 15)
   ;; (org-agenda nil "Q")
   ;; (other-window 1)
   ;; (shrink-window-if-larger-than-buffer)
   ;; (other-window 2)
   ;; (shrink-window-horizontally 10)
   ;; (other-window 1)
-  ;; (shrink-window 15)
   ;; (other-window 1)
   (run-with-timer 0 (* 5 60) 'refresh-dashboard)
   )
