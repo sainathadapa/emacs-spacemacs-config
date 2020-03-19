@@ -161,7 +161,7 @@ Don't show tasks in agenda if they are done
 
 Max number of days to show in agenda
 #+BEGIN_SRC emacs-lisp
-(setq org-agenda-span 45)
+(setq org-agenda-span 90)
 #+END_SRC
 
 Warn about a deadline
@@ -432,14 +432,14 @@ Create a dashboard with multiple Agenda views
     (other-window 1)
     ;; (split-window-below)
     (org-agenda nil "a")
-    ;; (other-window 1)
+    (other-window 1)
+    (shrink-window 15)
     ;; (org-agenda nil "Q")
     ;; (other-window 1)
     ;; (shrink-window-if-larger-than-buffer)
     ;; (other-window 2)
     ;; (shrink-window-horizontally 10)
     ;; (other-window 1)
-    ;; (shrink-window 15)
     ;; (other-window 1)
     (run-with-timer 0 (* 5 60) 'refresh-dashboard)
     )
