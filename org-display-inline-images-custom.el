@@ -119,10 +119,10 @@ buffer boundaries with possible narrowing."
                                                                      (actual-height (cdr this-image-dimensions))
                                                                      ;; calculate the aspect ratio
                                                                      (this-aspect-ratio (/ (float actual-width) (float actual-height)))
-                                                                     ;; get the window width
-                                                                     (this-window-width (- (window-pixel-width) 50))
-                                                                     ;; get the window height
-                                                                     (this-window-height (* (window-pixel-height) 0.5))
+                                                                     ;; get the window width, and subtract 100 pixels
+                                                                     (this-window-width (- (window-pixel-width) 100))
+                                                                     ;; get the window height, and multiply it by 0.25
+                                                                     (this-window-height (* (window-pixel-height) 0.25))
                                                                      ;; minimum of image width and window width
                                                                      (min-width (min actual-width this-window-width))
                                                                      ;; minimum of image height and window height
