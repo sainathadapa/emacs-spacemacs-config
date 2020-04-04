@@ -137,10 +137,15 @@
                entry
                (file+datetree "~/Dropbox/org/tasks.org")
                "* TODO [#A] %^{Task}")
-              ("j"
+              ("p"
                "Journal"
                item
                (file+datetree "~/Dropbox/org/journal.org")
+               "- %U - %^{Activity}")
+              ("j"
+               "Work log"
+               item
+               (file+olp+datetree "~/Dropbox/org/work.org" "Log")
                "- %U - %^{Activity}")
               ("b"
                "Add a book to read"
