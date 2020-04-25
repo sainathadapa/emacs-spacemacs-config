@@ -2,7 +2,6 @@
 #+PROPERTY: header-args+ :comments both
 #+PROPERTY: header-args+ :mkdirp yes
 #+PROPERTY: header-args+ :tangle "general-config.el"
-#+SETUPFILE: ~/emacs-spacemacs-config/org-html-themes/setup/theme-readtheorg.setup
 #+HTML_HEAD: <style> #content{max-width:1800px;}</style>
 #+OPTIONS: \n:t
 * Appearance
@@ -68,8 +67,8 @@ Answer with y/n instead of having to write the full words
 
 Default browser to use
 #+BEGIN_SRC emacs-lisp
-(setq browse-url-browser-function 'browse-url-generic
-      browse-url-generic-program "google-chrome-stable")
+;; (setq browse-url-browser-function 'browse-url-generic
+;;       browse-url-generic-program "google-chrome-stable")
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -87,7 +86,7 @@ Spacemacs requires the org-mode settings to be defined after the org-mode is act
 
 Default file to open
 #+BEGIN_SRC emacs-lisp
-(find-file "~/Dropbox/org/main.org")
+(find-file "c:/Users/Sai/Dropbox/org/main.org")
 #+END_SRC
 * Disabled
 #+BEGIN_SRC emacs-lisp

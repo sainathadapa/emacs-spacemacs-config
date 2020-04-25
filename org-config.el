@@ -39,7 +39,7 @@
 ;; Load ~org-pretty-tags~. See https://gitlab.com/marcowahl/org-pretty-tags
 
 ;; [[file:~/emacs-spacemacs-config/org-config.org::*Appearance][Appearance:5]]
-(load "~/emacs-spacemacs-config/org-pretty-tags/org-pretty-tags.el")
+(load "c:/Users/Sai/AppData/Roaming/emacs-spacemacs-config/org-pretty-tags/org-pretty-tags.el")
 ;; Appearance:5 ends here
 
 
@@ -68,7 +68,7 @@
 
 ;; [[file:~/emacs-spacemacs-config/org-config.org::*Appearance][Appearance:8]]
 (setq org-image-actual-width 1800)
-(load "~/emacs-spacemacs-config/org-display-inline-images-custom.el")
+(load "c:/Users/Sai/AppData/Roaming/emacs-spacemacs-config/org-display-inline-images-custom.el")
 ;; Appearance:8 ends here
 
 
@@ -87,7 +87,7 @@
 ;; To-Do states and related
 ;; Keywords
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*To-Do%20states%20and%20related][To-Do states and related:1]]
+;; [[file:~/emacs-spacemacs-config/org-config.org::*To-Do states and related][To-Do states and related:1]]
 (setq org-todo-keywords
       (quote
        ((sequence "TODO" "PROG" "PAUS" "|" "DONE" "CANC"))))
@@ -97,7 +97,7 @@
 
 ;; Colors for todo states
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*To-Do%20states%20and%20related][To-Do states and related:2]]
+;; [[file:~/emacs-spacemacs-config/org-config.org::*To-Do states and related][To-Do states and related:2]]
 (setq org-todo-keyword-faces
       '(("PROG" . "orange") ("PAUS" . "magenta") ("CANC" . "red") ("DONE" . "green")))
 ;; To-Do states and related:2 ends here
@@ -106,7 +106,7 @@
 
 ;; Priority settings : default is H, highest is A, and lowest is Z
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*To-Do%20states%20and%20related][To-Do states and related:3]]
+;; [[file:~/emacs-spacemacs-config/org-config.org::*To-Do states and related][To-Do states and related:3]]
 (setq org-default-priority 72)
 (setq org-highest-priority 65)
 (setq org-lowest-priority 90)
@@ -129,29 +129,29 @@
               ("w"         ; hotkey
                "Work Todo" ; name
                entry       ; type
-               (file+headline "~/Dropbox/org/work.org" "Tasks") ;target
+               (file+headline "c:/Users/Sai/Dropbox/org/work.org" "Tasks") ;target
                "* TODO [#A] %^{Task}" ; template
                )
               ("t"
                "Task Diary"
                entry
-               (file+datetree "~/Dropbox/org/tasks.org")
+               (file+datetree "c:/Users/Sai/Dropbox/org/tasks.org")
                "* TODO [#A] %^{Task}")
               ("j"
                "Journal"
                item
-               (file+datetree "~/Dropbox/org/journal.org")
+               (file+datetree "c:/Users/Sai/Dropbox/org/journal.org")
                "- %U - %^{Activity}")
               ("b"
                "Add a book to read"
                entry
-               (file+headline "~/Dropbox/org/notes.org" "Books to read")
+               (file+headline "c:/Users/Sai/Dropbox/org/notes.org" "Books to read")
                "* TODO %^{Book name}\n%^{Why to read this book?}"
                )
               ("s"
                "Schedule an event or a task"
                entry
-               (file+datetree "~/Dropbox/org/tasks.org")
+               (file+datetree "c:/Users/Sai/Dropbox/org/tasks.org")
                "* %^{Event or Task}\nSCHEDULED: %^t"
                )
               )))
@@ -194,7 +194,7 @@
 ;; Include these files and directories when creating the agenda
 
 ;; [[file:~/emacs-spacemacs-config/org-config.org::*Agenda][Agenda:5]]
-(setq org-agenda-files '("~/Dropbox/org"))
+(setq org-agenda-files '("c:/Users/Sai/Dropbox/org"))
 ;; Agenda:5 ends here
 
 
@@ -304,7 +304,7 @@
 ;; Helper functions
 ;; Extract the date of completion, and use it for comparison. From http://emacs.stackexchange.com/questions/26351/custom-sorting-for-agenda
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Helper%20functions][Helper functions:1]]
+;; [[file:~/emacs-spacemacs-config/org-config.org::*Helper functions][Helper functions:1]]
 (defun cmp-date-property (prop)
   "Compare two `org-mode' agenda entries, `A' and `B', by some date property. If a is before b, return -1. If a is after b, return 1. If they are equal return t."
   (lexical-let ((prop prop))
@@ -326,15 +326,15 @@
 
 ;; Display the total number of tasks in Agenda. From http://emacs.stackexchange.com/questions/18710/display-count-of-tasks-in-agenda-instead-of-tasks-based-on-tag
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Helper%20functions][Helper functions:2]]
-(load "~/emacs-spacemacs-config/org-agenda-count.el")
+;; [[file:~/emacs-spacemacs-config/org-config.org::*Helper functions][Helper functions:2]]
+(load "c:/Users/Sai/AppData/Roaming/emacs-spacemacs-config/org-agenda-count.el")
 ;; Helper functions:2 ends here
 
 
 
 ;; Sort agenda items by link's text and not link's URL
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Helper%20functions][Helper functions:3]]
+;; [[file:~/emacs-spacemacs-config/org-config.org::*Helper functions][Helper functions:3]]
 (defun remove-priority (str)
   (replace-regexp-in-string "\\[#[^\\[]*\\] " "" str))
 
@@ -509,7 +509,7 @@
 
 ;; [[file:~/emacs-spacemacs-config/org-config.org::*Miscellaneous][Miscellaneous:6]]
 (require 'org-download)
-(setq-default org-download-image-dir "~/Dropbox/org/pics")
+(setq-default org-download-image-dir "c:/Users/Sai/Dropbox/org/pics")
 ;; Miscellaneous:6 ends here
 
 
@@ -517,19 +517,8 @@
 ;; Load a requirement for ~org-cliplink~
 
 ;; [[file:~/emacs-spacemacs-config/org-config.org::*Miscellaneous][Miscellaneous:7]]
-(load "~/emacs-spacemacs-config/emacs-request/request.el")
+(load "c:/Users/Sai/AppData/Roaming/emacs-spacemacs-config/emacs-request/request.el")
 ;; Miscellaneous:7 ends here
-
-
-
-;; Alerts:
-;; - https://github.com/akhramov/org-wild-notifier.el
-;; - https://github.com/spegoraro/org-alert
-
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Miscellaneous][Miscellaneous:8]]
-(require 'org-alert)
-(setq alert-default-style 'libnotify)
-;; Miscellaneous:8 ends here
 
 ;; Dashboard
 ;; Create a dashboard with multiple Agenda views
