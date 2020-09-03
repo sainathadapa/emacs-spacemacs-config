@@ -66,7 +66,19 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(org-cliplink transpose-frame rainbow-mode helm-org-rifle org-download eval-in-repl org-alert scala-mode)
+   dotspacemacs-additional-packages
+   '(
+     doom-themes
+     eval-in-repl
+     helm-org-rifle
+     org-alert
+     org-cliplink
+     org-download
+     org-reverse-datetree
+     rainbow-mode
+     scala-mode
+     transpose-frame
+     )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -356,6 +368,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  '(evil-want-Y-yank-to-eol nil)
  '(ispell-personal-dictionary "~/Dropbox/org/.aspell.en.pws")
+ '(ispell-program-name "/usr/local/bin/aspell")
  '(line-spacing 5)
  '(org-download-screenshot-method "screencapture -i %s")
  '(org-modules (quote (org-crypt org-habit org-mouse)))
