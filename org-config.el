@@ -396,7 +396,7 @@
                       )))
          nil)
         ("E" "Non-Work ToDos"
-         ((tags-todo "-work" (
+         ((tags-todo "-work-paper" (
                               (org-agenda-overriding-header (format "Non-Work Tasks (%s)" (org-agenda-count "")))
                               (org-agenda-cmp-user-defined 'org-cmp-alpha-2)
                               (org-agenda-sorting-strategy '(user-defined-up))
@@ -559,6 +559,7 @@
   (org-agenda nil "W")
   (other-window 1)
   (org-agenda nil "E")
+  (shrink-window 50)
   (other-window 1)
   ;; (split-window-below)
   (org-agenda nil "a")
