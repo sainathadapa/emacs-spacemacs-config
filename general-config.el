@@ -1,7 +1,7 @@
 ;; Appearance
 ;; Disabling bent arrows (↩)
 
-;; [[file:~/emacs-spacemacs-config/general-config.org::*Appearance][Appearance:1]]
+;; [[file:general-config.org::*Appearance][Appearance:1]]
 (setq-default visual-line-fringe-indicators nil)
 (setq-default fringe-indicator-alist '(
                                        (truncation left-arrow right-arrow)
@@ -19,7 +19,7 @@
 ;; Backup and other file settings
 ;; Store all backup and autosave files in the ~/tmp~ directory
 
-;; [[file:~/emacs-spacemacs-config/general-config.org::*Backup and other file settings][Backup and other file settings:1]]
+;; [[file:general-config.org::*Backup and other file settings][Backup and other file settings:1]]
 (setq backup-directory-alist
       `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms
@@ -30,7 +30,7 @@
 
 ;; Backup by copying instead of renaming. See https://www.gnu.org/software/emacs/manual/html_node/emacs/Backup-Copying.html
 
-;; [[file:~/emacs-spacemacs-config/general-config.org::*Backup and other file settings][Backup and other file settings:2]]
+;; [[file:general-config.org::*Backup and other file settings][Backup and other file settings:2]]
 (setq backup-by-copying t)
 ;; Backup and other file settings:2 ends here
 
@@ -38,7 +38,7 @@
 
 ;; Automatic deletion of backups. See https://www.gnu.org/software/emacs/manual/html_node/emacs/Backup-Deletion.html
 
-;; [[file:~/emacs-spacemacs-config/general-config.org::*Backup and other file settings][Backup and other file settings:3]]
+;; [[file:general-config.org::*Backup and other file settings][Backup and other file settings:3]]
 (setq delete-old-versions t
       kept-new-versions 6
       kept-old-versions 2
@@ -49,7 +49,7 @@
 
 ;; Do not create "lock" files.
 
-;; [[file:~/emacs-spacemacs-config/general-config.org::*Backup and other file settings][Backup and other file settings:4]]
+;; [[file:general-config.org::*Backup and other file settings][Backup and other file settings:4]]
 (setq create-lockfiles nil)
 ;; Backup and other file settings:4 ends here
 
@@ -57,7 +57,7 @@
 
 ;; Save files when emacs goes out of focus
 
-;; [[file:~/emacs-spacemacs-config/general-config.org::*Backup and other file settings][Backup and other file settings:5]]
+;; [[file:general-config.org::*Backup and other file settings][Backup and other file settings:5]]
 (defun save-all ()
   (interactive)
   (save-some-buffers t))
@@ -68,14 +68,14 @@
 
 ;; Load any changes from disk automatically
 
-;; [[file:~/emacs-spacemacs-config/general-config.org::*Backup and other file settings][Backup and other file settings:6]]
+;; [[file:general-config.org::*Backup and other file settings][Backup and other file settings:6]]
 (setq global-auto-revert-mode t)
 ;; Backup and other file settings:6 ends here
 
 ;; Miscellaneous
 ;; Answer with y/n instead of having to write the full words
 
-;; [[file:~/emacs-spacemacs-config/general-config.org::*Miscellaneous][Miscellaneous:1]]
+;; [[file:general-config.org::*Miscellaneous][Miscellaneous:1]]
 (fset 'yes-or-no-p 'y-or-n-p)
 ;; Miscellaneous:1 ends here
 
@@ -83,21 +83,28 @@
 
 ;; Default browser to use
 
-;; [[file:~/emacs-spacemacs-config/general-config.org::*Miscellaneous][Miscellaneous:2]]
+;; [[file:general-config.org::*Miscellaneous][Miscellaneous:2]]
 ;; (setq browse-url-browser-function 'browse-url-generic
 ;;       browse-url-generic-program "google-chrome-stable")
 ;; Miscellaneous:2 ends here
 
-;; [[file:~/emacs-spacemacs-config/general-config.org::*Miscellaneous][Miscellaneous:3]]
+;; [[file:general-config.org::*Miscellaneous][Miscellaneous:3]]
 (with-eval-after-load 'helm
   (setq helm-display-function 'helm-default-display-buffer)) ;; temp work around
 ;; Miscellaneous:3 ends here
 
+;; [[file:general-config.org::*Miscellaneous][Miscellaneous:4]]
+(setq history-delete-duplicates t)
+;; Miscellaneous:4 ends here
+
 ;; Org config
 ;; Spacemacs requires the org-mode settings to be defined after the org-mode is activated.
 
-;; [[file:~/emacs-spacemacs-config/general-config.org::*Org config][Org config:1]]
+;; [[file:general-config.org::*Org config][Org config:1]]
 (with-eval-after-load 'org
+  ;; Initialize some variables
+  (setq my-org-folder "c:/Users/Sai/Dropbox/org")
+  (setq my-config-folder "c:/Users/Sai/AppData/Roaming/emacs-spacemacs-config")
   (require 'org-config)
 )
 ;; Org config:1 ends here
@@ -106,13 +113,13 @@
 
 ;; Default file to open
 
-;; [[file:~/emacs-spacemacs-config/general-config.org::*Org config][Org config:2]]
+;; [[file:general-config.org::*Org config][Org config:2]]
 (find-file "c:/Users/Sai/Dropbox/org/main.org")
 ;; Org config:2 ends here
 
 ;; Disabled
 
-;; [[file:~/emacs-spacemacs-config/general-config.org::*Disabled][Disabled:1]]
+;; [[file:general-config.org::*Disabled][Disabled:1]]
 ;; (require 'epa-file)
 ;; (epa-file-enable)
 ;; (setq epa-file-cache-passphrase-for-symmetric-encryption t)
@@ -132,6 +139,6 @@
 ;; Final
 ;; Let the Spacemacs use this configuration.
 
-;; [[file:~/emacs-spacemacs-config/general-config.org::*Final][Final:1]]
+;; [[file:general-config.org::*Final][Final:1]]
 (provide 'general-config)
 ;; Final:1 ends here

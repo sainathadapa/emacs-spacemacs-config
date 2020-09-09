@@ -75,10 +75,18 @@ Default browser to use
 (with-eval-after-load 'helm
   (setq helm-display-function 'helm-default-display-buffer)) ;; temp work around
 #+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (setq history-delete-duplicates t)
+#+END_SRC
+
 * Org config
 Spacemacs requires the org-mode settings to be defined after the org-mode is activated.
 #+BEGIN_SRC emacs-lisp
 (with-eval-after-load 'org
+  ;; Initialize some variables
+  (setq my-org-folder "c:/Users/Sai/Dropbox/org")
+  (setq my-config-folder "c:/Users/Sai/AppData/Roaming/emacs-spacemacs-config")
   (require 'org-config)
 )
 #+END_SRC

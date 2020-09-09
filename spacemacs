@@ -30,31 +30,51 @@ values."
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(
+   '(;; org-mode
+     org
+     ;; Typing-related
+     auto-completion
+     (spell-checking :variables spell-checking-enable-by-default nil)
+     syntax-checking
+     ;; Search-related
+     deft
+     ;; Language support
+     emacs-lisp
+     html
+     javascript
+     markdown
+     markdown
      python
      sql
-     ;; ----------------------------------------------------------------
-     ;; Example of useful layers you may want to use right away.
-     ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
-     ;; <M-m f e R> (Emacs style) to install them.
-     ;; ----------------------------------------------------------------
+     yaml
+     shell-scripts
+     lsp
+     ;; (scala :variables scala-backend 'scala-metals)
+     ;; Other
+     git
      helm
-     auto-completion
-     emacs-lisp
-     org
-     markdown
-     html
-     (spell-checking :variables spell-checking-enable-by-default nil)
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(org-cliplink transpose-frame rainbow-mode helm-org-rifle org-download eval-in-repl)
+   dotspacemacs-additional-packages
+   '(
+     doom-themes
+     eval-in-repl
+     helm-org-rifle
+     org-alert
+     org-cliplink
+     org-download
+     org-reverse-datetree
+     rainbow-mode
+     scala-mode
+     transpose-frame
+     )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '(undo-tree)
+   dotspacemacs-excluded-packages '(ensime)
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
    ;; `used-only' installs only explicitly used packages and uninstall any
@@ -123,14 +143,13 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(spacemacs-light
-                         spacemacs-dark)
+   dotspacemacs-themes '(doom-one)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 16
+                               :size 17
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -297,17 +316,15 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
+  (add-to-list 'configuration-layer-elpa-archives '("melpa-stable" . "stable.melpa.org/packages/"))
+  (add-to-list 'package-pinned-packages '(ensime . "melpa-stable"))
   )
 
 (defun dotspacemacs/user-config ()
   (add-to-list 'load-path "c:/Users/Sai/AppData/Roaming/emacs-spacemacs-config")
   (require 'general-config)
-  ;; from https://two-wrongs.com/centered-cursor-mode-in-vanilla-emacs.html
-  (setq scroll-preserve-screen-position t
-        scroll-conservatively 0
-        maximum-scroll-margin 0.5
-        scroll-margin 99999)
-  ;; (server-start)
+  (menu-bar-mode t)
+  ;;(server-start)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
