@@ -137,10 +137,15 @@
                entry
                (file+datetree "c:/Users/Sai/Dropbox/org/tasks.org")
                "* TODO [#A] %^{Task}")
-              ("j"
+              ("p"
                "Journal"
                item
                (file+datetree "c:/Users/Sai/Dropbox/org/journal.org")
+               "- %U - %^{Activity}")
+              ("j"
+               "Work log"
+               item
+               (file+olp+datetree "c:/Users/Sai/Dropbox/org/work.org" "Log")
                "- %U - %^{Activity}")
               ("b"
                "Add a book to read"
@@ -211,7 +216,7 @@
 ;; Max number of days to show in agenda
 
 ;; [[file:~/emacs-spacemacs-config/org-config.org::*Agenda][Agenda:7]]
-(setq org-agenda-span 45)
+(setq org-agenda-span 90)
 ;; Agenda:7 ends here
 
 
@@ -417,6 +422,14 @@
 (setq org-export-backends (quote (html icalendar md)))
 ;; Export:2 ends here
 
+
+
+;; Do not use babel on export
+
+;; [[file:~/emacs-spacemacs-config/org-config.org::*Export][Export:3]]
+(setq org-export-use-babel nil)
+;; Export:3 ends here
+
 ;; Refile
 
 ;; [[file:~/emacs-spacemacs-config/org-config.org::*Refile][Refile:1]]
@@ -531,49 +544,41 @@
   (setq org-agenda-window-setup 'current-window)
   (setq-default mode-line-format nil)
   (split-window-right)
-  ;; (split-window-below)
-  ;; (org-agenda nil "W")
-  ;; (other-window 1)
+  (split-window-below)
+  (org-agenda nil "W")
+  (other-window 1)
   (org-agenda nil "E")
   (other-window 1)
-  ;; (split-window-below)
   (org-agenda nil "a")
-  ;; (other-window 1)
-  ;; (org-agenda nil "Q")
-  ;; (other-window 1)
-  ;; (shrink-window-if-larger-than-buffer)
-  ;; (other-window 2)
-  ;; (shrink-window-horizontally 10)
-  ;; (other-window 1)
-  ;; (shrink-window 15)
-  ;; (other-window 1)
+  (other-window 1)
+  (shrink-window 15)
   (run-with-timer 0 (* 5 60) 'refresh-dashboard)
   )
 (global-set-key (kbd "<f7>") 'org-dashboard)
 
-(defun refresh-dashboard ()
-  "Run some commands in sequence."
-  (interactive)
-  ;; (message "%s" "i started")
-  ;; (message nil)
-  (cl-loop repeat 2 do (execute-kbd-macro (kbd "r")) (other-window 1))
-  ;; (message "%s" "i ran")
-  ;; (message nil)
-  )
+  (defun refresh-dashboard ()
+    "Run some commands in sequence."
+    (interactive)
+    ;; (message "%s" "i started")
+    ;; (message nil)
+    (cl-loop repeat 3 do (execute-kbd-macro (kbd "r")) (other-window 1))
+    ;; (message "%s" "i ran")
+    ;; (message nil)
+    )
 
-(require 'cl)
-(defun bk-kill-buffers (regexp)
-  "Kill buffers matching REGEXP without asking for confirmation."
-  (interactive "sKill buffers matching this regular expression: ")
-  (flet ((kill-buffer-ask (buffer) (kill-buffer buffer)))
-    (kill-matching-buffers regexp)))
-(defun close-dashboard ()
-  "Dashboard-like setting in org"
-  (interactive)
-  (cancel-function-timers 'refresh-dashboard)
-  (bk-kill-buffers ".*Org.*Agenda.*")
-  (delete-other-windows)
-  )
+  (require 'cl)
+  (defun bk-kill-buffers (regexp)
+    "Kill buffers matching REGEXP without asking for confirmation."
+    (interactive "sKill buffers matching this regular expression: ")
+    (flet ((kill-buffer-ask (buffer) (kill-buffer buffer)))
+      (kill-matching-buffers regexp)))
+  (defun close-dashboard ()
+    "Dashboard-like setting in org"
+    (interactive)
+    (cancel-function-timers 'refresh-dashboard)
+    (bk-kill-buffers ".*Org.*Agenda.*")
+    (delete-other-windows)
+    )
 ;; Dashboard:1 ends here
 
 ;; Disabled
