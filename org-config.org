@@ -2,9 +2,13 @@
 #+PROPERTY: header-args+ :comments both
 #+PROPERTY: header-args+ :mkdirp yes
 #+PROPERTY: header-args+ :tangle "org-config.el"
-#+SETUPFILE: ~/emacs-spacemacs-config/org-html-themes/setup/theme-readtheorg.setup
 #+HTML_HEAD: <style> #content{max-width:1800px;}</style>
 #+OPTIONS: \n:t
+* Initialize variables
+#+BEGIN_SRC emacs-lisp
+(setq org-directory "~/Dropbox/org")
+(setq my-config-folder "~/emacs-spacemacs-config")
+#+END_SRC
 * Appearance
 Indent headings and text
 #+BEGIN_SRC emacs-lisp
@@ -88,42 +92,42 @@ Hotkey
 
 Templates
 #+BEGIN_SRC emacs-lisp
-(setq org-capture-templates
-      (quote (
-              ("w"         ; hotkey
-               "Work Todo" ; name
-               entry       ; type
-               (file+headline (concat my-org-folder "/work.org") "Tasks") ;target
-               "* TODO [#A] %^{Task}" ; template
-               )
-              ("t"
-               "Task Diary"
-               entry
-               (file+datetree (concat my-org-folder "/tasks.org"))
-               "* TODO [#A] %^{Task}")
-              ("p"
-               "Journal"
-               item
-               (file+datetree (concat my-org-folder "/journal.org"))
-               "- %U - %^{Activity}")
-              ("j"
-               "Work log"
-               item
-               (file+olp+datetree (concat my-org-folder "/work.org") "Log")
-               "- %U - %^{Activity}")
-              ("b"
-               "Add a book to read"
-               entry
-               (file+headline (concat my-org-folder "/notes.org") "Books to read")
-               "* TODO %^{Book name}\n%^{Why to read this book?}"
-               )
-              ("s"
-               "Schedule an event or a task"
-               entry
-               (file+datetree (concat my-org-folder "/tasks.org"))
-               "* %^{Event or Task}\nSCHEDULED: %^t"
-               )
-              )))
+  (setq org-capture-templates
+        '(
+          ("w"         ; hotkey
+           "Work Todo" ; name
+           entry       ; type
+           (file+headline (lambda () (concat org-directory "/work.org")) "Tasks") ;target
+           "* TODO [#A] %^{Task}" ; template
+           )
+          ("t"
+           "Task Diary"
+           entry
+           (file+datetree (lambda () (concat org-directory "/tasks.org")))
+           "* TODO [#A] %^{Task}")
+          ("p"
+           "Journal"
+           item
+           (file+datetree (lambda () (concat org-directory "/journal.org")))
+           "- %U - %^{Activity}")
+          ("j"
+           "Work log"
+           item
+           (file+olp+datetree (lambda () (concat org-directory "/work.org")) "Log")
+           "- %U - %^{Activity}")
+          ("b"
+           "Add a book to read"
+           entry
+           (file+headline (lambda () (concat org-directory "/notes.org")) "Books to read")
+           "* TODO %^{Book name}\n%^{Why to read this book?}"
+           )
+          ("s"
+           "Schedule an event or a task"
+           entry
+           (file+datetree (lambda () (concat org-directory "/tasks.org")))
+           "* %^{Event or Task}\nSCHEDULED: %^t"
+           )
+          ))
 #+END_SRC
 * Agenda
 Enable the compact layout in agenda
@@ -149,10 +153,10 @@ Pressing ~Tab~ while the cursor is on a task will expand that task in a separate
 
 Include these files and directories when creating the agenda
 #+BEGIN_SRC emacs-lisp
-  ;; (setq org-agenda-files '(my-org-folder))
+  ;; (setq org-agenda-files '(org-directory))
   (setq org-agenda-files (append
-                          (directory-files-recursively my-org-folder "\\.org$")
-                          (directory-files-recursively my-org-folder "\\.org.txt$")))
+                          (directory-files-recursively org-directory "\\.org$")
+                          (directory-files-recursively org-directory "\\.org.txt$")))
 #+END_SRC
 
 Don't show tasks in agenda if they are done
@@ -401,7 +405,7 @@ Collapse everything except current tab. From https://stackoverflow.com/questions
 ~org-download~ settings
 #+BEGIN_SRC emacs-lisp
 (require 'org-download)
-(setq-default org-download-image-dir (concat my-org-folder "/pics"))
+(setq-default org-download-image-dir (concat org-directory "/pics"))
 #+END_SRC
 
 Load a requirement for ~org-cliplink~

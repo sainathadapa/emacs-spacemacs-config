@@ -1,3 +1,10 @@
+;; Initialize variables
+
+;; [[file:org-config.org::*Initialize variables][Initialize variables:1]]
+(setq org-directory "~/Dropbox/org")
+(setq my-config-folder "~/emacs-spacemacs-config")
+;; Initialize variables:1 ends here
+
 ;; Appearance
 ;; Indent headings and text
 
@@ -116,41 +123,41 @@
 
 ;; [[file:org-config.org::*Capture][Capture:2]]
 (setq org-capture-templates
-      (quote (
-              ("w"         ; hotkey
-               "Work Todo" ; name
-               entry       ; type
-               (file+headline (concat my-org-folder "/work.org") "Tasks") ;target
-               "* TODO [#A] %^{Task}" ; template
-               )
-              ("t"
-               "Task Diary"
-               entry
-               (file+datetree (concat my-org-folder "/tasks.org"))
-               "* TODO [#A] %^{Task}")
-              ("p"
-               "Journal"
-               item
-               (file+datetree (concat my-org-folder "/journal.org"))
-               "- %U - %^{Activity}")
-              ("j"
-               "Work log"
-               item
-               (file+olp+datetree (concat my-org-folder "/work.org") "Log")
-               "- %U - %^{Activity}")
-              ("b"
-               "Add a book to read"
-               entry
-               (file+headline (concat my-org-folder "/notes.org") "Books to read")
-               "* TODO %^{Book name}\n%^{Why to read this book?}"
-               )
-              ("s"
-               "Schedule an event or a task"
-               entry
-               (file+datetree (concat my-org-folder "/tasks.org"))
-               "* %^{Event or Task}\nSCHEDULED: %^t"
-               )
-              )))
+      '(
+        ("w"         ; hotkey
+         "Work Todo" ; name
+         entry       ; type
+         (file+headline (lambda () (concat org-directory "/work.org")) "Tasks") ;target
+         "* TODO [#A] %^{Task}" ; template
+         )
+        ("t"
+         "Task Diary"
+         entry
+         (file+datetree (lambda () (concat org-directory "/tasks.org")))
+         "* TODO [#A] %^{Task}")
+        ("p"
+         "Journal"
+         item
+         (file+datetree (lambda () (concat org-directory "/journal.org")))
+         "- %U - %^{Activity}")
+        ("j"
+         "Work log"
+         item
+         (file+olp+datetree (lambda () (concat org-directory "/work.org")) "Log")
+         "- %U - %^{Activity}")
+        ("b"
+         "Add a book to read"
+         entry
+         (file+headline (lambda () (concat org-directory "/notes.org")) "Books to read")
+         "* TODO %^{Book name}\n%^{Why to read this book?}"
+         )
+        ("s"
+         "Schedule an event or a task"
+         entry
+         (file+datetree (lambda () (concat org-directory "/tasks.org")))
+         "* %^{Event or Task}\nSCHEDULED: %^t"
+         )
+        ))
 ;; Capture:2 ends here
 
 ;; Agenda
@@ -190,10 +197,10 @@
 ;; Include these files and directories when creating the agenda
 
 ;; [[file:org-config.org::*Agenda][Agenda:5]]
-;; (setq org-agenda-files '(my-org-folder))
+;; (setq org-agenda-files '(org-directory))
 (setq org-agenda-files (append
-                        (directory-files-recursively my-org-folder "\\.org$")
-                        (directory-files-recursively my-org-folder "\\.org.txt$")))
+                        (directory-files-recursively org-directory "\\.org$")
+                        (directory-files-recursively org-directory "\\.org.txt$")))
 ;; Agenda:5 ends here
 
 
@@ -516,7 +523,7 @@
 
 ;; [[file:org-config.org::*Miscellaneous][Miscellaneous:6]]
 (require 'org-download)
-(setq-default org-download-image-dir (concat my-org-folder "/pics"))
+(setq-default org-download-image-dir (concat org-directory "/pics"))
 ;; Miscellaneous:6 ends here
 
 

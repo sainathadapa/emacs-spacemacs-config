@@ -85,11 +85,7 @@ Default browser to use
 Spacemacs requires the org-mode settings to be defined after the org-mode is activated.
 #+BEGIN_SRC emacs-lisp
 (with-eval-after-load 'org
-  ;; Initialize some variables
-  (setq my-org-folder "~/Dropbox/org")
-  (setq my-config-folder "~/emacs-spacemacs-config")
-  (require 'org-config)
-)
+  (require 'org-config))
 #+END_SRC
 
 Default file to open
