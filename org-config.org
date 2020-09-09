@@ -33,7 +33,7 @@ Set the symbols for different heading levels
 
 Load ~org-pretty-tags~. See https://gitlab.com/marcowahl/org-pretty-tags
 #+BEGIN_SRC emacs-lisp
-(load "~/emacs-spacemacs-config/org-pretty-tags/org-pretty-tags.el")
+(load (concat my-config-folder "/org-pretty-tags/org-pretty-tags.el"))
 #+END_SRC
 
 On startup, content should be in folded state
@@ -53,7 +53,7 @@ Custom ~org-display-inline-images~ function that displays the images according t
 4. Resize only if the actual dimensions do not conform to the above two points
 #+BEGIN_SRC emacs-lisp
 (setq org-image-actual-width 1800)
-(load "~/emacs-spacemacs-config/org-display-inline-images-custom.el")
+(load (concat my-config-folder "/org-display-inline-images-custom.el"))
 #+END_SRC
 
 Smooth scrolling with mouse:
@@ -99,34 +99,34 @@ Templates
               ("w"         ; hotkey
                "Work Todo" ; name
                entry       ; type
-               (file+headline "~/Dropbox/org/work.org" "Tasks") ;target
+               (file+headline (concat my-org-folder "/work.org") "Tasks") ;target
                "* TODO [#A] %^{Task}" ; template
                )
               ("t"
                "Task Diary"
                entry
-               (file+datetree "~/Dropbox/org/tasks.org")
+               (file+datetree (concat my-org-folder "/tasks.org"))
                "* TODO [#A] %^{Task}")
               ("p"
                "Journal"
                item
-               (file+datetree "~/Dropbox/org/journal.org")
+               (file+datetree (concat my-org-folder "/journal.org"))
                "- %U - %^{Activity}")
               ("j"
                "Work log"
                item
-               (file+olp+datetree "~/Dropbox/org/work.org" "Log")
+               (file+olp+datetree (concat my-org-folder "/work.org") "Log")
                "- %U - %^{Activity}")
               ("b"
                "Add a book to read"
                entry
-               (file+headline "~/Dropbox/org/notes.org" "Books to read")
+               (file+headline (concat my-org-folder "/notes.org") "Books to read")
                "* TODO %^{Book name}\n%^{Why to read this book?}"
                )
               ("s"
                "Schedule an event or a task"
                entry
-               (file+datetree "~/Dropbox/org/tasks.org")
+               (file+datetree (concat my-org-folder "/tasks.org"))
                "* %^{Event or Task}\nSCHEDULED: %^t"
                )
               )))
@@ -155,7 +155,10 @@ Pressing ~Tab~ while the cursor is on a task will expand that task in a separate
 
 Include these files and directories when creating the agenda
 #+BEGIN_SRC emacs-lisp
-(setq org-agenda-files '("~/Dropbox/org"))
+  ;; (setq org-agenda-files '(my-org-folder))
+  (setq org-agenda-files (append
+                          (directory-files-recursively my-org-folder "\\.org$")
+                          (directory-files-recursively my-org-folder "\\.org.txt$")))
 #+END_SRC
 
 Don't show tasks in agenda if they are done
@@ -253,7 +256,7 @@ Extract the date of completion, and use it for comparison. From http://emacs.sta
 
 Display the total number of tasks in Agenda. From http://emacs.stackexchange.com/questions/18710/display-count-of-tasks-in-agenda-instead-of-tasks-based-on-tag
 #+BEGIN_SRC emacs-lisp
-(load "~/emacs-spacemacs-config/org-agenda-count.el")
+(load (concat my-config-folder "/org-agenda-count.el"))
 #+END_SRC
 
 Sort agenda items by link's text and not link's URL
@@ -404,12 +407,12 @@ Collapse everything except current tab. From https://stackoverflow.com/questions
 ~org-download~ settings
 #+BEGIN_SRC emacs-lisp
 (require 'org-download)
-(setq-default org-download-image-dir "~/Dropbox/org/pics")
+(setq-default org-download-image-dir (concat my-org-folder "/pics"))
 #+END_SRC
 
 Load a requirement for ~org-cliplink~
 #+BEGIN_SRC emacs-lisp
-(load "~/emacs-spacemacs-config/emacs-request/request.el")
+(load (concat my-config-folder "/emacs-request/request.el"))
 #+END_SRC
 
 Alerts:
