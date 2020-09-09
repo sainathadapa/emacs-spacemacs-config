@@ -50,11 +50,11 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(org-cliplink transpose-frame rainbow-mode helm-org-rifle org-download eval-in-repl org-alert)
+   dotspacemacs-additional-packages '(org-cliplink transpose-frame rainbow-mode helm-org-rifle org-download eval-in-repl)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '(org-projectile)
+   dotspacemacs-excluded-packages '(undo-tree)
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
    ;; `used-only' installs only explicitly used packages and uninstall any
@@ -80,7 +80,7 @@ values."
    ;; This variable has no effect if Emacs is launched with the parameter
    ;; `--insecure' which forces the value of this variable to nil.
    ;; (default t)
-   dotspacemacs-elpa-https t
+   dotspacemacs-elpa-https nil
    ;; Maximum allowed time in seconds to contact an ELPA repository.
    dotspacemacs-elpa-timeout 5
    ;; If non nil then spacemacs will check for updates at startup
@@ -123,14 +123,14 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(spacemacs-dark
-                         spacemacs-light)
+   dotspacemacs-themes '(spacemacs-light
+                         spacemacs-dark)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 15
+                               :size 16
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -300,14 +300,14 @@ before packages are loaded. If you are unsure, you should try in setting them in
   )
 
 (defun dotspacemacs/user-config ()
-  (add-to-list 'load-path "~/emacs-spacemacs-config")
+  (add-to-list 'load-path "c:/Users/Sai/AppData/Roaming/emacs-spacemacs-config")
   (require 'general-config)
   ;; from https://two-wrongs.com/centered-cursor-mode-in-vanilla-emacs.html
   (setq scroll-preserve-screen-position t
         scroll-conservatively 0
         maximum-scroll-margin 0.5
         scroll-margin 99999)
-  (server-start)
+  ;; (server-start)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -317,13 +317,13 @@ before packages are loaded. If you are unsure, you should try in setting them in
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ispell-personal-dictionary "~/Dropbox/org/.aspell.en.pws")
+ '(ispell-personal-dictionary "c:/Users/Sai/Dropbox/org/.aspell.en.pws")
  '(line-spacing 5)
  '(org-modules (quote (org-crypt org-habit org-mouse)))
  '(org-pretty-tags-surrogate-strings (quote (("imp" . "☆") ("music" . "♩"))))
  '(package-selected-packages
    (quote
-    (yapfify sql-indent pyvenv pytest pyenv-mode py-isort pip-requirements org-alert live-py-mode hy-mode dash-functional helm-pydoc cython-mode company-anaconda anaconda-mode pythonic lv transpose-frame tagedit slim-mode sass-mode rainbow-mode pug-mode org-present org-pomodoro log4e gntp org-download org-cliplink mmm-mode markdown-toc less-css-mode htmlize helm-css-scss helm-c-yasnippet haml-mode gnuplot gh-md fuzzy flyspell-correct-helm flyspell-correct eval-in-repl paredit emmet-mode company-web web-completion-data company-statistics auto-yasnippet auto-dictionary ac-ispell auto-complete web-mode scss-mode helm-org-rifle helm-company company yasnippet markdown-mode alert org-mime ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))))
+    (yapfify sql-indent pyvenv pytest pyenv-mode py-isort pip-requirements org-alert live-py-mode hy-mode dash-functional helm-pydoc cython-mode company-anaconda anaconda-mode pythonic lv transpose-frame tagedit slim-mode sass-mode rainbow-mode pug-mode org-present org-pomodoro log4e gntp org-download org-cliplink mmm-mode markdown-toc less-css-mode htmlize helm-css-scss helm-c-yasnippet haml-mode gnuplot gh-md fuzzy flyspell-correct-helm flyspell-correct eval-in-repl paredit emmet-mode company-web web-completion-data company-statistics auto-yasnippet auto-dictionary ac-ispell auto-complete web-mode scss-mode helm-org-rifle helm-company company yasnippet markdown-mode alert org-mime ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg val-sexp-fu highlight elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -347,7 +347,7 @@ This function is called at the very end of Spacemacs initialization."
  '(org-pretty-tags-surrogate-strings (quote (("imp" . "☆") ("music" . "♩"))))
  '(package-selected-packages
    (quote
-    (yapfify sql-indent pyvenv pytest pyenv-mode py-isort pip-requirements org-alert live-py-mode hy-mode dash-functional helm-pydoc cython-mode company-anaconda anaconda-mode pythonic lv transpose-frame tagedit slim-mode sass-mode rainbow-mode pug-mode org-present org-pomodoro log4e gntp org-download org-cliplink mmm-mode markdown-toc less-css-mode htmlize helm-css-scss helm-c-yasnippet haml-mode gnuplot gh-md fuzzy flyspell-correct-helm flyspell-correct eval-in-repl paredit emmet-mode company-web web-completion-data company-statistics auto-yasnippet auto-dictionary ac-ispell auto-complete web-mode scss-mode helm-org-rifle helm-company company yasnippet markdown-mode alert org-mime ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))))
+    (yapfify sql-indent pyvenv pytest pyenv-mode py-isort pip-requirements org-alert live-py-mode hy-mode dash-functional helm-pydoc cython-mode company-anaconda anaconda-mode pythonic lv transpose-frame tagedit slim-mode sass-mode rainbow-mode pug-mode org-present org-pomodoro log4e gntp org-download org-cliplink mmm-mode markdown-toc less-css-mode htmlize helm-css-scss helm-c-yasnippet haml-mode gnuplot gh-md fuzzy flyspell-correct-helm flyspell-correct eval-in-repl paredit emmet-mode company-web web-completion-data company-statistics auto-yasnippet auto-dictionary ac-ispell auto-complete web-mode scss-mode helm-org-rifle helm-company company yasnippet markdown-mode alert org-mime ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg val-sexp-fu highlight elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
