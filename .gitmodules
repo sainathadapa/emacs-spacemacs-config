@@ -1,9 +1,6 @@
 [submodule "emacs-request"]
 	path = emacs-request
 	url = https://github.com/tkf/emacs-request.git
-[submodule "org-pretty-tags"]
-	path = org-pretty-tags
-	url = https://gitlab.com/marcowahl/org-pretty-tags.git
 [submodule "grasp"]
 	path = grasp
 	url = https://github.com/karlicoss/grasp.git
