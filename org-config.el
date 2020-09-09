@@ -1,7 +1,7 @@
 ;; Appearance
 ;; Indent headings and text
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Appearance][Appearance:1]]
+;; [[file:org-config.org::*Appearance][Appearance:1]]
 (require 'org-indent)
 (setq org-startup-indented t)
 ;; Appearance:1 ends here
@@ -10,7 +10,7 @@
 
 ;; Do not truncate lines and enable word wrap
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Appearance][Appearance:2]]
+;; [[file:org-config.org::*Appearance][Appearance:2]]
 (set-default 'truncate-lines nil)
 (set-default 'word-wrap t)
 (setq helm-buffers-truncate-lines nil)
@@ -21,7 +21,7 @@
 
 ;; Do not align Tags automatically
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Appearance][Appearance:3]]
+;; [[file:org-config.org::*Appearance][Appearance:3]]
 (setq org-auto-align-tags nil)
 ;; Appearance:3 ends here
 
@@ -29,34 +29,25 @@
 
 ;; Set the symbols for different heading levels
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Appearance][Appearance:4]]
+;; [[file:org-config.org::*Appearance][Appearance:4]]
 (setq org-bullets-bullet-list (quote ("◉" "◆" "✚" "☀" "○")))
 ;; Appearance:4 ends here
 
 
 
-
-;; Load ~org-pretty-tags~. See https://gitlab.com/marcowahl/org-pretty-tags
-
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Appearance][Appearance:5]]
-(load "c:/Users/Sai/AppData/Roaming/emacs-spacemacs-config/org-pretty-tags/org-pretty-tags.el")
-;; Appearance:5 ends here
-
-
-
 ;; On startup, content should be in folded state
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Appearance][Appearance:6]]
+;; [[file:org-config.org::*Appearance][Appearance:5]]
 (setq org-startup-folded t)
-;; Appearance:6 ends here
+;; Appearance:5 ends here
 
 
 
 ;; Count all checkboxes, not just the ones directly below
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Appearance][Appearance:7]]
+;; [[file:org-config.org::*Appearance][Appearance:6]]
 (setq org-checkbox-hierarchical-statistics nil)
-;; Appearance:7 ends here
+;; Appearance:6 ends here
 
 
 
@@ -66,28 +57,28 @@
 ;; 3. Image shouldn't exceed half of the current window's height
 ;; 4. Resize only if the actual dimensions do not conform to the above two points
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Appearance][Appearance:8]]
+;; [[file:org-config.org::*Appearance][Appearance:7]]
 (setq org-image-actual-width 1800)
-(load "c:/Users/Sai/AppData/Roaming/emacs-spacemacs-config/org-display-inline-images-custom.el")
-;; Appearance:8 ends here
+(load (concat my-config-folder "/org-display-inline-images-custom.el"))
+;; Appearance:7 ends here
 
 
 
 ;; Smooth scrolling with mouse:
 ;; from https://emacs.stackexchange.com/questions/10354/smooth-mouse-scroll-for-inline-images
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Appearance][Appearance:9]]
+;; [[file:org-config.org::*Appearance][Appearance:8]]
 (pixel-scroll-mode)
 (setq pixel-dead-time 0) ; Never go back to the old scrolling behaviour.
 (setq pixel-resolution-fine-flag t) ; Scroll by number of pixels instead of lines (t = frame-char-height pixels).
 (setq mouse-wheel-scroll-amount '(1)) ; Distance in pixel-resolution to scroll each mouse wheel event.
 (setq mouse-wheel-progressive-speed nil) ; Progressive speed is too fast
-;; Appearance:9 ends here
+;; Appearance:8 ends here
 
 ;; To-Do states and related
 ;; Keywords
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*To-Do states and related][To-Do states and related:1]]
+;; [[file:org-config.org::*To-Do states and related][To-Do states and related:1]]
 (setq org-todo-keywords
       (quote
        ((sequence "TODO" "PROG" "PAUS" "|" "DONE" "CANC"))))
@@ -97,7 +88,7 @@
 
 ;; Colors for todo states
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*To-Do states and related][To-Do states and related:2]]
+;; [[file:org-config.org::*To-Do states and related][To-Do states and related:2]]
 (setq org-todo-keyword-faces
       '(("PROG" . "orange") ("PAUS" . "magenta") ("CANC" . "red") ("DONE" . "green")))
 ;; To-Do states and related:2 ends here
@@ -106,7 +97,7 @@
 
 ;; Priority settings : default is H, highest is A, and lowest is Z
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*To-Do states and related][To-Do states and related:3]]
+;; [[file:org-config.org::*To-Do states and related][To-Do states and related:3]]
 (setq org-default-priority 72)
 (setq org-highest-priority 65)
 (setq org-lowest-priority 90)
@@ -115,7 +106,7 @@
 ;; Capture
 ;; Hotkey
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Capture][Capture:1]]
+;; [[file:org-config.org::*Capture][Capture:1]]
 (global-set-key (kbd "<f6>") 'org-capture)
 ;; Capture:1 ends here
 
@@ -123,40 +114,40 @@
 
 ;; Templates
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Capture][Capture:2]]
+;; [[file:org-config.org::*Capture][Capture:2]]
 (setq org-capture-templates
       (quote (
               ("w"         ; hotkey
                "Work Todo" ; name
                entry       ; type
-               (file+headline "c:/Users/Sai/Dropbox/org/work.org" "Tasks") ;target
+               (file+headline (concat my-org-folder "/work.org") "Tasks") ;target
                "* TODO [#A] %^{Task}" ; template
                )
               ("t"
                "Task Diary"
                entry
-               (file+datetree "c:/Users/Sai/Dropbox/org/tasks.org")
+               (file+datetree (concat my-org-folder "/tasks.org"))
                "* TODO [#A] %^{Task}")
               ("p"
                "Journal"
                item
-               (file+datetree "c:/Users/Sai/Dropbox/org/journal.org")
+               (file+datetree (concat my-org-folder "/journal.org"))
                "- %U - %^{Activity}")
               ("j"
                "Work log"
                item
-               (file+olp+datetree "c:/Users/Sai/Dropbox/org/work.org" "Log")
+               (file+olp+datetree (concat my-org-folder "/work.org") "Log")
                "- %U - %^{Activity}")
               ("b"
                "Add a book to read"
                entry
-               (file+headline "c:/Users/Sai/Dropbox/org/notes.org" "Books to read")
+               (file+headline (concat my-org-folder "/notes.org") "Books to read")
                "* TODO %^{Book name}\n%^{Why to read this book?}"
                )
               ("s"
                "Schedule an event or a task"
                entry
-               (file+datetree "c:/Users/Sai/Dropbox/org/tasks.org")
+               (file+datetree (concat my-org-folder "/tasks.org"))
                "* %^{Event or Task}\nSCHEDULED: %^t"
                )
               )))
@@ -165,7 +156,7 @@
 ;; Agenda
 ;; Enable the compact layout in agenda
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Agenda][Agenda:1]]
+;; [[file:org-config.org::*Agenda][Agenda:1]]
 (setq org-agenda-compact-blocks t)
 ;; Agenda:1 ends here
 
@@ -173,7 +164,7 @@
 
 ;; Restore layout after exit from agenda view
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Agenda][Agenda:2]]
+;; [[file:org-config.org::*Agenda][Agenda:2]]
 (setq org-agenda-restore-windows-after-quit t)
 ;; Agenda:2 ends here
 
@@ -181,7 +172,7 @@
 
 ;; Default appointment duration
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Agenda][Agenda:3]]
+;; [[file:org-config.org::*Agenda][Agenda:3]]
 (setq org-agenda-default-appointment-duration 30)
 ;; Agenda:3 ends here
 
@@ -189,7 +180,7 @@
 
 ;; Pressing ~Tab~ while the cursor is on a task will expand that task in a separate buffer
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Agenda][Agenda:4]]
+;; [[file:org-config.org::*Agenda][Agenda:4]]
 (add-hook 'org-agenda-mode-hook
           (lambda () (local-set-key [tab] 'org-agenda-tree-to-indirect-buffer)))
 ;; Agenda:4 ends here
@@ -198,15 +189,18 @@
 
 ;; Include these files and directories when creating the agenda
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Agenda][Agenda:5]]
-(setq org-agenda-files '("c:/Users/Sai/Dropbox/org"))
+;; [[file:org-config.org::*Agenda][Agenda:5]]
+;; (setq org-agenda-files '(my-org-folder))
+(setq org-agenda-files (append
+                        (directory-files-recursively my-org-folder "\\.org$")
+                        (directory-files-recursively my-org-folder "\\.org.txt$")))
 ;; Agenda:5 ends here
 
 
 
 ;; Don't show tasks in agenda if they are done
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Agenda][Agenda:6]]
+;; [[file:org-config.org::*Agenda][Agenda:6]]
 (setq org-agenda-skip-deadline-if-done t)
 (setq org-agenda-skip-scheduled-if-done t)
 ;; Agenda:6 ends here
@@ -215,7 +209,7 @@
 
 ;; Max number of days to show in agenda
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Agenda][Agenda:7]]
+;; [[file:org-config.org::*Agenda][Agenda:7]]
 (setq org-agenda-span 90)
 ;; Agenda:7 ends here
 
@@ -223,7 +217,7 @@
 
 ;; Warn about a deadline
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Agenda][Agenda:8]]
+;; [[file:org-config.org::*Agenda][Agenda:8]]
 (setq org-deadline-warning-days 90)
 ;; Agenda:8 ends here
 
@@ -231,7 +225,7 @@
 
 ;; Agenda starts on the current day
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Agenda][Agenda:9]]
+;; [[file:org-config.org::*Agenda][Agenda:9]]
 (setq org-agenda-start-on-weekday nil)
 ;; Agenda:9 ends here
 
@@ -239,7 +233,7 @@
 
 ;; Sorting strategy
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Agenda][Agenda:10]]
+;; [[file:org-config.org::*Agenda][Agenda:10]]
 (setq org-agenda-sorting-strategy
       (quote
        ((agenda priority-down alpha-up)
@@ -251,7 +245,7 @@
 
 ;; Display format
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Agenda][Agenda:11]]
+;; [[file:org-config.org::*Agenda][Agenda:11]]
 (setq org-agenda-prefix-format
       (quote
        ((agenda . "%s %?-12t %e ")
@@ -265,7 +259,7 @@
 
 ;; Default format for columns view
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Agenda][Agenda:12]]
+;; [[file:org-config.org::*Agenda][Agenda:12]]
 (setq org-columns-default-format
       "%75ITEM %TODO %PRIORITY %SCHEDULED %DEADLINE %CLOSED %ALLTAGS")
 ;; Agenda:12 ends here
@@ -274,7 +268,7 @@
 
 ;; Place tags close to the right-hand side of the window. From http://lists.gnu.org/archive/html/emacs-orgmode//2010-12/msg00410.html
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Agenda][Agenda:13]]
+;; [[file:org-config.org::*Agenda][Agenda:13]]
 (add-hook 'org-finalize-agenda-hook 'place-agenda-tags)
 (defun place-agenda-tags ()
   "Put the agenda tags by the right border of the agenda window."
@@ -286,7 +280,7 @@
 
 ;; By default, agenda will reorganize frames/splits
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Agenda][Agenda:14]]
+;; [[file:org-config.org::*Agenda][Agenda:14]]
 (setq org-agenda-window-setup 'reorganize-frame)
 ;; Agenda:14 ends here
 
@@ -294,7 +288,7 @@
 
 ;; By default, Org maintains only a single agenda buffer and rebuilds it each time you change the view, to make sure everything is always up to date. If you often switch between agenda views and the build time bothers you, you can turn on sticky agenda buffers or make this the default by customizing the variable org-agenda-sticky. With sticky agendas, the agenda dispatcher will not recreate agenda views from scratch, it will only switch to the selected one, and you need to update the agenda by hand with r or g when needed. You can toggle sticky agenda view any time with org-toggle-sticky-agenda.
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Agenda][Agenda:15]]
+;; [[file:org-config.org::*Agenda][Agenda:15]]
 (setq org-agenda-sticky nil)
 ;; Agenda:15 ends here
 
@@ -302,14 +296,14 @@
 
 ;; When you run an agenda command, Org visits agenda files that are not yet visited. When finding a file for the first time, Org checks the startup options and apply them to the buffer: those options are either globally set through the org-startup-* variables or on a per-file basis through the #+STARTUP keyword. Especially, Org will honor the startup visibility status, as set by org-startup-folded or #+STARTUP: folded. This may slow down the operation of visiting a file very much, and the process of selecting agenda entries consequently. To prevent agenda commands to honor startup options when visiting an agenda file for the first time, do this
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Agenda][Agenda:16]]
+;; [[file:org-config.org::*Agenda][Agenda:16]]
 (setq org-agenda-inhibit-startup t)
 ;; Agenda:16 ends here
 
 ;; Helper functions
 ;; Extract the date of completion, and use it for comparison. From http://emacs.stackexchange.com/questions/26351/custom-sorting-for-agenda
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Helper functions][Helper functions:1]]
+;; [[file:org-config.org::*Helper functions][Helper functions:1]]
 (defun cmp-date-property (prop)
   "Compare two `org-mode' agenda entries, `A' and `B', by some date property. If a is before b, return -1. If a is after b, return 1. If they are equal return t."
   (lexical-let ((prop prop))
@@ -331,15 +325,15 @@
 
 ;; Display the total number of tasks in Agenda. From http://emacs.stackexchange.com/questions/18710/display-count-of-tasks-in-agenda-instead-of-tasks-based-on-tag
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Helper functions][Helper functions:2]]
-(load "c:/Users/Sai/AppData/Roaming/emacs-spacemacs-config/org-agenda-count.el")
+;; [[file:org-config.org::*Helper functions][Helper functions:2]]
+(load (concat my-config-folder "/org-agenda-count.el"))
 ;; Helper functions:2 ends here
 
 
 
 ;; Sort agenda items by link's text and not link's URL
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Helper functions][Helper functions:3]]
+;; [[file:org-config.org::*Helper functions][Helper functions:3]]
 (defun remove-priority (str)
   (replace-regexp-in-string "\\[#[^\\[]*\\] " "" str))
 
@@ -374,7 +368,7 @@
 
 ;; Views
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Views][Views:1]]
+;; [[file:org-config.org::*Views][Views:1]]
 (setq org-agenda-custom-commands
       (quote
        (
@@ -396,7 +390,7 @@
                       )))
          nil)
         ("E" "Non-Work ToDos"
-         ((tags-todo "-work" (
+         ((tags-todo "-work-paper" (
                               (org-agenda-overriding-header (format "Non-Work Tasks (%s)" (org-agenda-count "")))
                               (org-agenda-cmp-user-defined 'org-cmp-alpha-2)
                               (org-agenda-sorting-strategy '(user-defined-up))
@@ -408,7 +402,7 @@
 ;; Export
 ;; Stylize exported html according to specified CSS
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Export][Export:1]]
+;; [[file:org-config.org::*Export][Export:1]]
 (setq org-html-htmlize-output-type 'css)
 (setq org-html-html5-fancy t
       org-html-doctype "html5")
@@ -418,7 +412,7 @@
 
 ;; Backends to enable
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Export][Export:2]]
+;; [[file:org-config.org::*Export][Export:2]]
 (setq org-export-backends (quote (html icalendar md)))
 ;; Export:2 ends here
 
@@ -426,13 +420,13 @@
 
 ;; Do not use babel on export
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Export][Export:3]]
+;; [[file:org-config.org::*Export][Export:3]]
 (setq org-export-use-babel nil)
 ;; Export:3 ends here
 
 ;; Refile
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Refile][Refile:1]]
+;; [[file:org-config.org::*Refile][Refile:1]]
 (setq org-refile-allow-creating-parent-nodes (quote confirm))
 (setq org-refile-targets '((nil :maxlevel . 9)
                            (org-agenda-files :maxlevel . 9)))
@@ -443,7 +437,7 @@
 ;; Clocking
 ;; Log the clocks into this drawer
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Clocking][Clocking:1]]
+;; [[file:org-config.org::*Clocking][Clocking:1]]
 (setq org-log-into-drawer "LOGBOOK")
 ;; Clocking:1 ends here
 
@@ -451,7 +445,7 @@
 
 ;; Remember to clock out the clock on exit
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Clocking][Clocking:2]]
+;; [[file:org-config.org::*Clocking][Clocking:2]]
 (setq org-remember-clock-out-on-exit t)
 ;; Clocking:2 ends here
 
@@ -459,14 +453,14 @@
 
 ;; Display clock time both in mode line and frame title
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Clocking][Clocking:3]]
+;; [[file:org-config.org::*Clocking][Clocking:3]]
 (setq org-clock-clocked-in-display (quote both))
 ;; Clocking:3 ends here
 
 ;; Miscellaneous
 ;; Modules to load
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Miscellaneous][Miscellaneous:1]]
+;; [[file:org-config.org::*Miscellaneous][Miscellaneous:1]]
 (setq org-modules (quote (org-crypt org-habit org-mouse)))
 ;; Miscellaneous:1 ends here
 
@@ -474,7 +468,7 @@
 
 ;; Prevent editing in the invisible area
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Miscellaneous][Miscellaneous:2]]
+;; [[file:org-config.org::*Miscellaneous][Miscellaneous:2]]
 (setq org-catch-invisible-edits (quote show-and-error))
 ;; Miscellaneous:2 ends here
 
@@ -482,7 +476,7 @@
 
 ;; Do not show empty lines between subtrees, when collapsed
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Miscellaneous][Miscellaneous:3]]
+;; [[file:org-config.org::*Miscellaneous][Miscellaneous:3]]
 (setq org-cycle-separator-lines 0)
 ;; Miscellaneous:3 ends here
 
@@ -490,7 +484,7 @@
 
 ;; Collapse everything except current tab. From https://stackoverflow.com/questions/25161792/emacs-org-mode-how-can-i-fold-everything-but-the-current-headline
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Miscellaneous][Miscellaneous:4]]
+;; [[file:org-config.org::*Miscellaneous][Miscellaneous:4]]
 (defun org-show-current-heading-tidily ()
   (interactive)
   "Show next entry, keeping other entries closed."
@@ -511,7 +505,7 @@
 
 ;; ~helm-org-rifle~ settings
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Miscellaneous][Miscellaneous:5]]
+;; [[file:org-config.org::*Miscellaneous][Miscellaneous:5]]
 (require 'helm-org-rifle)
 (setq helm-org-rifle-show-path t)
 ;; Miscellaneous:5 ends here
@@ -520,23 +514,34 @@
 
 ;; ~org-download~ settings
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Miscellaneous][Miscellaneous:6]]
+;; [[file:org-config.org::*Miscellaneous][Miscellaneous:6]]
 (require 'org-download)
-(setq-default org-download-image-dir "c:/Users/Sai/Dropbox/org/pics")
+(setq-default org-download-image-dir (concat my-org-folder "/pics"))
 ;; Miscellaneous:6 ends here
 
 
 
 ;; Load a requirement for ~org-cliplink~
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Miscellaneous][Miscellaneous:7]]
-(load "c:/Users/Sai/AppData/Roaming/emacs-spacemacs-config/emacs-request/request.el")
+;; [[file:org-config.org::*Miscellaneous][Miscellaneous:7]]
+(load (concat my-config-folder "/emacs-request/request.el"))
 ;; Miscellaneous:7 ends here
+
+
+
+;; Alerts:
+;; - https://github.com/akhramov/org-wild-notifier.el
+;; - https://github.com/spegoraro/org-alert
+
+;; [[file:org-config.org::*Miscellaneous][Miscellaneous:8]]
+(require 'org-alert)
+(setq alert-default-style 'libnotify)
+;; Miscellaneous:8 ends here
 
 ;; Dashboard
 ;; Create a dashboard with multiple Agenda views
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Dashboard][Dashboard:1]]
+;; [[file:org-config.org::*Dashboard][Dashboard:1]]
 (defun org-dashboard ()
   "Dashboard-like setting in org"
   (interactive)
@@ -548,42 +553,50 @@
   (org-agenda nil "W")
   (other-window 1)
   (org-agenda nil "E")
+  (shrink-window 50)
   (other-window 1)
+  ;; (split-window-below)
   (org-agenda nil "a")
   (other-window 1)
   (shrink-window 15)
+  ;; (org-agenda nil "Q")
+  ;; (other-window 1)
+  ;; (shrink-window-if-larger-than-buffer)
+  ;; (other-window 2)
+  ;; (shrink-window-horizontally 10)
+  ;; (other-window 1)
+  ;; (other-window 1)
   (run-with-timer 0 (* 5 60) 'refresh-dashboard)
   )
-(global-set-key (kbd "<f7>") 'org-dashboard)
 
-  (defun refresh-dashboard ()
-    "Run some commands in sequence."
-    (interactive)
-    ;; (message "%s" "i started")
-    ;; (message nil)
-    (cl-loop repeat 3 do (execute-kbd-macro (kbd "r")) (other-window 1))
-    ;; (message "%s" "i ran")
-    ;; (message nil)
-    )
+(defun refresh-dashboard ()
+  "Run some commands in sequence."
+  (interactive)
+  ;; (message "%s" "i started")
+  ;; (message nil)
+  (cl-loop repeat 3 do (execute-kbd-macro (kbd "r")) (other-window 1))
+  ;; (message "%s" "i ran")
+  ;; (message nil)
+  )
 
-  (require 'cl)
-  (defun bk-kill-buffers (regexp)
-    "Kill buffers matching REGEXP without asking for confirmation."
-    (interactive "sKill buffers matching this regular expression: ")
-    (flet ((kill-buffer-ask (buffer) (kill-buffer buffer)))
-      (kill-matching-buffers regexp)))
-  (defun close-dashboard ()
-    "Dashboard-like setting in org"
-    (interactive)
-    (cancel-function-timers 'refresh-dashboard)
-    (bk-kill-buffers ".*Org.*Agenda.*")
-    (delete-other-windows)
-    )
+(require 'cl)
+(defun bk-kill-buffers (regexp)
+  "Kill buffers matching REGEXP without asking for confirmation."
+  (interactive "sKill buffers matching this regular expression: ")
+  (flet ((kill-buffer-ask (buffer) (kill-buffer buffer)))
+    (kill-matching-buffers regexp)))
+(defun close-dashboard ()
+  "Dashboard-like setting in org"
+  (interactive)
+  (cancel-function-timers 'refresh-dashboard)
+  (bk-kill-buffers ".*Org.*Agenda.*")
+  (delete-other-windows)
+  )
 ;; Dashboard:1 ends here
 
 ;; Disabled
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Disabled][Disabled:1]]
+;; [[file:org-config.org::*Disabled][Disabled:1]]
 ;; any items below the headings with these tags dont inherit that tag
 ;; (setq org-tags-exclude-from-inheritance (quote ("PROJECT" "crypt")))
 
@@ -634,6 +647,6 @@
 ;; Final
 ;; Let the Spacemacs use this configuration.
 
-;; [[file:~/emacs-spacemacs-config/org-config.org::*Final][Final:1]]
+;; [[file:org-config.org::*Final][Final:1]]
 (provide 'org-config)
 ;; Final:1 ends here
