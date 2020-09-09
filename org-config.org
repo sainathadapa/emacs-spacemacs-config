@@ -30,12 +30,6 @@ Set the symbols for different heading levels
 (setq org-bullets-bullet-list (quote ("◉" "◆" "✚" "☀" "○")))
 #+END_SRC
 
-
-Load ~org-pretty-tags~. See https://gitlab.com/marcowahl/org-pretty-tags
-#+BEGIN_SRC emacs-lisp
-(load (concat my-config-folder "/org-pretty-tags/org-pretty-tags.el"))
-#+END_SRC
-
 On startup, content should be in folded state
 #+BEGIN_SRC emacs-lisp
 (setq org-startup-folded t)

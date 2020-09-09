@@ -35,28 +35,19 @@
 
 
 
-
-;; Load ~org-pretty-tags~. See https://gitlab.com/marcowahl/org-pretty-tags
-
-;; [[file:org-config.org::*Appearance][Appearance:5]]
-(load (concat my-config-folder "/org-pretty-tags/org-pretty-tags.el"))
-;; Appearance:5 ends here
-
-
-
 ;; On startup, content should be in folded state
 
-;; [[file:org-config.org::*Appearance][Appearance:6]]
+;; [[file:org-config.org::*Appearance][Appearance:5]]
 (setq org-startup-folded t)
-;; Appearance:6 ends here
+;; Appearance:5 ends here
 
 
 
 ;; Count all checkboxes, not just the ones directly below
 
-;; [[file:org-config.org::*Appearance][Appearance:7]]
+;; [[file:org-config.org::*Appearance][Appearance:6]]
 (setq org-checkbox-hierarchical-statistics nil)
-;; Appearance:7 ends here
+;; Appearance:6 ends here
 
 
 
@@ -66,23 +57,23 @@
 ;; 3. Image shouldn't exceed half of the current window's height
 ;; 4. Resize only if the actual dimensions do not conform to the above two points
 
-;; [[file:org-config.org::*Appearance][Appearance:8]]
+;; [[file:org-config.org::*Appearance][Appearance:7]]
 (setq org-image-actual-width 1800)
 (load (concat my-config-folder "/org-display-inline-images-custom.el"))
-;; Appearance:8 ends here
+;; Appearance:7 ends here
 
 
 
 ;; Smooth scrolling with mouse:
 ;; from https://emacs.stackexchange.com/questions/10354/smooth-mouse-scroll-for-inline-images
 
-;; [[file:org-config.org::*Appearance][Appearance:9]]
+;; [[file:org-config.org::*Appearance][Appearance:8]]
 (pixel-scroll-mode)
 (setq pixel-dead-time 0) ; Never go back to the old scrolling behaviour.
 (setq pixel-resolution-fine-flag t) ; Scroll by number of pixels instead of lines (t = frame-char-height pixels).
 (setq mouse-wheel-scroll-amount '(1)) ; Distance in pixel-resolution to scroll each mouse wheel event.
 (setq mouse-wheel-progressive-speed nil) ; Progressive speed is too fast
-;; Appearance:9 ends here
+;; Appearance:8 ends here
 
 ;; To-Do states and related
 ;; Keywords
