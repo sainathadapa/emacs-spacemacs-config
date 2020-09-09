@@ -102,11 +102,7 @@
 
 ;; [[file:general-config.org::*Org config][Org config:1]]
 (with-eval-after-load 'org
-  ;; Initialize some variables
-  (setq my-org-folder "~/Dropbox/org")
-  (setq my-config-folder "~/emacs-spacemacs-config")
-  (require 'org-config)
-)
+  (require 'org-config))
 ;; Org config:1 ends here
 
 
