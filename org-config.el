@@ -54,7 +54,7 @@
 ;; Count all checkboxes, not just the ones directly below
 
 ;; [[file:org-config.org::*Appearance][Appearance:6]]
-(setq org-checkbox-hierarchical-statistics nil)
+;; (setq org-checkbox-hierarchical-statistics nil)
 ;; Appearance:6 ends here
 
 

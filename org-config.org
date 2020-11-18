@@ -42,7 +42,7 @@ On startup, content should be in folded state
 
 Count all checkboxes, not just the ones directly below
 #+BEGIN_SRC emacs-lisp
-(setq org-checkbox-hierarchical-statistics nil)
+;; (setq org-checkbox-hierarchical-statistics nil)
 #+END_SRC
 
 Custom ~org-display-inline-images~ function that displays the images according to the logic:
