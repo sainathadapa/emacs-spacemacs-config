@@ -97,6 +97,17 @@
 (setq history-delete-duplicates t)
 ;; Miscellaneous:4 ends here
 
+
+
+;; Flyspell mode settings
+
+;; [[file:general-config.org::*Miscellaneous][Miscellaneous:5]]
+(eval-after-load "flyspell"
+  '(progn
+     (define-key flyspell-mouse-map [down-mouse-3] #'flyspell-correct-word)
+     (define-key flyspell-mouse-map [mouse-3] #'undefined)))
+;; Miscellaneous:5 ends here
+
 ;; Org config
 ;; Spacemacs requires the org-mode settings to be defined after the org-mode is activated.
 
