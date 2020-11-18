@@ -81,6 +81,14 @@ Default browser to use
   (setq history-delete-duplicates t)
 #+END_SRC
 
+Flyspell mode settings
+#+BEGIN_SRC emacs-lisp
+  (eval-after-load "flyspell"
+    '(progn
+       (define-key flyspell-mouse-map [down-mouse-3] #'flyspell-correct-word)
+       (define-key flyspell-mouse-map [mouse-3] #'undefined)))
+#+END_SRC
+
 * Org config
 Spacemacs requires the org-mode settings to be defined after the org-mode is activated.
 #+BEGIN_SRC emacs-lisp
