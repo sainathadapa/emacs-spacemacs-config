@@ -31,7 +31,8 @@ Do not align Tags automatically
 
 Set the symbols for different heading levels
 #+BEGIN_SRC emacs-lisp
-(setq org-bullets-bullet-list (quote ("◉" "◆" "✚" "☀" "○")))
+;; (setq org-bullets-bullet-list (quote ("◉" "◆" "✚" "☀" "○")))
+(setq org-superstar-bullet-list '("◉" "◆" "✚" "☀" "○"))
 #+END_SRC
 
 On startup, content should be in folded state

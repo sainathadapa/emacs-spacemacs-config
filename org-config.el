@@ -37,7 +37,8 @@
 ;; Set the symbols for different heading levels
 
 ;; [[file:org-config.org::*Appearance][Appearance:4]]
-(setq org-bullets-bullet-list (quote ("◉" "◆" "✚" "☀" "○")))
+;; (setq org-bullets-bullet-list (quote ("◉" "◆" "✚" "☀" "○")))
+(setq org-superstar-bullet-list '("◉" "◆" "✚" "☀" "○"))
 ;; Appearance:4 ends here
 
 
