@@ -4,3 +4,6 @@
 [submodule "grasp"]
 	path = grasp
 	url = https://github.com/karlicoss/grasp.git
+[submodule ".emacs.d"]
+	path = .emacs.d
+	url = https://github.com/syl20bnr/spacemacs.git
