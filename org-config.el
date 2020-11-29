@@ -561,7 +561,7 @@
   (org-agenda nil "W")
   (other-window 1)
   (org-agenda nil "E")
-  (shrink-window 50)
+  (shrink-window 20)
   (other-window 1)
   ;; (split-window-below)
   (org-agenda nil "a")
@@ -574,7 +574,7 @@
   ;; (shrink-window-horizontally 10)
   ;; (other-window 1)
   ;; (other-window 1)
-  (run-with-timer 0 (* 5 60) 'refresh-dashboard)
+  ;; (run-with-timer 0 (* 5 60) 'refresh-dashboard)
   )
 
 (defun refresh-dashboard ()
