@@ -85,6 +85,7 @@ Priority settings : default is H, highest is A, and lowest is Z
 (setq org-highest-priority 65)
 (setq org-lowest-priority 90)
 #+END_SRC
+
 * Capture
 Hotkey
 #+BEGIN_SRC emacs-lisp
