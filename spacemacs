@@ -31,7 +31,8 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(;; org-mode
-     (org :variables org-enable-bootstrap-support t)
+     (org :variables org-enable-bootstrap-support t
+                     org-want-todo-bindings       t)
      ;; Typing-related
      auto-completion
      (spell-checking :variables spell-checking-enable-by-default nil)
