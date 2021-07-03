@@ -128,7 +128,7 @@
         ("w"         ; hotkey
          "Work Todo" ; name
          entry       ; type
-         (file+headline (lambda () (concat org-directory "/work.org")) "Tasks") ;target
+         (file+headline (lambda () (concat "~/Google Drive/org" "/work.org")) "Tasks") ;target
          "* TODO [#A] %^{Task}" ; template
          )
         ("t"
@@ -144,13 +144,13 @@
         ("j"
          "Work log"
          item
-         (file+olp+datetree (lambda () (concat org-directory "/work.org")) "Log")
+         (file+olp+datetree (lambda () (concat "~/Google Drive/org" "/work.org")) "Log")
          "- %U - %^{Activity}")
         ("b"
          "Add a book to read"
          entry
          (file+headline (lambda () (concat org-directory "/notes.org")) "Books to read")
-         "* TODO %^{Book name}\n%^{Why to read this book?}"
+         "* TODO [#Z] %^{Book name}\n%^{Why to read this book?}"
          )
         ("s"
          "Schedule an event or a task"
@@ -200,6 +200,7 @@
 ;; [[file:org-config.org::*Agenda][Agenda:5]]
 ;; (setq org-agenda-files '(org-directory))
 (setq org-agenda-files (append
+                        (directory-files-recursively "~/Google Drive/org" "\\.org$")
                         (directory-files-recursively org-directory "\\.org$")
                         (directory-files-recursively org-directory "\\.org.txt$")))
 ;; Agenda:5 ends here
@@ -524,7 +525,7 @@
 
 ;; [[file:org-config.org::*Miscellaneous][Miscellaneous:6]]
 (require 'org-download)
-(setq-default org-download-image-dir (concat org-directory "/pics"))
+(setq-default org-download-image-dir nil)
 ;; Miscellaneous:6 ends here
 
 
@@ -574,7 +575,8 @@
   ;; (shrink-window-horizontally 10)
   ;; (other-window 1)
   ;; (other-window 1)
-  ;; (run-with-timer 0 (* 5 60) 'refresh-dashboard)
+  ;; (run-with-timer 0 (* 60 60) 'refresh-dashboard)
+  ;; (add-hook 'focus-out-hook 'save-all)
   )
 
 (defun refresh-dashboard ()
@@ -594,7 +596,6 @@
   (flet ((kill-buffer-ask (buffer) (kill-buffer buffer)))
     (kill-matching-buffers regexp)))
 (defun close-dashboard ()
-  "Dashboard-like setting in org"
   (interactive)
   (cancel-function-timers 'refresh-dashboard)
   (bk-kill-buffers ".*Org.*Agenda.*")
@@ -609,13 +610,14 @@
 ;; (setq org-tags-exclude-from-inheritance (quote ("PROJECT" "crypt")))
 
 ;; crypt
-;; (require 'org-crypt)
-;; (org-crypt-use-before-save-magic)
-;; (setq org-tags-exclude-from-inheritance (quote ("crypt")))
-
+(require 'org-crypt)
+(require 'epa-file)
+(epa-file-enable)
+(org-crypt-use-before-save-magic)
+(setq org-tags-exclude-from-inheritance (quote ("crypt")))
 ;; GPG key to use for encryption
 ;; Either the Key ID or set to nil to use symmetric encryption.
-;; (setq org-crypt-key nil)
+(setq org-crypt-key nil)
 
 ;; org-publish
 ;; (require 'ox-publish)
