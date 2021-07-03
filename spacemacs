@@ -152,13 +152,13 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(doom-one)
+   dotspacemacs-themes '(spacemacs-light)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
-   dotspacemacs-default-font '("Source Code Pro"
-                               :size 17
+   dotspacemacs-default-font '("Iosevka Aile"
+                               :size 16
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -372,11 +372,16 @@ This function is called at the very end of Spacemacs initialization."
  '(ispell-program-name "/usr/local/bin/aspell")
  '(line-spacing 5)
  '(org-download-screenshot-method "screencapture -i %s")
- '(org-modules (quote (org-crypt org-habit org-mouse)))
- '(org-pretty-tags-surrogate-strings (quote (("imp" . "☆") ("music" . "♩"))))
+ '(org-modules '(org-crypt org-habit org-mouse))
+ '(org-pretty-tags-surrogate-strings '(("imp" . "☆") ("music" . "♩")))
  '(package-selected-packages
-   (quote
-    (tern nodejs-repl livid-mode skewer-mode js2-refactor multiple-cursors js2-mode js-doc import-js grizzl helm-gtags ggtags dap-mode lsp-treemacs bui lsp-mode counsel-gtags counsel swiper ivy add-node-modules-path scala-mode sbt-mode noflet reveal-in-osx-finder pbcopy osx-trash osx-dictionary launchctl yapfify sql-indent pyvenv pytest pyenv-mode py-isort pip-requirements org-alert live-py-mode hy-mode dash-functional helm-pydoc cython-mode company-anaconda anaconda-mode pythonic lv transpose-frame tagedit slim-mode sass-mode rainbow-mode pug-mode org-present org-pomodoro log4e gntp org-download org-cliplink mmm-mode markdown-toc less-css-mode htmlize helm-css-scss helm-c-yasnippet haml-mode gnuplot gh-md fuzzy flyspell-correct-helm flyspell-correct eval-in-repl paredit emmet-mode company-web web-completion-data company-statistics auto-yasnippet auto-dictionary ac-ispell auto-complete web-mode scss-mode helm-org-rifle helm-company company yasnippet markdown-mode alert org-mime ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))))
+   '(tern nodejs-repl livid-mode skewer-mode js2-refactor multiple-cursors js2-mode js-doc import-js grizzl helm-gtags ggtags dap-mode lsp-treemacs bui lsp-mode counsel-gtags counsel swiper ivy add-node-modules-path scala-mode sbt-mode noflet reveal-in-osx-finder pbcopy osx-trash osx-dictionary launchctl yapfify sql-indent pyvenv pytest pyenv-mode py-isort pip-requirements org-alert live-py-mode hy-mode dash-functional helm-pydoc cython-mode company-anaconda anaconda-mode pythonic lv transpose-frame tagedit slim-mode sass-mode rainbow-mode pug-mode org-present org-pomodoro log4e gntp org-download org-cliplink mmm-mode markdown-toc less-css-mode htmlize helm-css-scss helm-c-yasnippet haml-mode gnuplot gh-md fuzzy flyspell-correct-helm flyspell-correct eval-in-repl paredit emmet-mode company-web web-completion-data company-statistics auto-yasnippet auto-dictionary ac-ispell auto-complete web-mode scss-mode helm-org-rifle helm-company company yasnippet markdown-mode alert org-mime ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))
+ '(safe-local-variable-values
+   '((org-download-image-dir . "~/Dropbox/org/pics")
+     (org-download-image-dir . "~/Google Drive/org/pics")
+     (javascript-backend . tide)
+     (javascript-backend . tern)
+     (javascript-backend . lsp))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

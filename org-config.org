@@ -99,7 +99,7 @@ Templates
           ("w"         ; hotkey
            "Work Todo" ; name
            entry       ; type
-           (file+headline (lambda () (concat org-directory "/work.org")) "Tasks") ;target
+           (file+headline (lambda () (concat "~/Google Drive/org" "/work.org")) "Tasks") ;target
            "* TODO [#A] %^{Task}" ; template
            )
           ("t"
@@ -115,13 +115,13 @@ Templates
           ("j"
            "Work log"
            item
-           (file+olp+datetree (lambda () (concat org-directory "/work.org")) "Log")
+           (file+olp+datetree (lambda () (concat "~/Google Drive/org" "/work.org")) "Log")
            "- %U - %^{Activity}")
           ("b"
            "Add a book to read"
            entry
            (file+headline (lambda () (concat org-directory "/notes.org")) "Books to read")
-           "* TODO %^{Book name}\n%^{Why to read this book?}"
+           "* TODO [#Z] %^{Book name}\n%^{Why to read this book?}"
            )
           ("s"
            "Schedule an event or a task"
@@ -157,6 +157,7 @@ Include these files and directories when creating the agenda
 #+BEGIN_SRC emacs-lisp
   ;; (setq org-agenda-files '(org-directory))
   (setq org-agenda-files (append
+                          (directory-files-recursively "~/Google Drive/org" "\\.org$")
                           (directory-files-recursively org-directory "\\.org$")
                           (directory-files-recursively org-directory "\\.org.txt$")))
 #+END_SRC
@@ -407,7 +408,7 @@ Collapse everything except current tab. From https://stackoverflow.com/questions
 ~org-download~ settings
 #+BEGIN_SRC emacs-lisp
 (require 'org-download)
-(setq-default org-download-image-dir (concat org-directory "/pics"))
+(setq-default org-download-image-dir nil)
 #+END_SRC
 
 Load a requirement for ~org-cliplink~
@@ -450,7 +451,8 @@ Create a dashboard with multiple Agenda views
     ;; (shrink-window-horizontally 10)
     ;; (other-window 1)
     ;; (other-window 1)
-    ;; (run-with-timer 0 (* 5 60) 'refresh-dashboard)
+    ;; (run-with-timer 0 (* 60 60) 'refresh-dashboard)
+    ;; (add-hook 'focus-out-hook 'save-all)
     )
 
   (defun refresh-dashboard ()
@@ -470,7 +472,6 @@ Create a dashboard with multiple Agenda views
     (flet ((kill-buffer-ask (buffer) (kill-buffer buffer)))
       (kill-matching-buffers regexp)))
   (defun close-dashboard ()
-    "Dashboard-like setting in org"
     (interactive)
     (cancel-function-timers 'refresh-dashboard)
     (bk-kill-buffers ".*Org.*Agenda.*")
@@ -479,51 +480,52 @@ Create a dashboard with multiple Agenda views
 #+END_SRC
 * Disabled
 #+BEGIN_SRC emacs-lisp
-;; any items below the headings with these tags dont inherit that tag
-;; (setq org-tags-exclude-from-inheritance (quote ("PROJECT" "crypt")))
-
-;; crypt
-;; (require 'org-crypt)
-;; (org-crypt-use-before-save-magic)
-;; (setq org-tags-exclude-from-inheritance (quote ("crypt")))
-
-;; GPG key to use for encryption
-;; Either the Key ID or set to nil to use symmetric encryption.
-;; (setq org-crypt-key nil)
-
-;; org-publish
-;; (require 'ox-publish)
-;; (setq org-publish-project-alist
-;;       '(
-;;         ("org"
-;;          :base-directory "~/Dropbox/org/"
-;;          :publishing-directory "~/Dropbox/org/"
-;;          :base-extension "---"
-;;          :recursive nil
-;;          :publishing-function org-html-publish-to-html
-;;          :include ("bayesian.org" "classification.org" "clustering.org" "data_science_misc.org" "data_structs_algos.org" "deep_learning.org" "ds_tools.org" "machine_learning_misc.org" "nlp.org" "recommendations.org" "regression.org" "reinforcement-learning.org" "statistics.org" "supervised_learning.org" "time_series.org")
-;;          )))
-
-;; change ... to
-;; (setq org-ellipsis "⤵")
-
-;; calendar export settings
-;; (setq org-icalendar-exclude-tags (quote ("noexport")))
-;; (setq org-icalendar-include-todo t)
-;; (setq org-icalendar-use-deadline (quote (event-if-not-todo event-if-todo)))
-;; (setq org-icalendar-use-scheduled (quote (event-if-not-todo event-if-todo)))
-
-;; lists are also collapsed by default, not just headings
-;; (setq org-cycle-include-plain-lists 'integrate)
-
-;; Don't show tasks with "home" tag during day time
-;; (defun my/org-agenda-skip-home ()
-;;   (let ((current-hour (string-to-number (format-time-string "%H"))))
-;;     (when (and (< 10 current-hour 18)
-;;                (member "home" (org-get-tags-at)))
-;;       (or (outline-next-heading)
-;;           (goto-char (point-max))))))
-;; (setq org-agenda-skip-function #'my/org-agenda-skip-home)
+  ;; any items below the headings with these tags dont inherit that tag
+  ;; (setq org-tags-exclude-from-inheritance (quote ("PROJECT" "crypt")))
+  
+  ;; crypt
+  (require 'org-crypt)
+  (require 'epa-file)
+  (epa-file-enable)
+  (org-crypt-use-before-save-magic)
+  (setq org-tags-exclude-from-inheritance (quote ("crypt")))
+  ;; GPG key to use for encryption
+  ;; Either the Key ID or set to nil to use symmetric encryption.
+  (setq org-crypt-key nil)
+  
+  ;; org-publish
+  ;; (require 'ox-publish)
+  ;; (setq org-publish-project-alist
+  ;;       '(
+  ;;         ("org"
+  ;;          :base-directory "~/Dropbox/org/"
+  ;;          :publishing-directory "~/Dropbox/org/"
+  ;;          :base-extension "---"
+  ;;          :recursive nil
+  ;;          :publishing-function org-html-publish-to-html
+  ;;          :include ("bayesian.org" "classification.org" "clustering.org" "data_science_misc.org" "data_structs_algos.org" "deep_learning.org" "ds_tools.org" "machine_learning_misc.org" "nlp.org" "recommendations.org" "regression.org" "reinforcement-learning.org" "statistics.org" "supervised_learning.org" "time_series.org")
+  ;;          )))
+  
+  ;; change ... to
+  ;; (setq org-ellipsis "⤵")
+  
+  ;; calendar export settings
+  ;; (setq org-icalendar-exclude-tags (quote ("noexport")))
+  ;; (setq org-icalendar-include-todo t)
+  ;; (setq org-icalendar-use-deadline (quote (event-if-not-todo event-if-todo)))
+  ;; (setq org-icalendar-use-scheduled (quote (event-if-not-todo event-if-todo)))
+  
+  ;; lists are also collapsed by default, not just headings
+  ;; (setq org-cycle-include-plain-lists 'integrate)
+  
+  ;; Don't show tasks with "home" tag during day time
+  ;; (defun my/org-agenda-skip-home ()
+  ;;   (let ((current-hour (string-to-number (format-time-string "%H"))))
+  ;;     (when (and (< 10 current-hour 18)
+  ;;                (member "home" (org-get-tags-at)))
+  ;;       (or (outline-next-heading)
+  ;;           (goto-char (point-max))))))
+  ;; (setq org-agenda-skip-function #'my/org-agenda-skip-home)
 #+END_SRC
 * Final
 Let the Spacemacs use this configuration.
