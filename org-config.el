@@ -396,6 +396,7 @@
          ((tags-todo "+work"
                      ((org-agenda-overriding-header (format "Work Tasks (%s)" (org-agenda-count "")))
                       (org-agenda-hide-tags-regexp "work")
+                       (org-agenda-sorting-strategy '(priority-down))
                       )))
          nil)
         ("E" "Non-Work ToDos"
@@ -515,8 +516,8 @@
 ;; ~helm-org-rifle~ settings
 
 ;; [[file:org-config.org::*Miscellaneous][Miscellaneous:5]]
-(require 'helm-org-rifle)
-(setq helm-org-rifle-show-path t)
+;; (require 'helm-org-rifle)
+;; (setq helm-org-rifle-show-path t)
 ;; Miscellaneous:5 ends here
 
 
