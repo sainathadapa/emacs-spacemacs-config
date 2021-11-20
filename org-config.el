@@ -103,12 +103,12 @@
 
 
 
-;; Priority settings : default is H, highest is A, and lowest is Z
+;; Priority settings
 
 ;; [[file:org-config.org::*To-Do states and related][To-Do states and related:3]]
-(setq org-default-priority 72)
-(setq org-highest-priority 65)
-(setq org-lowest-priority 90)
+(setq org-default-priority 10)
+(setq org-highest-priority 1)
+(setq org-lowest-priority 64)
 ;; To-Do states and related:3 ends here
 
 ;; Capture
@@ -402,8 +402,13 @@
         ("E" "Non-Work ToDos"
          ((tags-todo "-work-paper" (
                               (org-agenda-overriding-header (format "Non-Work Tasks (%s)" (org-agenda-count "")))
-                              (org-agenda-cmp-user-defined 'org-cmp-alpha-2)
-                              (org-agenda-sorting-strategy '(user-defined-up))
+                              (org-agenda-sorting-strategy '(priority-down))
+                              )))
+         nil)
+        ("B" "Books"
+         ((tags-todo "+book" (
+                              (org-agenda-overriding-header (format "Books (%s)" (org-agenda-count "")))
+                              (org-agenda-sorting-strategy '(priority-down))
                               )))
          nil)
         )))
@@ -578,6 +583,23 @@
   ;; (other-window 1)
   ;; (run-with-timer 0 (* 60 60) 'refresh-dashboard)
   ;; (add-hook 'focus-out-hook 'save-all)
+  )
+
+(defun org-dashboard-work ()
+  (interactive)
+  (setq org-agenda-sticky t)
+  (setq org-agenda-window-setup 'current-window)
+  (setq-default mode-line-format nil)
+  (split-window-right)
+  (split-window-below)
+  (org-agenda nil "W")
+  (other-window 1)
+  (org-agenda nil "Q")
+  (shrink-window 20)
+  (other-window 1)
+  (org-agenda nil "a")
+  (other-window 1)
+  (shrink-window 15)
   )
 
 (defun refresh-dashboard ()
