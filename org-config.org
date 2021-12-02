@@ -70,13 +70,13 @@ Keywords
 #+BEGIN_SRC emacs-lisp
 (setq org-todo-keywords
       (quote
-       ((sequence "TODO" "PROG" "PAUS" "|" "DONE" "CANC"))))
+       ((sequence "TODO" "PROG" "PAUS" "REVW" "|" "DONE" "CANC"))))
 #+END_SRC
 
 Colors for todo states
 #+BEGIN_SRC emacs-lisp
 (setq org-todo-keyword-faces
-      '(("PROG" . "orange") ("PAUS" . "magenta") ("CANC" . "red") ("DONE" . "green")))
+      '(("PROG" . "orange") ("PAUS" . "magenta") ("REVW" . "magenta") ("CANC" . "red") ("DONE" . "green")))
 #+END_SRC
 
 Priority settings
@@ -501,12 +501,8 @@ Create a dashboard with multiple Agenda views
     (delete-other-windows)
     )
 #+END_SRC
-* Disabled
+* Encryption
 #+BEGIN_SRC emacs-lisp
-  ;; any items below the headings with these tags dont inherit that tag
-  ;; (setq org-tags-exclude-from-inheritance (quote ("PROJECT" "crypt")))
-  
-  ;; crypt
   (require 'org-crypt)
   (require 'epa-file)
   (epa-file-enable)
@@ -515,6 +511,9 @@ Create a dashboard with multiple Agenda views
   ;; GPG key to use for encryption
   ;; Either the Key ID or set to nil to use symmetric encryption.
   (setq org-crypt-key nil)
+#+END_SRC
+* Disabled
+#+BEGIN_SRC emacs-lisp
   
   ;; org-publish
   ;; (require 'ox-publish)

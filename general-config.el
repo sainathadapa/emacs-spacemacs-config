@@ -127,9 +127,10 @@
 ;; Disabled
 
 ;; [[file:general-config.org::*Disabled][Disabled:1]]
-;; (require 'epa-file)
-;; (epa-file-enable)
-;; (setq epa-file-cache-passphrase-for-symmetric-encryption t)
+;;  (require 'epa-file)
+;;  (epa-file-enable)
+;;  (setq epa-file-cache-passphrase-for-symmetric-encryption t)
+;;  (setf epa-pinentry-mode 'loopback)
 
 ;; (require 'python) ; if not done elsewhere
 ;; (require 'eval-in-repl-python)
