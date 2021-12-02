@@ -89,7 +89,7 @@
 ;; [[file:org-config.org::*To-Do states and related][To-Do states and related:1]]
 (setq org-todo-keywords
       (quote
-       ((sequence "TODO" "PROG" "PAUS" "|" "DONE" "CANC"))))
+       ((sequence "TODO" "PROG" "PAUS" "REVW" "|" "DONE" "CANC"))))
 ;; To-Do states and related:1 ends here
 
 
@@ -98,7 +98,7 @@
 
 ;; [[file:org-config.org::*To-Do states and related][To-Do states and related:2]]
 (setq org-todo-keyword-faces
-      '(("PROG" . "orange") ("PAUS" . "magenta") ("CANC" . "red") ("DONE" . "green")))
+      '(("PROG" . "orange") ("PAUS" . "magenta") ("REVW" . "magenta") ("CANC" . "red") ("DONE" . "green")))
 ;; To-Do states and related:2 ends here
 
 
@@ -626,13 +626,9 @@
   )
 ;; Dashboard:1 ends here
 
-;; Disabled
+;; Encryption
 
-;; [[file:org-config.org::*Disabled][Disabled:1]]
-;; any items below the headings with these tags dont inherit that tag
-;; (setq org-tags-exclude-from-inheritance (quote ("PROJECT" "crypt")))
-
-;; crypt
+;; [[file:org-config.org::*Encryption][Encryption:1]]
 (require 'org-crypt)
 (require 'epa-file)
 (epa-file-enable)
@@ -641,7 +637,11 @@
 ;; GPG key to use for encryption
 ;; Either the Key ID or set to nil to use symmetric encryption.
 (setq org-crypt-key nil)
+;; Encryption:1 ends here
 
+;; Disabled
+
+;; [[file:org-config.org::*Disabled][Disabled:1]]
 ;; org-publish
 ;; (require 'ox-publish)
 ;; (setq org-publish-project-alist

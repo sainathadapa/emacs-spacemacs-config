@@ -102,20 +102,21 @@ Default file to open
 #+END_SRC
 * Disabled
 #+BEGIN_SRC emacs-lisp
-;; (require 'epa-file)
-;; (epa-file-enable)
-;; (setq epa-file-cache-passphrase-for-symmetric-encryption t)
+  ;;  (require 'epa-file)
+  ;;  (epa-file-enable)
+  ;;  (setq epa-file-cache-passphrase-for-symmetric-encryption t)
+  ;;  (setf epa-pinentry-mode 'loopback)
 
-;; (require 'python) ; if not done elsewhere
-;; (require 'eval-in-repl-python)
-;; (add-hook 'python-mode-hook
-;;           '(lambda ()
-;;              (local-set-key (kbd "<C-return>") 'eir-eval-in-python)))
+  ;; (require 'python) ; if not done elsewhere
+  ;; (require 'eval-in-repl-python)
+  ;; (add-hook 'python-mode-hook
+  ;;           '(lambda ()
+  ;;              (local-set-key (kbd "<C-return>") 'eir-eval-in-python)))
 
-;; consider *.org.txt files as org files
-;; (add-to-list 'auto-mode-alist '("\\.org.txt\\'" . org-mode))
+  ;; consider *.org.txt files as org files
+  ;; (add-to-list 'auto-mode-alist '("\\.org.txt\\'" . org-mode))
 
-;; (require 'helm-bookmark)
+  ;; (require 'helm-bookmark)
 #+END_SRC
 * Final
 Let the Spacemacs use this configuration.
