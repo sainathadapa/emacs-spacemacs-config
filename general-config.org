@@ -98,7 +98,7 @@ Spacemacs requires the org-mode settings to be defined after the org-mode is act
 
 Default file to open
 #+BEGIN_SRC emacs-lisp
-(find-file "~/Dropbox/org/main.org")
+(find-file "~/Google Drive/org/main.org")
 #+END_SRC
 * Disabled
 #+BEGIN_SRC emacs-lisp
