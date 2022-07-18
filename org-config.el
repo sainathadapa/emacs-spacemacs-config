@@ -134,12 +134,12 @@
         ("t"
          "Task Diary"
          entry
-         (file+datetree (lambda () (concat org-directory "/tasks.org")))
+         (file+olp+datetree (lambda () (concat org-directory "/tasks.org")) "Tasks")
          "* TODO [#A] %^{Task}")
         ("p"
          "Journal"
          item
-         (file+datetree (lambda () (concat org-directory "/journal.org")))
+         (file+olp+datetree (lambda () (concat org-directory "/journal.org")) "Journal")
          "- %U - %^{Activity}")
         ("j"
          "Work log"
@@ -155,9 +155,14 @@
         ("s"
          "Schedule an event or a task"
          entry
-         (file+datetree (lambda () (concat org-directory "/tasks.org")))
+         (file+olp+datetree (lambda () (concat org-directory "/tasks.org")) "Tasks")
          "* %^{Event or Task}\nSCHEDULED: %^t"
          )
+        ("d"
+         "Donation log"
+         item
+         (file+olp+datetree (lambda () (concat "~/Dropbox/org" "/notes.org")) "Donations")
+         "- %U - %^{Activity}")
         ))
 ;; Capture:2 ends here
 

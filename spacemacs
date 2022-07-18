@@ -79,6 +79,7 @@ values."
      rainbow-mode
      scala-mode
      transpose-frame
+     exec-path-from-shell
      )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -152,14 +153,14 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(doom-one)
+   dotspacemacs-themes '(spacemacs-light)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Iosevka Aile"
-                               :size 16
-                               :weight normal
+                               :size 17
+                               :weight semi-bold
                                :width normal
                                :powerline-scale 1.1)
    ;; The leader key
@@ -330,6 +331,10 @@ before packages are loaded. If you are unsure, you should try in setting them in
   )
 
 (defun dotspacemacs/user-config ()
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize))
+  (when (daemonp)
+    (exec-path-from-shell-initialize))
   (add-to-list 'load-path "~/emacs-spacemacs-config")
   (require 'general-config)
   (menu-bar-mode t)
@@ -373,7 +378,7 @@ This function is called at the very end of Spacemacs initialization."
  '(ispell-program-name "/usr/local/bin/aspell")
  '(line-spacing 5)
  '(org-agenda-files
-   '("/Users/sainatha/Google Drive/org/calendar.org" "/Users/sainatha/Google Drive/org/grasp.org" "/Users/sainatha/Google Drive/org/java.org" "/Users/sainatha/Google Drive/org/setup.org" "/Users/sainatha/Google Drive/org/sonalytic.org" "/Users/sainatha/Google Drive/org/tasks.org" "/Users/sainatha/Google Drive/org/work.org" "/Users/sainatha/Dropbox/org/Orgzly.org" "/Users/sainatha/Dropbox/org/algos.org" "/Users/sainatha/Dropbox/org/arguments.org" "/Users/sainatha/Dropbox/org/audio.org" "/Users/sainatha/Dropbox/org/bayesian.org" "/Users/sainatha/Dropbox/org/clustering.org" "/Users/sainatha/Dropbox/org/deep_learning.org" "/Users/sainatha/Dropbox/org/finance.org" "/Users/sainatha/Dropbox/org/haskell.org" "/Users/sainatha/Dropbox/org/ideas.org" "/Users/sainatha/Dropbox/org/journal-2015.org" "/Users/sainatha/Dropbox/org/journal-2016.org" "/Users/sainatha/Dropbox/org/journal-2017.org" "/Users/sainatha/Dropbox/org/journal-before-2015.org" "/Users/sainatha/Dropbox/org/journal.org" "/Users/sainatha/Dropbox/org/machine_learning_misc.org" "/Users/sainatha/Dropbox/org/main.org" "/Users/sainatha/Dropbox/org/next.org" "/Users/sainatha/Dropbox/org/nlp.org" "/Users/sainatha/Dropbox/org/notes.org" "/Users/sainatha/Dropbox/org/pocket-to-org.org" "/Users/sainatha/Dropbox/org/programming.org" "/Users/sainatha/Dropbox/org/recommendations.org" "/Users/sainatha/Dropbox/org/reinforcement-learning.org" "/Users/sainatha/Dropbox/org/revenue_management.org" "/Users/sainatha/Dropbox/org/scala.org" "/Users/sainatha/Dropbox/org/setup.org" "/Users/sainatha/Dropbox/org/setup_worg.org" "/Users/sainatha/Dropbox/org/statistics.org" "/Users/sainatha/Dropbox/org/supervised_learning.org" "/Users/sainatha/Dropbox/org/tasks.org" "/Users/sainatha/Dropbox/org/time_series.org"))
+   '("/Users/sainatha/Google Drive/org/calendar.org" "/Users/sainatha/Google Drive/org/grasp.org" "/Users/sainatha/Google Drive/org/java.org" "/Users/sainatha/Google Drive/org/setup.org" "/Users/sainatha/Google Drive/org/sonalytic.org" "/Users/sainatha/Google Drive/org/tasks.org" "/Users/sainatha/Google Drive/org/work.org" "/Users/sainatha/Dropbox/org/Orgzly.org" "/Users/sainatha/Dropbox/org/algos.org" "/Users/sainatha/Dropbox/org/arguments.org" "/Users/sainatha/Dropbox/org/audio.org" "/Users/sainatha/Dropbox/org/bayesian.org" "/Users/sainatha/Dropbox/org/clustering.org" "/Users/sainatha/Dropbox/org/deep_learning.org" "/Users/sainatha/Dropbox/org/finance.org" "/Users/sainatha/Dropbox/org/haskell.org" "/Users/sainatha/Dropbox/org/ideas.org" "/Users/sainatha/Dropbox/org/journal-2015.org" "/Users/sainatha/Dropbox/org/journal-2016.org" "/Users/sainatha/Dropbox/org/journal-2017.org" "/Users/sainatha/Dropbox/org/journal-before-2015.org" "/Users/sainatha/Dropbox/org/journal.org" "/Users/sainatha/Dropbox/org/machine_learning_misc.org" "/Users/sainatha/Dropbox/org/main.org" "/Users/sainatha/Dropbox/org/next.org" "/Users/sainatha/Dropbox/org/nlp.org" "/Users/sainatha/Dropbox/org/notes.org" "/Users/sainatha/Dropbox/org/pocket-to-org.org" "/Users/sainatha/Dropbox/org/programming.org" "/Users/sainatha/Dropbox/org/recommendations.org" "/Users/sainatha/Dropbox/org/reinforcement-learning.org" "/Users/sainatha/Dropbox/org/setup.org" "/Users/sainatha/Dropbox/org/setup_worg.org" "/Users/sainatha/Dropbox/org/statistics.org" "/Users/sainatha/Dropbox/org/supervised_learning.org" "/Users/sainatha/Dropbox/org/tasks.org" "/Users/sainatha/Dropbox/org/time_series.org"))
  '(org-download-screenshot-method "screencapture -i %s")
  '(org-modules '(org-crypt org-habit org-mouse))
  '(org-pretty-tags-surrogate-strings '(("imp" . "☆") ("music" . "♩")))
@@ -384,11 +389,14 @@ This function is called at the very end of Spacemacs initialization."
      (org-download-image-dir . "~/Google Drive/org/pics")
      (javascript-backend . tide)
      (javascript-backend . tern)
-     (javascript-backend . lsp))))
+     (javascript-backend . lsp)))
+ '(warning-suppress-log-types '((comp)))
+ '(warning-suppress-types '((comp))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(highlight-parentheses-highlight ((nil (:weight ultra-bold))) t)
  '(org-link ((t (:foreground "#b58900" :underline nil)))))
 )
