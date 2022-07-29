@@ -121,7 +121,7 @@
 ;; Default file to open
 
 ;; [[file:general-config.org::*Org config][Org config:2]]
-(find-file "~/Google Drive/org/main.org")
+(find-file "~/My Drive/org/main.org")
 ;; Org config:2 ends here
 
 ;; Disabled

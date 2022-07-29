@@ -128,14 +128,14 @@
         ("w"         ; hotkey
          "Work Todo" ; name
          entry       ; type
-         (file+headline (lambda () (concat "~/Google Drive/org" "/work.org")) "Tasks") ;target
-         "* TODO [#A] %^{Task}" ; template
+         (file+headline (lambda () (concat "~/My Drive/org" "/work.org")) "Tasks") ;target
+         "* TODO [#41] %^{Task}" ; template
          )
         ("t"
          "Task Diary"
          entry
          (file+olp+datetree (lambda () (concat org-directory "/tasks.org")) "Tasks")
-         "* TODO [#A] %^{Task}")
+         "* TODO [#41] %^{Task}")
         ("p"
          "Journal"
          item
@@ -144,13 +144,13 @@
         ("j"
          "Work log"
          item
-         (file+olp+datetree (lambda () (concat "~/Google Drive/org" "/work.org")) "Log")
+         (file+olp+datetree (lambda () (concat "~/My Drive/org" "/work.org")) "Log")
          "- %U - %^{Activity}")
         ("b"
          "Add a book to read"
          entry
          (file+headline (lambda () (concat org-directory "/notes.org")) "Books to read")
-         "* TODO [#Z] %^{Book name}\n%^{Why to read this book?}"
+         "* TODO [#64] %^{Book name}\n%^{Why to read this book?}"
          )
         ("s"
          "Schedule an event or a task"
@@ -205,7 +205,7 @@
 ;; [[file:org-config.org::*Agenda][Agenda:5]]
 ;; (setq org-agenda-files '(org-directory))
 (setq org-agenda-files (append
-                        (directory-files-recursively "~/Google Drive/org" "\\.org$")
+                        (directory-files-recursively "~/My Drive/org" "\\.org$")
                         (directory-files-recursively org-directory "\\.org$")
                         (directory-files-recursively org-directory "\\.org.txt$")))
 ;; Agenda:5 ends here
