@@ -1,4 +1,4 @@
-;; Appearance
+
 ;; Disabling bent arrows (↩)
 
 ;; [[file:general-config.org::*Appearance][Appearance:1]]
@@ -16,7 +16,7 @@
                                        (unknown . question-mark)))
 ;; Appearance:1 ends here
 
-;; Backup and other file settings
+
 ;; Store all backup and autosave files in the ~/tmp~ directory
 
 ;; [[file:general-config.org::*Backup and other file settings][Backup and other file settings:1]]
@@ -72,7 +72,7 @@
 (setq global-auto-revert-mode t)
 ;; Backup and other file settings:6 ends here
 
-;; Miscellaneous
+
 ;; Answer with y/n instead of having to write the full words
 
 ;; [[file:general-config.org::*Miscellaneous][Miscellaneous:1]]
@@ -108,7 +108,7 @@
      (define-key flyspell-mouse-map [mouse-3] #'undefined)))
 ;; Miscellaneous:5 ends here
 
-;; Org config
+
 ;; Spacemacs requires the org-mode settings to be defined after the org-mode is activated.
 
 ;; [[file:general-config.org::*Org config][Org config:1]]
@@ -123,8 +123,6 @@
 ;; [[file:general-config.org::*Org config][Org config:2]]
 (find-file "~/My Drive/org/main.org")
 ;; Org config:2 ends here
-
-;; Disabled
 
 ;; [[file:general-config.org::*Disabled][Disabled:1]]
 ;;  (require 'epa-file)
@@ -144,7 +142,7 @@
 ;; (require 'helm-bookmark)
 ;; Disabled:1 ends here
 
-;; Final
+
 ;; Let the Spacemacs use this configuration.
 
 ;; [[file:general-config.org::*Final][Final:1]]
