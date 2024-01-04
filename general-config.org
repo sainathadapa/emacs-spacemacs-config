@@ -89,6 +89,13 @@ Flyspell mode settings
        (define-key flyspell-mouse-map [mouse-3] #'undefined)))
 #+END_SRC
 
+Smart case insensitive searches
+https://emacs.stackexchange.com/questions/31368/how-to-do-case-sensitive-searches-using-evils-evil-search
+#+BEGIN_SRC emacs-lisp
+  (setq evil-ex-search-case 'smart)
+#+END_SRC
+
+
 * Org config
 Spacemacs requires the org-mode settings to be defined after the org-mode is activated.
 #+BEGIN_SRC emacs-lisp

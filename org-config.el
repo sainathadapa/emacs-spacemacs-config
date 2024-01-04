@@ -97,8 +97,7 @@
 ;; Colors for todo states
 
 ;; [[file:org-config.org::*To-Do states and related][To-Do states and related:2]]
-(setq org-todo-keyword-faces
-      '(("PROG" . "orange") ("PAUS" . "magenta") ("REVW" . "magenta") ("CANC" . "red") ("DONE" . "green")))
+;; (setq org-todo-keyword-faces '(("PROG" . "orange") ("PAUS" . "magenta") ("REVW" . "magenta") ("CANC" . "red") ("DONE" . "green")))
 ;; To-Do states and related:2 ends here
 
 
@@ -134,7 +133,7 @@
         ("t"
          "Task Diary"
          entry
-         (file+olp+datetree (lambda () (concat org-directory "/tasks.org")) "Tasks")
+         (file+olp+datetree (lambda () (concat org-directory "/tasks-personal.org")) "Tasks")
          "* TODO [#41] %^{Task}")
         ("p"
          "Journal"
@@ -149,19 +148,19 @@
         ("b"
          "Add a book to read"
          entry
-         (file+headline (lambda () (concat org-directory "/notes.org")) "Books to read")
+         (file+headline (lambda () (concat org-directory "/notes-personal.org")) "Books to read")
          "* TODO [#64] %^{Book name}\n%^{Why to read this book?}"
          )
         ("s"
          "Schedule an event or a task"
          entry
-         (file+olp+datetree (lambda () (concat org-directory "/tasks.org")) "Tasks")
+         (file+olp+datetree (lambda () (concat org-directory "/tasks-personal.org")) "Tasks")
          "* %^{Event or Task}\nSCHEDULED: %^t"
          )
         ("d"
          "Donation log"
          item
-         (file+olp+datetree (lambda () (concat "~/Dropbox/org" "/notes.org")) "Donations")
+         (file+olp+datetree (lambda () (concat "~/Dropbox/org" "/notes-personal.org")) "Donations")
          "- %U - %^{Activity}")
         ))
 ;; Capture:2 ends here
@@ -171,6 +170,10 @@
 
 ;; [[file:org-config.org::*Agenda][Agenda:1]]
 (setq org-agenda-compact-blocks t)
+(setq org-agenda-format-date (lambda (date) (concat
+                                                    (make-string (* (/ (window-width) 3) 2) 9472)
+                                                    "\n"
+                                                    (org-agenda-format-date-aligned date))))
 ;; Agenda:1 ends here
 
 
@@ -617,11 +620,11 @@
   ;; (message nil)
   )
 
-(require 'cl)
+(require 'cl-lib)
 (defun bk-kill-buffers (regexp)
   "Kill buffers matching REGEXP without asking for confirmation."
   (interactive "sKill buffers matching this regular expression: ")
-  (flet ((kill-buffer-ask (buffer) (kill-buffer buffer)))
+  (cl-flet ((kill-buffer-ask (buffer) (kill-buffer buffer)))
     (kill-matching-buffers regexp)))
 (defun close-dashboard ()
   (interactive)
@@ -647,19 +650,6 @@
 ;; Disabled
 
 ;; [[file:org-config.org::*Disabled][Disabled:1]]
-;; org-publish
-;; (require 'ox-publish)
-;; (setq org-publish-project-alist
-;;       '(
-;;         ("org"
-;;          :base-directory "~/Dropbox/org/"
-;;          :publishing-directory "~/Dropbox/org/"
-;;          :base-extension "---"
-;;          :recursive nil
-;;          :publishing-function org-html-publish-to-html
-;;          :include ("bayesian.org" "classification.org" "clustering.org" "data_science_misc.org" "data_structs_algos.org" "deep_learning.org" "ds_tools.org" "machine_learning_misc.org" "nlp.org" "recommendations.org" "regression.org" "reinforcement-learning.org" "statistics.org" "supervised_learning.org" "time_series.org")
-;;          )))
-
 ;; change ... to
 ;; (setq org-ellipsis "⤵")
 
