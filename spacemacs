@@ -34,6 +34,9 @@ values."
      (org :variables
           org-enable-bootstrap-support t
           org-want-todo-bindings t
+          org-enable-notifications t
+          org-start-notification-daemon-on-startup t
+          org-enable-appear-support t
           )
      ;; Typing-related
      auto-completion
@@ -57,13 +60,13 @@ values."
      git
      helm
      (osx :variables osx-command-as       'control
-                     osx-option-as        'meta
-                     osx-control-as       'hyper
-                     osx-function-as      nil
-                     osx-right-command-as 'left
-                     osx-right-option-as  'left
-                     osx-right-control-as 'left
-                     osx-swap-option-and-command nil)
+          osx-option-as        'meta
+          osx-control-as       'hyper
+          osx-function-as      nil
+          osx-right-command-as 'left
+          osx-right-option-as  'left
+          osx-right-control-as 'left
+          osx-swap-option-and-command nil)
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -78,6 +81,7 @@ values."
      org-cliplink
      org-download
      org-reverse-datetree
+     org-super-agenda
      rainbow-mode
      transpose-frame
      exec-path-from-shell
@@ -344,6 +348,10 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (menu-bar-mode t)
   (find-file "~/My Drive/org/main.org")
   (make-frame-on-current-monitor)
+  (org-agenda nil "W")
+  (make-frame-on-current-monitor)
+  (find-file "~/My Drive/org/main2.org")
+  (org-agenda nil "a")
   ;;(server-start)
   )
 
@@ -356,12 +364,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
  ;; If there is more than one, they won't work right.
  '(ispell-personal-dictionary "~/Dropbox/org/.aspell.en.pws")
  '(line-spacing 5)
- '(org-download-screenshot-method "screencapture -i %s")
- '(org-modules (quote (org-crypt org-habit org-mouse)))
- '(org-pretty-tags-surrogate-strings (quote (("imp" . "☆") ("music" . "♩"))))
- '(package-selected-packages
-   (quote
-    (yaml-mode web-beautify smeargle orgit org-projectile org-category-capture magit-gitflow magit-popup livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc insert-shebang helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link flycheck-pos-tip pos-tip flycheck fish-mode evil-magit magit git-commit with-editor transient deft company-tern tern company-shell coffee-mode scala-mode sbt-mode noflet reveal-in-osx-finder pbcopy osx-trash osx-dictionary launchctl yapfify sql-indent pyvenv pytest pyenv-mode py-isort pip-requirements org-alert live-py-mode hy-mode dash-functional helm-pydoc cython-mode company-anaconda anaconda-mode pythonic lv transpose-frame tagedit slim-mode sass-mode rainbow-mode pug-mode org-present org-pomodoro log4e gntp org-download org-cliplink mmm-mode markdown-toc less-css-mode htmlize helm-css-scss helm-c-yasnippet haml-mode gnuplot gh-md fuzzy flyspell-correct-helm flyspell-correct eval-in-repl paredit emmet-mode company-web web-completion-data company-statistics auto-yasnippet auto-dictionary ac-ispell auto-complete web-mode scss-mode helm-company company yasnippet markdown-mode alert org-mime ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))))
+ )
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -374,51 +377,29 @@ before packages are loaded. If you are unsure, you should try in setting them in
 This is an auto-generated function, do not modify its content directly, use
 Emacs customize menu instead.
 This function is called at the very end of Spacemacs initialization."
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(epg-gpg-program "gpg2")
- '(evil-want-Y-yank-to-eol nil)
- '(ispell-personal-dictionary "~/Dropbox/org/.aspell.en.pws")
- '(ispell-program-name "/usr/local/bin/aspell")
- '(line-spacing 5)
- '(org-agenda-files
-   '("/Users/sainatha/My Drive/org/calendar.org" "/Users/sainatha/My Drive/org/grasp.org" "/Users/sainatha/My Drive/org/java.org" "/Users/sainatha/My Drive/org/main.org" "/Users/sainatha/My Drive/org/setup.org" "/Users/sainatha/My Drive/org/sonalytic.org" "/Users/sainatha/My Drive/org/tasks-work.org" "/Users/sainatha/My Drive/org/work.org" "/Users/sainatha/Dropbox/org/Orgzly.org" "/Users/sainatha/Dropbox/org/algos.org" "/Users/sainatha/Dropbox/org/arguments.org" "/Users/sainatha/Dropbox/org/audio.org" "/Users/sainatha/Dropbox/org/bayesian.org" "/Users/sainatha/Dropbox/org/clustering.org" "/Users/sainatha/Dropbox/org/deep_learning.org" "/Users/sainatha/Dropbox/org/drawing.org" "/Users/sainatha/Dropbox/org/ds_tools.org" "/Users/sainatha/Dropbox/org/finance.org" "/Users/sainatha/Dropbox/org/haskell.org" "/Users/sainatha/Dropbox/org/ideas.org" "/Users/sainatha/Dropbox/org/journal-2015.org" "/Users/sainatha/Dropbox/org/journal-2016.org" "/Users/sainatha/Dropbox/org/journal-2017.org" "/Users/sainatha/Dropbox/org/journal-before-2015.org" "/Users/sainatha/Dropbox/org/journal.org" "/Users/sainatha/Dropbox/org/machine_learning_misc.org" "/Users/sainatha/Dropbox/org/main.org" "/Users/sainatha/Dropbox/org/next.org" "/Users/sainatha/Dropbox/org/nlp.org" "/Users/sainatha/Dropbox/org/notes-personal.org" "/Users/sainatha/Dropbox/org/pocket-to-org.org" "/Users/sainatha/Dropbox/org/programming.org" "/Users/sainatha/Dropbox/org/recommendations.org" "/Users/sainatha/Dropbox/org/reinforcement-learning.org" "/Users/sainatha/Dropbox/org/setup.org" "/Users/sainatha/Dropbox/org/setup_worg.org" "/Users/sainatha/Dropbox/org/statistics.org" "/Users/sainatha/Dropbox/org/supervised_learning.org" "/Users/sainatha/Dropbox/org/tasks-personal.org" "/Users/sainatha/Dropbox/org/time_series.org" "/Users/sainatha/Dropbox/org/recipes.org" "/Users/sainatha/Dropbox/org/habits.org"))
- '(org-download-screenshot-method "screencapture -i %s")
- '(org-modules '(org-crypt org-habit org-mouse))
- '(org-pretty-tags-surrogate-strings '(("imp" . "☆") ("music" . "♩")))
- '(package-selected-packages
-   '(tern nodejs-repl livid-mode skewer-mode js2-refactor multiple-cursors js2-mode js-doc import-js grizzl helm-gtags ggtags dap-mode lsp-treemacs bui lsp-mode counsel-gtags counsel swiper ivy add-node-modules-path scala-mode sbt-mode noflet reveal-in-osx-finder pbcopy osx-trash osx-dictionary launchctl yapfify sql-indent pyvenv pytest pyenv-mode py-isort pip-requirements org-alert live-py-mode hy-mode dash-functional helm-pydoc cython-mode company-anaconda anaconda-mode pythonic lv transpose-frame tagedit slim-mode sass-mode rainbow-mode pug-mode org-present org-pomodoro log4e gntp org-download org-cliplink mmm-mode markdown-toc less-css-mode htmlize helm-css-scss helm-c-yasnippet haml-mode gnuplot gh-md fuzzy flyspell-correct-helm flyspell-correct eval-in-repl paredit emmet-mode company-web web-completion-data company-statistics auto-yasnippet auto-dictionary ac-ispell auto-complete web-mode scss-mode helm-company company yasnippet markdown-mode alert org-mime ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))
- '(safe-local-variable-values
-   '((org-download-image-dir . "~/Dropbox/org/pics")
-     (org-download-image-dir . "~/My Drive/org/pics")
-     (javascript-backend . tide)
-     (javascript-backend . tern)
-     (javascript-backend . lsp)))
- '(warning-suppress-log-types
-   '(((evil-collection))
-     ((evil-collection))
-     (org-element-cache)
-     (emacs)
-     (emacs)
-     (emacs)
-     ((evil-collection))
-     (comp)))
- '(warning-suppress-types
-   '(((evil-collection))
-     (org-element-cache)
-     (emacs)
-     (emacs)
-     (emacs)
-     ((evil-collection))
-     (comp))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(highlight-parentheses-highlight ((nil (:weight ultra-bold))) t)
- '(org-link ((t (:underline nil)))))
-)
+  (custom-set-variables
+   ;; custom-set-variables was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   '(enable-local-eval t)
+   '(enable-local-variables :all)
+   '(epg-gpg-program "gpg2")
+   '(evil-want-Y-yank-to-eol nil)
+   '(ispell-personal-dictionary "~/Dropbox/org/.aspell.en.pws")
+   '(ispell-program-name "/usr/local/bin/aspell")
+   '(line-spacing 5)
+   '(safe-local-variable-values
+     '(
+       (javascript-backend . tide)
+       (javascript-backend . tern)
+       (javascript-backend . lsp)))
+   )
+  (custom-set-faces
+   ;; custom-set-faces was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   '(highlight-parentheses-highlight ((nil (:weight ultra-bold))) t)
+   '(org-link ((t (:underline nil)))))
+  )

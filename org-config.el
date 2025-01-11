@@ -89,7 +89,7 @@
 ;; [[file:org-config.org::*To-Do states and related][To-Do states and related:1]]
 (setq org-todo-keywords
       (quote
-       ((sequence "TODO" "PROG" "PAUS" "REVW" "|" "DONE" "CANC"))))
+       ((sequence "TODO" "PROG" "|" "DONE" "CANC"))))
 ;; To-Do states and related:1 ends here
 
 
@@ -298,7 +298,8 @@
 ;; By default, agenda will reorganize frames/splits
 
 ;; [[file:org-config.org::*Agenda][Agenda:14]]
-(setq org-agenda-window-setup 'reorganize-frame)
+(setq org-agenda-window-setup 'current-window)
+(setq org-agenda-restore-windows-after-quit t)
 ;; Agenda:14 ends here
 
 
@@ -306,7 +307,7 @@
 ;; By default, Org maintains only a single agenda buffer and rebuilds it each time you change the view, to make sure everything is always up to date. If you often switch between agenda views and the build time bothers you, you can turn on sticky agenda buffers or make this the default by customizing the variable org-agenda-sticky. With sticky agendas, the agenda dispatcher will not recreate agenda views from scratch, it will only switch to the selected one, and you need to update the agenda by hand with r or g when needed. You can toggle sticky agenda view any time with org-toggle-sticky-agenda.
 
 ;; [[file:org-config.org::*Agenda][Agenda:15]]
-(setq org-agenda-sticky nil)
+(setq org-agenda-sticky t)
 ;; Agenda:15 ends here
 
 
@@ -540,6 +541,7 @@
 ;; [[file:org-config.org::*Miscellaneous][Miscellaneous:6]]
 (require 'org-download)
 (setq-default org-download-image-dir nil)
+(setq org-download-screenshot-method "screencapture -i %s")
 ;; Miscellaneous:6 ends here
 
 

@@ -70,7 +70,7 @@ Keywords
 #+BEGIN_SRC emacs-lisp
 (setq org-todo-keywords
       (quote
-       ((sequence "TODO" "PROG" "PAUS" "REVW" "|" "DONE" "CANC"))))
+       ((sequence "TODO" "PROG" "|" "DONE" "CANC"))))
 #+END_SRC
 
 Colors for todo states
@@ -229,12 +229,13 @@ Place tags close to the right-hand side of the window. From http://lists.gnu.org
 
 By default, agenda will reorganize frames/splits
 #+BEGIN_SRC emacs-lisp
-(setq org-agenda-window-setup 'reorganize-frame)
+  (setq org-agenda-window-setup 'current-window)
+  (setq org-agenda-restore-windows-after-quit t)
 #+END_SRC
 
 By default, Org maintains only a single agenda buffer and rebuilds it each time you change the view, to make sure everything is always up to date. If you often switch between agenda views and the build time bothers you, you can turn on sticky agenda buffers or make this the default by customizing the variable org-agenda-sticky. With sticky agendas, the agenda dispatcher will not recreate agenda views from scratch, it will only switch to the selected one, and you need to update the agenda by hand with r or g when needed. You can toggle sticky agenda view any time with org-toggle-sticky-agenda.
 #+BEGIN_SRC emacs-lisp
-(setq org-agenda-sticky nil)
+(setq org-agenda-sticky t)
 #+END_SRC
 
 When you run an agenda command, Org visits agenda files that are not yet visited. When finding a file for the first time, Org checks the startup options and apply them to the buffer: those options are either globally set through the org-startup-* variables or on a per-file basis through the #+STARTUP keyword. Especially, Org will honor the startup visibility status, as set by org-startup-folded or #+STARTUP: folded. This may slow down the operation of visiting a file very much, and the process of selecting agenda entries consequently. To prevent agenda commands to honor startup options when visiting an agenda file for the first time, do this
@@ -423,6 +424,7 @@ Collapse everything except current tab. From https://stackoverflow.com/questions
 #+BEGIN_SRC emacs-lisp
 (require 'org-download)
 (setq-default org-download-image-dir nil)
+(setq org-download-screenshot-method "screencapture -i %s")
 #+END_SRC
 
 Load a requirement for ~org-cliplink~
