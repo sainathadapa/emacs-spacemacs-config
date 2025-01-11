@@ -124,12 +124,6 @@
 ;; [[file:org-config.org::*Capture][Capture:2]]
 (setq org-capture-templates
       '(
-        ("w"         ; hotkey
-         "Work Todo" ; name
-         entry       ; type
-         (file+headline (lambda () (concat "~/My Drive/org" "/work.org")) "Tasks") ;target
-         "* TODO [#41] %^{Task}" ; template
-         )
         ("t"
          "Task Diary"
          entry
@@ -139,11 +133,6 @@
          "Journal"
          item
          (file+olp+datetree (lambda () (concat org-directory "/journal.org")) "Journal")
-         "- %U - %^{Activity}")
-        ("j"
-         "Work log"
-         item
-         (file+olp+datetree (lambda () (concat "~/My Drive/org" "/work.org")) "Log")
          "- %U - %^{Activity}")
         ("b"
          "Add a book to read"
@@ -208,7 +197,7 @@
 ;; [[file:org-config.org::*Agenda][Agenda:5]]
 ;; (setq org-agenda-files '(org-directory))
 (setq org-agenda-files (append
-                        (directory-files-recursively "~/My Drive/org" "\\.org$")
+                        (directory-files-recursively "~/Dropbox/org" "\\.org$")
                         (directory-files-recursively org-directory "\\.org$")
                         (directory-files-recursively org-directory "\\.org.txt$")))
 ;; Agenda:5 ends here

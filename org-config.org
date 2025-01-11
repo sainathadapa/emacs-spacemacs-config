@@ -95,12 +95,6 @@ Templates
 #+BEGIN_SRC emacs-lisp
   (setq org-capture-templates
         '(
-          ("w"         ; hotkey
-           "Work Todo" ; name
-           entry       ; type
-           (file+headline (lambda () (concat "~/My Drive/org" "/work.org")) "Tasks") ;target
-           "* TODO [#41] %^{Task}" ; template
-           )
           ("t"
            "Task Diary"
            entry
@@ -110,11 +104,6 @@ Templates
            "Journal"
            item
            (file+olp+datetree (lambda () (concat org-directory "/journal.org")) "Journal")
-           "- %U - %^{Activity}")
-          ("j"
-           "Work log"
-           item
-           (file+olp+datetree (lambda () (concat "~/My Drive/org" "/work.org")) "Log")
            "- %U - %^{Activity}")
           ("b"
            "Add a book to read"
@@ -165,7 +154,7 @@ Include these files and directories when creating the agenda
 #+BEGIN_SRC emacs-lisp
   ;; (setq org-agenda-files '(org-directory))
   (setq org-agenda-files (append
-                          (directory-files-recursively "~/My Drive/org" "\\.org$")
+                          (directory-files-recursively "~/Dropbox/org" "\\.org$")
                           (directory-files-recursively org-directory "\\.org$")
                           (directory-files-recursively org-directory "\\.org.txt$")))
 #+END_SRC
