@@ -30,7 +30,8 @@ values."
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(;; org-mode
+   '(javascript
+     ;; org-mode
      (org :variables
           org-enable-bootstrap-support t
           org-want-todo-bindings t
@@ -389,12 +390,12 @@ This function is called at the very end of Spacemacs initialization."
    '(ispell-personal-dictionary "~/Dropbox/org/.aspell.en.pws")
    '(ispell-program-name "/usr/local/bin/aspell")
    '(line-spacing 5)
+   '(package-selected-packages
+     '(add-node-modules-path dap-mode lsp-docker bui ggtags import-js grizzl js-doc js2-refactor multiple-cursors livid-mode nodejs-repl npm-mode skewer-mode js2-mode tern yasnippet-snippets ws-butler writeroom-mode winum which-key wgrep web-mode web-beautify vundo volatile-highlights vim-powerline vi-tilde-fringe undo-fu-session undo-fu treemacs-projectile treemacs-persp treemacs-magit treemacs-icons-dired treemacs-evil transpose-frame toc-org term-cursor tagedit symon symbol-overlay string-inflection string-edit-at-point spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline space-doc smeargle slim-mode scss-mode sass-mode reveal-in-osx-finder restart-emacs request rainbow-mode rainbow-delimiters quickrun pug-mode prettier-js popwin pcre2el password-generator paradox ox-twbs ox-clip overseer osx-trash osx-dictionary osx-clipboard orgit-forge org-wild-notifier org-superstar org-super-agenda org-rich-yank org-reverse-datetree org-projectile org-present org-pomodoro org-mime org-download org-contrib org-cliplink org-appear org-alert open-junk-file nameless multi-line markdown-toc macrostep lsp-ui lsp-treemacs lsp-origami lorem-ipsum link-hint launchctl inspector info+ indent-guide impatient-mode hybrid-mode hungry-delete holy-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org-rifle helm-org helm-mode-manager helm-make helm-lsp helm-ls-git helm-git-grep helm-descbinds helm-css-scss helm-company helm-comint helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitignore-templates git-timemachine git-modes git-messenger git-link gh-md flyspell-correct-helm flycheck-pos-tip flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-org evil-numbers evil-nerd-commenter evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu eval-in-repl emr emmet-mode elisp-slime-nav elisp-demos elisp-def editorconfig edit-indirect dumb-jump drag-stuff dotenv-mode doom-themes disable-mouse dired-quick-sort diminish devdocs deft company-web column-enforce-mode code-review clean-aindent-mode centered-cursor-mode auto-yasnippet auto-highlight-symbol auto-compile all-the-icons aggressive-indent ace-link ace-jump-helm-line))
    '(safe-local-variable-values
-     '(
-       (javascript-backend . tide)
+     '((javascript-backend . tide)
        (javascript-backend . tern)
-       (javascript-backend . lsp)))
-   )
+       (javascript-backend . lsp))))
   (custom-set-faces
    ;; custom-set-faces was added by Custom.
    ;; If you edit it by hand, you could mess it up, so be careful.
