@@ -59,7 +59,11 @@ values."
      ;; (scala :variables scala-backend 'scala-metals)
      ;; Other
      git
-     helm
+     (helm :variables
+           helm-enable-auto-resize nil
+           helm-no-header nil
+           helm-position 'bottom
+           helm-use-fuzzy 'always)
      (osx :variables osx-command-as       'control
           osx-option-as        'meta
           osx-control-as       'hyper
@@ -136,7 +140,11 @@ values."
    ;; with `:variables' keyword (similar to layers). Check the editing styles
    ;; section of the documentation for details on available variables.
    ;; (default 'vim)
-   dotspacemacs-editing-style 'vim
+   dotspacemacs-editing-style '(vim :variables
+                                         vim-style-remap-Y-to-y$ nil
+                                         vim-style-retain-visual-state-on-shift t
+                                         vim-style-visual-line-move-text nil
+                                         vim-style-ex-substitute-global nil)
    ;; If non nil output loading progress in `*Messages*' buffer. (default nil)
    dotspacemacs-verbose-loading t
    ;; Specify the startup banner. Default value is `official', it displays
@@ -194,17 +202,6 @@ values."
    ;; In the terminal, these pairs are generally indistinguishable, so this only
    ;; works in the GUI. (default nil)
    dotspacemacs-distinguish-gui-tab nil
-   ;; If non nil `Y' is remapped to `y$' in Evil states. (default nil)
-   dotspacemacs-remap-Y-to-y$ nil
-   ;; If non-nil, the shift mappings `<' and `>' retain visual state if used
-   ;; there. (default t)
-   dotspacemacs-retain-visual-state-on-shift t
-   ;; If non-nil, J and K move lines up and down when in visual mode.
-   ;; (default nil)
-   dotspacemacs-visual-line-move-text nil
-   ;; If non nil, inverse the meaning of `g' in `:substitute' Evil ex-command.
-   ;; (default nil)
-   dotspacemacs-ex-substitute-global nil
    ;; Name of the default layout (default "Default")
    dotspacemacs-default-layout-name "Default"
    ;; If non nil the default layout name is displayed in the mode-line.
@@ -224,19 +221,6 @@ values."
    dotspacemacs-auto-save-file-location 'cache
    ;; Maximum number of rollback slots to keep in the cache. (default 5)
    dotspacemacs-max-rollback-slots 5
-   ;; If non nil, `helm' will try to minimize the space it uses. (default nil)
-   dotspacemacs-helm-resize nil
-   ;; if non nil, the helm header is hidden when there is only one source.
-   ;; (default nil)
-   dotspacemacs-helm-no-header nil
-   ;; define the position to display `helm', options are `bottom', `top',
-   ;; `left', or `right'. (default 'bottom)
-   dotspacemacs-helm-position 'bottom
-   ;; Controls fuzzy matching in helm. If set to `always', force fuzzy matching
-   ;; in all non-asynchronous sources. If set to `source', preserve individual
-   ;; source settings. Else, disable fuzzy matching in all sources.
-   ;; (default 'always)
-   dotspacemacs-helm-use-fuzzy 'always
    ;; If non nil the paste micro-state is enabled. When enabled pressing `p`
    ;; several times cycle between the kill ring content. (default nil)
    dotspacemacs-enable-paste-transient-state nil
@@ -314,7 +298,7 @@ values."
    ;; List of search tool executable names. Spacemacs uses the first installed
    ;; tool of the list. Supported tools are `ag', `pt', `ack' and `grep'.
    ;; (default '("ag" "pt" "ack" "grep"))
-   dotspacemacs-search-tools '("ag" "pt" "ack" "grep")
+   dotspacemacs-search-tools '("rg" "ag" "ack" "grep")
    ;; The default package repository used if no explicit repository has been
    ;; specified with an installed package.
    ;; Not used for now. (default nil)
@@ -338,6 +322,19 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (add-to-list 'package-pinned-packages '(ensime . "melpa-stable"))
   (setq native-comp-async-report-warnings-errors nil)
   )
+
+(defun sainatha/spacemacs-skip-version-check-on-develop (orig force &optional interval)
+  "Silently skip automatic version checks on the Spacemacs develop branch."
+  (if (and (not force)
+           (string-equal "develop" (spacemacs//git-get-current-branch)))
+      nil
+    (funcall orig force interval)))
+
+(with-eval-after-load 'core-release-management
+  (unless (advice-member-p #'sainatha/spacemacs-skip-version-check-on-develop
+                           'spacemacs/check-for-new-version)
+    (advice-add 'spacemacs/check-for-new-version :around
+                #'sainatha/spacemacs-skip-version-check-on-develop)))
 
 (defun dotspacemacs/user-config ()
   (when (memq window-system '(mac ns x))
@@ -382,7 +379,7 @@ This function is called at the very end of Spacemacs initialization."
    '(epg-gpg-program "gpg2")
    '(evil-want-Y-yank-to-eol nil)
    '(ispell-personal-dictionary "~/Dropbox/OrgMode/.aspell.en.pws")
-   '(ispell-program-name "/usr/local/bin/aspell")
+   '(ispell-program-name "/Users/sainatha/homebrew/bin/aspell")
    '(line-spacing 5)
    '(package-selected-packages
      '(add-node-modules-path dap-mode lsp-docker bui ggtags import-js grizzl js-doc js2-refactor multiple-cursors livid-mode nodejs-repl npm-mode skewer-mode js2-mode tern yasnippet-snippets ws-butler writeroom-mode winum which-key wgrep web-mode web-beautify vundo volatile-highlights vim-powerline vi-tilde-fringe undo-fu-session undo-fu treemacs-projectile treemacs-persp treemacs-magit treemacs-icons-dired treemacs-evil transpose-frame toc-org term-cursor tagedit symon symbol-overlay string-inflection string-edit-at-point spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline space-doc smeargle slim-mode scss-mode sass-mode reveal-in-osx-finder restart-emacs request rainbow-mode rainbow-delimiters quickrun pug-mode prettier-js popwin pcre2el password-generator paradox ox-twbs ox-clip overseer osx-trash osx-dictionary osx-clipboard orgit-forge org-wild-notifier org-superstar org-super-agenda org-rich-yank org-reverse-datetree org-projectile org-present org-pomodoro org-mime org-download org-contrib org-cliplink org-appear org-alert open-junk-file nameless multi-line markdown-toc macrostep lsp-ui lsp-treemacs lsp-origami lorem-ipsum link-hint launchctl inspector info+ indent-guide impatient-mode hybrid-mode hungry-delete holy-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org-rifle helm-org helm-mode-manager helm-make helm-lsp helm-ls-git helm-git-grep helm-descbinds helm-css-scss helm-company helm-comint helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitignore-templates git-timemachine git-modes git-messenger git-link gh-md flyspell-correct-helm flycheck-pos-tip flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-org evil-numbers evil-nerd-commenter evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu eval-in-repl emr emmet-mode elisp-slime-nav elisp-demos elisp-def editorconfig edit-indirect dumb-jump drag-stuff dotenv-mode doom-themes disable-mouse dired-quick-sort diminish devdocs deft company-web column-enforce-mode code-review clean-aindent-mode centered-cursor-mode auto-yasnippet auto-highlight-symbol auto-compile all-the-icons aggressive-indent ace-link ace-jump-helm-line))
