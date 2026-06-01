@@ -130,7 +130,7 @@
 ;; Default file to open
 
 ;; [[file:general-config.org::*Org config][Org config:2]]
-(find-file "~/My Drive/org/main.org")
+(find-file "~/Dropbox/OrgMode/main.org")
 ;; Org config:2 ends here
 
 ;; Disabled

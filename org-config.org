@@ -98,7 +98,7 @@ Templates
           ("w"         ; hotkey
            "Work Todo" ; name
            entry       ; type
-           (file+headline (lambda () (concat "~/My Drive/org" "/work.org")) "Tasks") ;target
+           (file+headline (lambda () (concat "~/Dropbox/OrgMode" "/work.org")) "Tasks") ;target
            "* TODO [#41] %^{Task}" ; template
            )
           ("t"
@@ -114,7 +114,7 @@ Templates
           ("j"
            "Work log"
            item
-           (file+olp+datetree (lambda () (concat "~/My Drive/org" "/work.org")) "Log")
+           (file+olp+datetree (lambda () (concat "~/Dropbox/OrgMode" "/work.org")) "Log")
            "- %U - %^{Activity}")
           ("b"
            "Add a book to read"
@@ -165,7 +165,7 @@ Include these files and directories when creating the agenda
 #+BEGIN_SRC emacs-lisp
   ;; (setq org-agenda-files '(org-directory))
   (setq org-agenda-files (append
-                          (directory-files-recursively "~/My Drive/org" "\\.org$")
+                          (directory-files-recursively "~/Dropbox/OrgMode" "\\.org$")
                           (directory-files-recursively org-directory "\\.org$")
                           (directory-files-recursively org-directory "\\.org.txt$")))
 #+END_SRC
