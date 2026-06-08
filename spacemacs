@@ -320,6 +320,11 @@ before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
   (add-to-list 'configuration-layer-elpa-archives '("melpa-stable" . "stable.melpa.org/packages/"))
   (add-to-list 'package-pinned-packages '(ensime . "melpa-stable"))
+  (setq epg-gpg-program (or (and (file-executable-p "/Users/sainatha/homebrew/bin/gpg")
+                                 "/Users/sainatha/homebrew/bin/gpg")
+                            (executable-find "gpg2")
+                            (executable-find "gpg")
+                            epg-gpg-program))
   (setq native-comp-async-report-warnings-errors nil)
   )
 
@@ -375,7 +380,6 @@ This function is called at the very end of Spacemacs initialization."
    ;; If there is more than one, they won't work right.
    '(enable-local-eval t)
    '(enable-local-variables :all)
-   '(epg-gpg-program "gpg2")
    '(evil-want-Y-yank-to-eol nil)
    '(ispell-program-name "/Users/sainatha/homebrew/bin/aspell")
    '(line-spacing 5)
