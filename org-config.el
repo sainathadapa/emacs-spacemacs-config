@@ -1,8 +1,16 @@
 ;; Initialize variables
 
 ;; [[file:org-config.org::*Initialize variables][Initialize variables:1]]
-(setq org-directory "~/Dropbox/OrgMode")
-(setq my-config-folder "~/emacs-spacemacs-config")
+(setq my-dropbox-folder (or (and (boundp 'my-dropbox-folder) my-dropbox-folder)
+                            (expand-file-name "~/Dropbox")))
+(setq org-directory (or (and (boundp 'org-directory) org-directory)
+                        (expand-file-name "OrgMode" my-dropbox-folder)))
+(setq my-config-folder (or (and (boundp 'my-config-folder) my-config-folder)
+                           (expand-file-name "~/emacs-spacemacs-config")))
+(setq my-work-org-file (expand-file-name "work.org" org-directory))
+(setq my-tasks-org-file (expand-file-name "tasks-personal.org" org-directory))
+(setq my-journal-org-file (expand-file-name "journal.org" org-directory))
+(setq my-notes-org-file (expand-file-name "notes-personal.org" org-directory))
 ;; Initialize variables:1 ends here
 
 ;; Appearance
@@ -127,40 +135,40 @@
         ("w"         ; hotkey
          "Work Todo" ; name
          entry       ; type
-         (file+headline (lambda () (concat "~/Dropbox/OrgMode" "/work.org")) "Tasks") ;target
+         (file+headline (lambda () my-work-org-file) "Tasks") ;target
          "* TODO [#41] %^{Task}" ; template
          )
         ("t"
          "Task Diary"
          entry
-         (file+olp+datetree (lambda () (concat org-directory "/tasks-personal.org")) "Tasks")
+         (file+olp+datetree (lambda () my-tasks-org-file) "Tasks")
          "* TODO [#41] %^{Task}")
         ("p"
          "Journal"
          item
-         (file+olp+datetree (lambda () (concat org-directory "/journal.org")) "Journal")
+         (file+olp+datetree (lambda () my-journal-org-file) "Journal")
          "- %U - %^{Activity}")
         ("j"
          "Work log"
          item
-         (file+olp+datetree (lambda () (concat "~/Dropbox/OrgMode" "/work.org")) "Log")
+         (file+olp+datetree (lambda () my-work-org-file) "Log")
          "- %U - %^{Activity}")
         ("b"
          "Add a book to read"
          entry
-         (file+headline (lambda () (concat org-directory "/notes-personal.org")) "Books to read")
+         (file+headline (lambda () my-notes-org-file) "Books to read")
          "* TODO [#64] %^{Book name}\n%^{Why to read this book?}"
          )
         ("s"
          "Schedule an event or a task"
          entry
-         (file+olp+datetree (lambda () (concat org-directory "/tasks-personal.org")) "Tasks")
+         (file+olp+datetree (lambda () my-tasks-org-file) "Tasks")
          "* %^{Event or Task}\nSCHEDULED: %^t"
          )
         ("d"
          "Donation log"
          item
-         (file+olp+datetree (lambda () (concat "~/Dropbox/OrgMode" "/notes-personal.org")) "Donations")
+         (file+olp+datetree (lambda () my-notes-org-file) "Donations")
          "- %U - %^{Activity}")
         ))
 ;; Capture:2 ends here
@@ -171,9 +179,9 @@
 ;; [[file:org-config.org::*Agenda][Agenda:1]]
 (setq org-agenda-compact-blocks t)
 (setq org-agenda-format-date (lambda (date) (concat
-                                             (make-string (* (/ (window-width) 3) 2) 9472)
-                                             "\n"
-                                             (org-agenda-format-date-aligned date))))
+                                                    (make-string (* (/ (window-width) 3) 2) 9472)
+                                                    "\n"
+                                                    (org-agenda-format-date-aligned date))))
 ;; Agenda:1 ends here
 
 
@@ -208,7 +216,6 @@
 ;; [[file:org-config.org::*Agenda][Agenda:5]]
 ;; (setq org-agenda-files '(org-directory))
 (setq org-agenda-files (append
-                        (directory-files-recursively "~/Dropbox/OrgMode" "\\.org$")
                         (directory-files-recursively org-directory "\\.org$")
                         (directory-files-recursively org-directory "\\.org.txt$")))
 ;; Agenda:5 ends here
@@ -325,18 +332,18 @@
 (defun cmp-date-property (prop)
   "Compare two `org-mode' agenda entries, `A' and `B', by some date property. If a is before b, return -1. If a is after b, return 1. If they are equal return t."
   (lexical-let ((prop prop))
-               #'(lambda (a b)
+    #'(lambda (a b)
 
-                   (let* ((a-pos (get-text-property 0 'org-marker a))
-                          (b-pos (get-text-property 0 'org-marker b))
-                          (a-date (or (org-entry-get a-pos prop)
-                                      (format "<%s>" (org-read-date t nil "now"))))
-                          (b-date (or (org-entry-get b-pos prop)
-                                      (format "<%s>" (org-read-date t nil "now"))))
-                          (cmp (compare-strings a-date nil nil b-date nil nil))
-                          )
-                     (if (eq cmp t) nil (signum cmp))
-                     ))))
+        (let* ((a-pos (get-text-property 0 'org-marker a))
+               (b-pos (get-text-property 0 'org-marker b))
+               (a-date (or (org-entry-get a-pos prop)
+                           (format "<%s>" (org-read-date t nil "now"))))
+               (b-date (or (org-entry-get b-pos prop)
+                           (format "<%s>" (org-read-date t nil "now"))))
+               (cmp (compare-strings a-date nil nil b-date nil nil))
+               )
+          (if (eq cmp t) nil (signum cmp))
+          ))))
 ;; Helper functions:1 ends here
 
 
@@ -405,14 +412,14 @@
          ((tags-todo "+work"
                      ((org-agenda-overriding-header (format "Work Tasks (%s)" (org-agenda-count "")))
                       (org-agenda-hide-tags-regexp "work")
-                      (org-agenda-sorting-strategy '(priority-down))
+                       (org-agenda-sorting-strategy '(priority-down))
                       )))
          nil)
         ("E" "Non-Work ToDos"
          ((tags-todo "-work-paper" (
-                                    (org-agenda-overriding-header (format "Non-Work Tasks (%s)" (org-agenda-count "")))
-                                    (org-agenda-sorting-strategy '(priority-down))
-                                    )))
+                              (org-agenda-overriding-header (format "Non-Work Tasks (%s)" (org-agenda-count "")))
+                              (org-agenda-sorting-strategy '(priority-down))
+                              )))
          nil)
         ("B" "Books"
          ((tags-todo "+book" (

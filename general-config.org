@@ -99,13 +99,18 @@ https://emacs.stackexchange.com/questions/31368/how-to-do-case-sensitive-searche
 * Org config
 Spacemacs requires the org-mode settings to be defined after the org-mode is activated.
 #+BEGIN_SRC emacs-lisp
+(setq my-dropbox-folder (expand-file-name "~/Dropbox"))
+(setq org-directory (expand-file-name "OrgMode" my-dropbox-folder))
+(setq my-main-org-file (expand-file-name "main.org" org-directory))
+(setq my-config-folder (expand-file-name "~/emacs-spacemacs-config"))
+(setq ispell-personal-dictionary (expand-file-name ".aspell.en.pws" org-directory))
 (with-eval-after-load 'org
   (require 'org-config))
 #+END_SRC
 
 Default file to open
 #+BEGIN_SRC emacs-lisp
-  (find-file "~/Dropbox/OrgMode/main.org")
+  (find-file my-main-org-file)
 #+END_SRC
 * Disabled
 #+BEGIN_SRC emacs-lisp

@@ -121,6 +121,11 @@
 ;; Spacemacs requires the org-mode settings to be defined after the org-mode is activated.
 
 ;; [[file:general-config.org::*Org config][Org config:1]]
+(setq my-dropbox-folder (expand-file-name "~/Dropbox"))
+(setq org-directory (expand-file-name "OrgMode" my-dropbox-folder))
+(setq my-main-org-file (expand-file-name "main.org" org-directory))
+(setq my-config-folder (expand-file-name "~/emacs-spacemacs-config"))
+(setq ispell-personal-dictionary (expand-file-name ".aspell.en.pws" org-directory))
 (with-eval-after-load 'org
   (require 'org-config))
 ;; Org config:1 ends here
@@ -130,7 +135,7 @@
 ;; Default file to open
 
 ;; [[file:general-config.org::*Org config][Org config:2]]
-(find-file "~/Dropbox/OrgMode/main.org")
+(find-file my-main-org-file)
 ;; Org config:2 ends here
 
 ;; Disabled

@@ -344,7 +344,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (add-to-list 'load-path "~/emacs-spacemacs-config")
   (require 'general-config)
   (menu-bar-mode t)
-  (find-file "~/Dropbox/OrgMode/main.org")
+  (find-file my-main-org-file)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -354,7 +354,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ispell-personal-dictionary "~/Dropbox/OrgMode/.aspell.en.pws")
  '(line-spacing 5)
  )
 (custom-set-faces
@@ -378,7 +377,6 @@ This function is called at the very end of Spacemacs initialization."
    '(enable-local-variables :all)
    '(epg-gpg-program "gpg2")
    '(evil-want-Y-yank-to-eol nil)
-   '(ispell-personal-dictionary "~/Dropbox/OrgMode/.aspell.en.pws")
    '(ispell-program-name "/Users/sainatha/homebrew/bin/aspell")
    '(line-spacing 5)
    '(package-selected-packages
